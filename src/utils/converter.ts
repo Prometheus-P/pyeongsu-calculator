@@ -20,3 +20,14 @@ export function convertPyeongToSqm(pyeong: number): number {
 export function formatNumber(value: number, decimals: number = 2): string {
   return value.toFixed(decimals);
 }
+
+/**
+ * 입력값 유효성 검사
+ */
+export function isValidInput(value: string): boolean {
+  if (value === '' || value === '.') {
+    return false;
+  }
+  const num = parseFloat(value);
+  return !isNaN(num) && num >= 0;
+}

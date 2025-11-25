@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { convertSqmToPyeong, convertPyeongToSqm, formatNumber } from './converter';
+import { convertSqmToPyeong, convertPyeongToSqm, formatNumber, isValidInput } from './converter';
 
 describe('convertSqmToPyeong', () => {
   it('33.06㎡를 10평으로 변환한다 (오차 0.01 이내)', () => {
@@ -24,5 +24,27 @@ describe('formatNumber', () => {
   it('지정된 소수점 자릿수로 포맷한다', () => {
     expect(formatNumber(10.1234, 3)).toBe('10.123');
     expect(formatNumber(10, 1)).toBe('10.0');
+  });
+});
+
+describe('isValidInput', () => {
+  it('빈 문자열은 유효하지 않다', () => {
+    expect(isValidInput('')).toBe(false);
+  });
+
+  it('점만 있는 문자열은 유효하지 않다', () => {
+    expect(isValidInput('.')).toBe(false);
+  });
+
+  it('음수는 유효하지 않다', () => {
+    expect(isValidInput('-5')).toBe(false);
+    expect(isValidInput('-10.5')).toBe(false);
+  });
+
+  it('유효한 양수는 유효하다', () => {
+    expect(isValidInput('10')).toBe(true);
+    expect(isValidInput('33.06')).toBe(true);
+    expect(isValidInput('0')).toBe(true);
+    expect(isValidInput('0.5')).toBe(true);
   });
 });

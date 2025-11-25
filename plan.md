@@ -5,8 +5,8 @@
 ## 진행 상황
 
 - 총 항목: 15개
-- 완료: 2개
-- 진행률: 13%
+- 완료: 3개
+- 진행률: 20%
 
 ---
 
@@ -23,7 +23,7 @@
 - 파일: `src/utils/converter.ts`
 
 ### 1.3 숫자 포맷팅 함수
-- [ ] `formatNumber(value: number, decimals?: number): string` 구현
+- [x] `formatNumber(value: number, decimals?: number): string` 구현
 - 테스트: 소수점 둘째자리 반올림
 - 파일: `src/utils/converter.ts`
 
@@ -99,3 +99,4 @@
 |------|----------|------|
 | 1.1 convertSqmToPyeong | 0422476 | 2025-11-25 |
 | 1.2 convertPyeongToSqm | 18276c4 | 2025-11-25 |
+| 1.3 formatNumber | 34cc76e | 2025-11-25 |
