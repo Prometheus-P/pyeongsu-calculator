@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>평수 계산기 | 제곱미터를 평으로 변환</title>
+    <meta name="description" content="부동산 평수를 제곱미터(㎡)로 빠르게 변환하세요. 아파트 평형 계산, 전용면적 공급면적 변환을 실시간으로 계산합니다.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .calculator-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .quick-buttons {
+            margin-bottom: 30px;
+        }
+        
+        .quick-buttons h3 {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .buttons-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .quick-btn {
+            padding: 10px 16px;
+            background: #f0f4ff;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .quick-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.5rem;
+            border: 3px solid #e0e0e0;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        input[type="number"]:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+        
+        .arrow {
+            text-align: center;
+            font-size: 2rem;
+            color: #ccc;
+            margin: 20px 0;
+        }
+        
+        .result-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .result-box .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .result-box .value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .clear-btn {
+            width: 100%;
+            padding: 15px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .clear-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        .info-box {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        
+        .info-box h4 {
+            margin-bottom: 10px;
+            color: #856404;
+        }
+        
+        .reference-table {
+            margin-top: 30px;
+        }
+        
+        .reference-table h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .table-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background: #f8f9fa;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .table-row:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .table-row .type {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .calculator-card {
+                padding: 25px;
+            }
+            
+            .buttons-grid {
+                gap: 8px;
+            }
+            
+            .quick-btn {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>평수 계산기</h1>
+            <p class="subtitle">제곱미터와 평을 빠르게 변환하세요</p>
+        </header>
+        
+        <div class="calculator-card">
+            <div class="quick-buttons">
+                <h3>빠른 평형 계산</h3>
+                <div class="buttons-grid">
+                    <button class="quick-btn" onclick="quickCalc(10)">10평 (원룸)</button>
+                    <button class="quick-btn" onclick="quickCalc(15)">15평 (투룸)</button>
+                    <button class="quick-btn" onclick="quickCalc(20)">20평 (소형)</button>
+                    <button class="quick-btn" onclick="quickCalc(25)">25평 (중소형)</button>
+                    <button class="quick-btn" onclick="quickCalc(30)">30평 (중형)</button>
+                    <button class="quick-btn" onclick="quickCalc(35)">35평 (중대형)</button>
+                    <button class="quick-btn" onclick="quickCalc(40)">40평 (대형)</button>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="sqm">제곱미터 (㎡)</label>
+                <input type="number" id="sqm" placeholder="숫자 입력" oninput="convertFromSqm()">
+            </div>
+            
+            <div class="arrow">⇅</div>
+            
+            <div class="input-group">
+                <label for="pyeong">평</label>
+                <input type="number" id="pyeong" placeholder="숫자 입력" oninput="convertFromPyeong()">
+            </div>
+            
+            <button class="clear-btn" onclick="clearAll()">초기화</button>
+            
+            <div id="result" class="result-box" style="display:none;">
+                <div class="label">변환 결과</div>
+                <div class="value" id="resultText"></div>
+            </div>
+            
+            <div class="info-box">
+                <h4>변환 공식</h4>
+                <p>• 1평 = 3.3058㎡</p>
+                <p>• 1㎡ = 0.3025평</p>
+            </div>
+            
+            <div class="reference-table">
+                <h3>일반적인 평형 참고표</h3>
+                <div class="table-row" onclick="quickCalc(10)">
+                    <div>
+                        <strong>10평</strong>
+                        <span class="type"> (원룸)</span>
+                    </div>
+                    <strong style="color: #667eea;">33.06㎡</strong>
+                </div>
+                <div class="table-row" onclick="quickCalc(15)">
+                    <div>
+                        <strong>15평</strong>
+                        <span class="type"> (투룸)</span>
+                    </div>
+                    <strong style="color: #667eea;">49.59㎡</strong>
+                </div>
+                <div class="table-row" onclick="quickCalc(20)">
+                    <div>
+                        <strong>20평</strong>
+                        <span class="type"> (소형 아파트)</span>
+                    </div>
+                    <strong style="color: #667eea;">66.12㎡</strong>
+                </div>
+                <div class="table-row" onclick="quickCalc(25)">
+                    <div>
+                        <strong>25평</strong>
+                        <span class="type"> (중소형 아파트)</span>
+                    </div>
+                    <strong style="color: #667eea;">82.64㎡</strong>
+                </div>
+                <div class="table-row" onclick="quickCalc(30)">
+                    <div>
+                        <strong>30평</strong>
+                        <span class="type"> (중형 아파트)</span>
+                    </div>
+                    <strong style="color: #667eea;">99.17㎡</strong>
+                </div>
+                <div class="table-row" onclick="quickCalc(35)">
+                    <div>
+                        <strong>35평</strong>
+                        <span class="type"> (중대형 아파트)</span>
+                    </div>
+                    <strong style="color: #667eea;">115.70㎡</strong>
+                </div>
+                <div class="table-row" onclick="quickCalc(40)">
+                    <div>
+                        <strong>40평</strong>
+                        <span class="type"> (대형 아파트)</span>
+                    </div>
+                    <strong style="color: #667eea;">132.23㎡</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const SQM_TO_PYEONG = 0.3025;
+        const PYEONG_TO_SQM = 3.3058;
+        
+        function convertFromSqm() {
+            const sqm = document.getElementById('sqm').value;
+            const pyeongInput = document.getElementById('pyeong');
+            
+            if (sqm === '' || sqm === '.') {
+                pyeongInput.value = '';
+                hideResult();
+                return;
+            }
+            
+            const numValue = parseFloat(sqm);
+            if (!isNaN(numValue)) {
+                const pyeong = (numValue * SQM_TO_PYEONG).toFixed(2);
+                pyeongInput.value = pyeong;
+                showResult(sqm, pyeong);
+            }
+        }
+        
+        function convertFromPyeong() {
+            const pyeong = document.getElementById('pyeong').value;
+            const sqmInput = document.getElementById('sqm');
+            
+            if (pyeong === '' || pyeong === '.') {
+                sqmInput.value = '';
+                hideResult();
+                return;
+            }
+            
+            const numValue = parseFloat(pyeong);
+            if (!isNaN(numValue)) {
+                const sqm = (numValue * PYEONG_TO_SQM).toFixed(2);
+                sqmInput.value = sqm;
+                showResult(sqm, pyeong);
+            }
+        }
+        
+        function quickCalc(pyeongValue) {
+            document.getElementById('pyeong').value = pyeongValue;
+            const sqm = (pyeongValue * PYEONG_TO_SQM).toFixed(2);
+            document.getElementById('sqm').value = sqm;
+            showResult(sqm, pyeongValue);
+        }
+        
+        function clearAll() {
+            document.getElementById('sqm').value = '';
+            document.getElementById('pyeong').value = '';
+            hideResult();
+        }
+        
+        function showResult(sqm, pyeong) {
+            const resultBox = document.getElementById('result');
+            const resultText = document.getElementById('resultText');
+            resultText.innerHTML = `${sqm}㎡ = ${pyeong}평`;
+            resultBox.style.display = 'block';
+        }
+        
+        function hideResult() {
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
