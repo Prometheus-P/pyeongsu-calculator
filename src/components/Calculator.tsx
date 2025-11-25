@@ -25,6 +25,11 @@ export default function Calculator() {
     }
   };
 
+  const handleReset = () => {
+    setSqm('');
+    setPyeong('');
+  };
+
   return (
     <div>
       <h1>평수 계산기</h1>
@@ -46,6 +51,7 @@ export default function Calculator() {
           onChange={(e) => handlePyeongChange(e.target.value)}
         />
       </div>
+      <button onClick={handleReset}>초기화</button>
     </div>
   );
 }

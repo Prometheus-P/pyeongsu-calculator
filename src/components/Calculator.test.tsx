@@ -46,4 +46,21 @@ describe('Calculator', () => {
       expect(sqmInput.value).toBe('33.06');
     });
   });
+
+  describe('초기화 기능', () => {
+    it('초기화 버튼 클릭 시 모든 필드가 비워진다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+      await user.type(sqmInput, '33.06');
+
+      const resetButton = screen.getByRole('button', { name: /초기화/ });
+      await user.click(resetButton);
+
+      const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+      expect(sqmInput.value).toBe('');
+      expect(pyeongInput.value).toBe('');
+    });
+  });
 });
