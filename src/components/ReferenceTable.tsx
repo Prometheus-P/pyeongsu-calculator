@@ -17,7 +17,7 @@ export default function ReferenceTable({ onSelect }: ReferenceTableProps) {
       </thead>
       <tbody>
         {COMMON_SIZES.map((item) => (
-          <tr key={item.pyeong}>
+          <tr key={item.pyeong} onClick={() => onSelect(item.pyeong)} style={{ cursor: 'pointer' }}>
             <td>{item.label}</td>
             <td>{formatNumber(convertPyeongToSqm(item.pyeong))}㎡</td>
             <td>{item.type}</td>

@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import ReferenceTable from './ReferenceTable';
 
 describe('ReferenceTable', () => {
@@ -16,6 +17,19 @@ describe('ReferenceTable', () => {
       expect(screen.getByText('10평')).toBeInTheDocument();
       expect(screen.getByText('33.06㎡')).toBeInTheDocument();
       expect(screen.getByText('원룸')).toBeInTheDocument();
+    });
+  });
+
+  describe('참고표 클릭 동작', () => {
+    it('항목 클릭 시 onSelect 콜백이 호출된다', async () => {
+      const user = userEvent.setup();
+      const handleSelect = vi.fn();
+      render(<ReferenceTable onSelect={handleSelect} />);
+
+      const row25 = screen.getByText('25평').closest('tr')!;
+      await user.click(row25);
+
+      expect(handleSelect).toHaveBeenCalledWith(25);
     });
   });
 });
