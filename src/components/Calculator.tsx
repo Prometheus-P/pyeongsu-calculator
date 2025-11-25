@@ -1,9 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { convertSqmToPyeong, convertPyeongToSqm, formatNumber, isValidInput } from '../utils/converter';
 
-export default function Calculator() {
+interface CalculatorProps {
+  initialPyeong?: number | null;
+}
+
+export default function Calculator({ initialPyeong }: CalculatorProps) {
   const [sqm, setSqm] = useState('');
   const [pyeong, setPyeong] = useState('');
+
+  useEffect(() => {
+    if (initialPyeong !== null && initialPyeong !== undefined) {
+      setPyeong(String(initialPyeong));
+      const converted = convertPyeongToSqm(initialPyeong);
+      setSqm(formatNumber(converted));
+    }
+  }, [initialPyeong]);
 
   const handleSqmChange = (value: string) => {
     setSqm(value);

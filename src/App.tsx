@@ -1,9 +1,14 @@
-// 메인 애플리케이션 컴포넌트
-// TODO: TDD 사이클에 따라 구현 예정
+import { useState } from 'react';
+import Calculator from './components/Calculator';
+import ReferenceTable from './components/ReferenceTable';
+
 function App() {
+  const [selectedPyeong, setSelectedPyeong] = useState<number | null>(null);
+
   return (
     <div>
-      <h1>평수 계산기</h1>
+      <Calculator initialPyeong={selectedPyeong} />
+      <ReferenceTable onSelect={setSelectedPyeong} />
     </div>
   );
 }
