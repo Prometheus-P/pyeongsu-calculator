@@ -5,15 +5,15 @@
 ## 진행 상황
 
 - 총 항목: 15개
-- 완료: 0개
-- 진행률: 0%
+- 완료: 1개
+- 진행률: 7%
 
 ---
 
 ## 1. 유틸리티 함수 (converter.ts)
 
 ### 1.1 제곱미터 → 평 변환 함수
-- [ ] `convertSqmToPyeong(sqm: number): number` 구현
+- [x] `convertSqmToPyeong(sqm: number): number` 구현
 - 테스트: 33.06㎡ → 10평 (오차 0.01 이내)
 - 파일: `src/utils/converter.ts`
 
@@ -97,4 +97,4 @@
 
 | 항목 | 커밋 해시 | 날짜 |
 |------|----------|------|
-| - | - | - |
+| 1.1 convertSqmToPyeong | 0422476 | 2025-11-25 |
