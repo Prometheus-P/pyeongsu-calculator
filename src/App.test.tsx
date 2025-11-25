@@ -19,7 +19,6 @@ describe('App', () => {
 
       // 테이블 내의 25평 항목 선택 (버튼과 구별)
       const table = screen.getByRole('table');
-      const row25 = table.querySelector('tr:has(td)')!;
       const cells = table.querySelectorAll('tbody tr');
       // 25평은 4번째 행 (10, 15, 20, 25)
       await user.click(cells[3]);
