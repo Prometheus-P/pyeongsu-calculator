@@ -13,3 +13,10 @@ export function convertSqmToPyeong(sqm: number): number {
 export function convertPyeongToSqm(pyeong: number): number {
   return pyeong * PYEONG_TO_SQM_RATIO;
 }
+
+/**
+ * 숫자를 지정된 소수점 자릿수로 포맷
+ */
+export function formatNumber(value: number, decimals: number = 2): string {
+  return value.toFixed(decimals);
+}
