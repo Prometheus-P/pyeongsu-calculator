@@ -9,19 +9,30 @@ export default function Calculator({ initialPyeong }: CalculatorProps) {
   const [sqm, setSqm] = useState('');
   const [pyeong, setPyeong] = useState('');
 
+  // 헬퍼: 평 값으로 양쪽 필드 업데이트
+  const updateFieldsFromPyeong = (pyeongValue: number) => {
+    setPyeong(String(pyeongValue));
+    setSqm(formatNumber(convertPyeongToSqm(pyeongValue)));
+  };
+
+  // 헬퍼: 필드 초기화
+  const clearFields = () => {
+    setSqm('');
+    setPyeong('');
+  };
+
   useEffect(() => {
-    if (initialPyeong !== null && initialPyeong !== undefined) {
-      setPyeong(String(initialPyeong));
-      const converted = convertPyeongToSqm(initialPyeong);
-      setSqm(formatNumber(converted));
+    if (initialPyeong === null || initialPyeong === undefined) {
+      clearFields();
+      return;
     }
+    updateFieldsFromPyeong(initialPyeong);
   }, [initialPyeong]);
 
   const handleSqmChange = (value: string) => {
     setSqm(value);
     if (isValidInput(value)) {
-      const converted = convertSqmToPyeong(parseFloat(value));
-      setPyeong(formatNumber(converted));
+      setPyeong(formatNumber(convertSqmToPyeong(parseFloat(value))));
     } else {
       setPyeong('');
     }
@@ -30,22 +41,10 @@ export default function Calculator({ initialPyeong }: CalculatorProps) {
   const handlePyeongChange = (value: string) => {
     setPyeong(value);
     if (isValidInput(value)) {
-      const converted = convertPyeongToSqm(parseFloat(value));
-      setSqm(formatNumber(converted));
+      setSqm(formatNumber(convertPyeongToSqm(parseFloat(value))));
     } else {
       setSqm('');
     }
-  };
-
-  const handleReset = () => {
-    setSqm('');
-    setPyeong('');
-  };
-
-  const handleQuickSelect = (pyeongValue: number) => {
-    setPyeong(String(pyeongValue));
-    const converted = convertPyeongToSqm(pyeongValue);
-    setSqm(formatNumber(converted));
   };
 
   const quickSizes = [10, 15, 20, 25, 30, 35, 40];
@@ -85,7 +84,7 @@ export default function Calculator({ initialPyeong }: CalculatorProps) {
       </div>
 
       <button
-        onClick={handleReset}
+        onClick={clearFields}
         className="w-full mt-4 py-2 px-4 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition"
       >
         초기화
@@ -97,7 +96,7 @@ export default function Calculator({ initialPyeong }: CalculatorProps) {
           {quickSizes.map((size) => (
             <button
               key={size}
-              onClick={() => handleQuickSelect(size)}
+              onClick={() => updateFieldsFromPyeong(size)}
               className="py-2 px-3 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg text-sm font-medium transition"
             >
               {size}평

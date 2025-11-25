@@ -22,7 +22,14 @@ export default function ReferenceTable({ onSelect }: ReferenceTableProps) {
             <tr
               key={item.pyeong}
               onClick={() => onSelect(item.pyeong)}
-              className="border-b border-gray-100 hover:bg-blue-50 cursor-pointer transition"
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  onSelect(item.pyeong);
+                }
+              }}
+              className="border-b border-gray-100 hover:bg-blue-50 cursor-pointer transition focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <td className="py-3 text-gray-800 font-medium">{item.label}</td>
               <td className="py-3 text-gray-600">{formatNumber(convertPyeongToSqm(item.pyeong))}㎡</td>
