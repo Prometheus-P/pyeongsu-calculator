@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Calculator from './Calculator';
 
 describe('Calculator', () => {
@@ -17,6 +18,19 @@ describe('Calculator', () => {
     it('평 입력 필드를 렌더링한다', () => {
       render(<Calculator />);
       expect(screen.getByLabelText(/평/)).toBeInTheDocument();
+    });
+  });
+
+  describe('제곱미터 → 평 변환', () => {
+    it('제곱미터 입력 시 평 필드가 자동 업데이트된다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/);
+      await user.type(sqmInput, '33.06');
+
+      const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+      expect(pyeongInput.value).toBe('10.00');
     });
   });
 });
