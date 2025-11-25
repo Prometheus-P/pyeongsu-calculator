@@ -30,6 +30,14 @@ export default function Calculator() {
     setPyeong('');
   };
 
+  const handleQuickSelect = (pyeongValue: number) => {
+    setPyeong(String(pyeongValue));
+    const converted = convertPyeongToSqm(pyeongValue);
+    setSqm(formatNumber(converted));
+  };
+
+  const quickSizes = [10, 15, 20, 25, 30, 35, 40];
+
   return (
     <div>
       <h1>평수 계산기</h1>
@@ -52,6 +60,13 @@ export default function Calculator() {
         />
       </div>
       <button onClick={handleReset}>초기화</button>
+      <div>
+        {quickSizes.map((size) => (
+          <button key={size} onClick={() => handleQuickSelect(size)}>
+            {size}평
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

@@ -63,4 +63,27 @@ describe('Calculator', () => {
       expect(pyeongInput.value).toBe('');
     });
   });
+
+  describe('빠른 평형 버튼', () => {
+    it('10, 15, 20, 25, 30, 35, 40평 버튼을 렌더링한다', () => {
+      render(<Calculator />);
+      [10, 15, 20, 25, 30, 35, 40].forEach((pyeong) => {
+        expect(screen.getByRole('button', { name: `${pyeong}평` })).toBeInTheDocument();
+      });
+    });
+
+    it('30평 버튼 클릭 시 필드가 업데이트된다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const button30 = screen.getByRole('button', { name: '30평' });
+      await user.click(button30);
+
+      const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+
+      expect(pyeongInput.value).toBe('30');
+      expect(sqmInput.value).toBe('99.17');
+    });
+  });
 });
