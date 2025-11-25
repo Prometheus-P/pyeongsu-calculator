@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { convertSqmToPyeong, formatNumber, isValidInput } from '../utils/converter';
+import { convertSqmToPyeong, convertPyeongToSqm, formatNumber, isValidInput } from '../utils/converter';
 
 export default function Calculator() {
   const [sqm, setSqm] = useState('');
@@ -12,6 +12,16 @@ export default function Calculator() {
       setPyeong(formatNumber(converted));
     } else {
       setPyeong('');
+    }
+  };
+
+  const handlePyeongChange = (value: string) => {
+    setPyeong(value);
+    if (isValidInput(value)) {
+      const converted = convertPyeongToSqm(parseFloat(value));
+      setSqm(formatNumber(converted));
+    } else {
+      setSqm('');
     }
   };
 
@@ -29,7 +39,12 @@ export default function Calculator() {
       </div>
       <div>
         <label htmlFor="pyeong">평</label>
-        <input id="pyeong" type="text" value={pyeong} readOnly />
+        <input
+          id="pyeong"
+          type="text"
+          value={pyeong}
+          onChange={(e) => handlePyeongChange(e.target.value)}
+        />
       </div>
     </div>
   );

@@ -33,4 +33,17 @@ describe('Calculator', () => {
       expect(pyeongInput.value).toBe('10.00');
     });
   });
+
+  describe('평 → 제곱미터 변환', () => {
+    it('평 입력 시 제곱미터 필드가 자동 업데이트된다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const pyeongInput = screen.getByLabelText(/평/);
+      await user.type(pyeongInput, '10');
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+      expect(sqmInput.value).toBe('33.06');
+    });
+  });
 });
