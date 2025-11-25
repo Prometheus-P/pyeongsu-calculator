@@ -5,8 +5,8 @@
 ## 진행 상황
 
 - 총 항목: 15개
-- 완료: 3개
-- 진행률: 20%
+- 완료: 4개
+- 진행률: 27%
 
 ---
 
@@ -28,7 +28,7 @@
 - 파일: `src/utils/converter.ts`
 
 ### 1.4 입력값 유효성 검사 함수
-- [ ] `isValidInput(value: string): boolean` 구현
+- [x] `isValidInput(value: string): boolean` 구현
 - 테스트: 빈 문자열, '.', 음수, 유효한 숫자
 - 파일: `src/utils/converter.ts`
 
@@ -100,3 +100,4 @@
 | 1.1 convertSqmToPyeong | 0422476 | 2025-11-25 |
 | 1.2 convertPyeongToSqm | 18276c4 | 2025-11-25 |
 | 1.3 formatNumber | 34cc76e | 2025-11-25 |
+| 1.4 isValidInput | ea10744 | 2025-11-25 |
