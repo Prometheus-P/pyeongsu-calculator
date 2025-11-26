@@ -27,5 +27,13 @@ npm-debug.log*
 # Test coverage
 coverage/
 
+# Playwright
+playwright-report/
+test-results/
+.playwright/
+
+# Legacy files
+legacy/
+
 # Vite
 *.local

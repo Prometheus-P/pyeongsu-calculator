@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Calculator from './Calculator';
 
@@ -19,6 +19,16 @@ describe('Calculator', () => {
       render(<Calculator />);
       expect(screen.getByLabelText(/평/)).toBeInTheDocument();
     });
+
+    it('초기화 버튼을 렌더링한다', () => {
+      render(<Calculator />);
+      expect(screen.getByRole('button', { name: /초기화/ })).toBeInTheDocument();
+    });
+
+    it('빠른 선택 레이블을 렌더링한다', () => {
+      render(<Calculator />);
+      expect(screen.getByText('빠른 선택')).toBeInTheDocument();
+    });
   });
 
   describe('제곱미터 → 평 변환', () => {
@@ -32,6 +42,17 @@ describe('Calculator', () => {
       const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
       expect(pyeongInput.value).toBe('10.00');
     });
+
+    it('0 입력 시 0평으로 변환된다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/);
+      await user.type(sqmInput, '0');
+
+      const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+      expect(pyeongInput.value).toBe('0.00');
+    });
   });
 
   describe('평 → 제곱미터 변환', () => {
@@ -44,6 +65,17 @@ describe('Calculator', () => {
 
       const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
       expect(sqmInput.value).toBe('33.06');
+    });
+
+    it('0 입력 시 0㎡로 변환된다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const pyeongInput = screen.getByLabelText(/평/);
+      await user.type(pyeongInput, '0');
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+      expect(sqmInput.value).toBe('0.00');
     });
   });
 
@@ -84,6 +116,103 @@ describe('Calculator', () => {
 
       expect(pyeongInput.value).toBe('30');
       expect(sqmInput.value).toBe('99.17');
+    });
+
+    it.each([
+      [10, '33.06'],
+      [15, '49.59'],
+      [20, '66.12'],
+      [25, '82.64'], // 25 * 3.3058 = 82.645 → 반올림 82.64
+      [30, '99.17'],
+      [35, '115.70'],
+      [40, '132.23'],
+    ])('%i평 버튼 클릭 시 %s㎡로 변환된다', async (pyeong, expectedSqm) => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const button = screen.getByRole('button', { name: `${pyeong}평` });
+      await user.click(button);
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+      expect(sqmInput.value).toBe(expectedSqm);
+    });
+  });
+
+  describe('initialPyeong prop', () => {
+    it('initialPyeong이 주어지면 해당 값으로 초기화된다', async () => {
+      render(<Calculator initialPyeong={25} />);
+
+      await waitFor(() => {
+        const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+        const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+
+        expect(pyeongInput.value).toBe('25');
+        expect(sqmInput.value).toBe('82.64'); // 25 * 3.3058 = 82.645 → 반올림 82.64
+      });
+    });
+
+    it('initialPyeong이 null이면 필드가 비어있다', () => {
+      render(<Calculator initialPyeong={null} />);
+
+      const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+
+      expect(pyeongInput.value).toBe('');
+      expect(sqmInput.value).toBe('');
+    });
+
+    it('initialPyeong이 undefined면 필드가 비어있다', () => {
+      render(<Calculator initialPyeong={undefined} />);
+
+      const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+
+      expect(pyeongInput.value).toBe('');
+      expect(sqmInput.value).toBe('');
+    });
+  });
+
+  describe('잘못된 입력 처리', () => {
+    it('유효하지 않은 입력 시 반대쪽 필드가 비워진다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+      await user.type(sqmInput, '.');
+
+      const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+      expect(pyeongInput.value).toBe('');
+    });
+
+    it('빈 입력으로 변경 시 반대쪽 필드도 비워진다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+      await user.type(sqmInput, '33');
+      await user.clear(sqmInput);
+
+      const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+      expect(pyeongInput.value).toBe('');
+    });
+  });
+
+  describe('접근성', () => {
+    it('입력 필드에 적절한 label이 연결되어 있다', () => {
+      render(<Calculator />);
+
+      const sqmInput = screen.getByLabelText(/제곱미터/);
+      const pyeongInput = screen.getByLabelText(/평/);
+
+      expect(sqmInput).toHaveAttribute('id', 'sqm');
+      expect(pyeongInput).toHaveAttribute('id', 'pyeong');
+    });
+
+    it('입력 필드에 placeholder가 있다', () => {
+      render(<Calculator />);
+
+      expect(screen.getByPlaceholderText('제곱미터 입력')).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('평수 입력')).toBeInTheDocument();
     });
   });
 });

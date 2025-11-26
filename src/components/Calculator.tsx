@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
-import { convertSqmToPyeong, convertPyeongToSqm, formatNumber, isValidInput } from '../utils/converter';
+import {
+  convertSqmToPyeong,
+  convertPyeongToSqm,
+  formatNumber,
+  isValidInput,
+} from '../utils/converter';
 
 interface CalculatorProps {
   initialPyeong?: number | null;

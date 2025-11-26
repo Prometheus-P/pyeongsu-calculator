@@ -110,3 +110,76 @@
 | 3.2 참고표 클릭 동작 | 1792540 | 2025-11-25 |
 | 4.1 App 통합 | 31aa19c | 2025-11-25 |
 | 4.2 Tailwind 스타일링 | c234be9 | 2025-11-25 |
+
+---
+
+## Phase 2: 추가 기능 (예정)
+
+- 총 항목: 8개
+- 완료: 0개
+- 진행률: 0%
+
+---
+
+## 5. 사용자 편의 기능
+
+### 5.1 계산 히스토리
+- [ ] 최근 변환 기록 저장 (localStorage 활용)
+- [ ] 히스토리 목록 표시 컴포넌트
+- [ ] 히스토리 항목 클릭 시 값 복원
+- 테스트: 변환 후 새로고침해도 기록 유지
+- 파일: `src/components/History.tsx`, `src/utils/storage.ts`
+
+### 5.2 클립보드 복사
+- [ ] 결과값 복사 버튼 추가
+- [ ] 복사 완료 피드백 (토스트 메시지)
+- 테스트: 복사 버튼 클릭 → 클립보드에 값 저장
+- 파일: `src/components/Calculator.tsx`
+
+### 5.3 URL 공유
+- [ ] 현재 계산 결과를 URL 쿼리 파라미터로 반영
+- [ ] URL 접속 시 파라미터 값으로 자동 계산
+- 테스트: `?pyeong=30` 접속 → 30평, 99.17㎡ 표시
+- 파일: `src/App.tsx`, `src/hooks/useQueryParams.ts`
+
+---
+
+## 6. UI/UX 개선
+
+### 6.1 다크 모드
+- [ ] 다크/라이트 테마 토글 버튼
+- [ ] 시스템 설정 자동 감지 (prefers-color-scheme)
+- [ ] 테마 설정 localStorage 저장
+- 파일: `src/contexts/ThemeContext.tsx`, `tailwind.config.js`
+
+### 6.2 키보드 접근성
+- [ ] Enter 키로 다음 필드 이동
+- [ ] Escape 키로 초기화
+- [ ] 키보드 단축키 안내 툴팁
+- 파일: `src/components/Calculator.tsx`
+
+---
+
+## 7. 단위 확장
+
+### 7.1 추가 면적 단위
+- [ ] 에이커 (acre) 변환 지원
+- [ ] 제곱피트 (sq ft) 변환 지원
+- [ ] 단위 선택 드롭다운 UI
+- 파일: `src/utils/converter.ts`, `src/constants/conversion.ts`
+
+---
+
+## 8. 기술 개선
+
+### 8.1 PWA 지원
+- [ ] Service Worker 구현 (오프라인 사용)
+- [ ] manifest.json 설정
+- [ ] 앱 설치 프롬프트
+- 파일: `public/manifest.json`, `src/sw.ts`
+
+### 8.2 성능 최적화
+- [ ] React.memo 적용
+- [ ] 입력 디바운싱 (300ms)
+- [ ] Lighthouse 성능 점수 90+ 달성
+- 파일: `src/components/*.tsx`
