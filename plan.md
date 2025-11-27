@@ -116,8 +116,8 @@
 ## Phase 2: 추가 기능 (예정)
 
 - 총 항목: 8개
-- 완료: 6개
-- 진행률: 75%
+- 완료: 7개
+- 진행률: 87.5%
 
 ---
 
@@ -173,10 +173,10 @@
 ## 8. 기술 개선
 
 ### 8.1 PWA 지원
-- [ ] Service Worker 구현 (오프라인 사용)
-- [ ] manifest.json 설정
-- [ ] 앱 설치 프롬프트
-- 파일: `public/manifest.json`, `src/sw.ts`
+- [x] Service Worker 구현 (오프라인 사용)
+- [x] manifest.json 설정
+- [x] 앱 아이콘 (favicon.svg)
+- 파일: `vite.config.ts`, `public/favicon.svg`
 
 ### 8.2 성능 최적화
 - [ ] React.memo 적용
