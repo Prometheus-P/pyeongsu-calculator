@@ -15,6 +15,7 @@ interface CalculatorProps {
 export default function Calculator({ initialPyeong, onHistoryUpdate }: CalculatorProps) {
   const [sqm, setSqm] = useState('');
   const [pyeong, setPyeong] = useState('');
+  const [showToast, setShowToast] = useState(false);
 
   // 히스토리 저장 함수
   const addToHistory = useCallback(
@@ -80,6 +81,15 @@ export default function Calculator({ initialPyeong, onHistoryUpdate }: Calculato
     addToHistory(convertPyeongToSqm(size), size);
   };
 
+  // 클립보드 복사
+  const handleCopy = async () => {
+    const text = `${sqm}㎡ = ${pyeong}평`;
+    await navigator.clipboard.writeText(text);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2000);
+  };
+
+  const hasValue = isValidInput(sqm) && isValidInput(pyeong);
   const quickSizes = [10, 15, 20, 25, 30, 35, 40];
 
   return (
@@ -118,12 +128,28 @@ export default function Calculator({ initialPyeong, onHistoryUpdate }: Calculato
         </div>
       </div>
 
-      <button
-        onClick={clearFields}
-        className="w-full mt-4 py-2 px-4 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition"
-      >
-        초기화
-      </button>
+      <div className="flex gap-2 mt-4">
+        <button
+          onClick={clearFields}
+          className="flex-1 py-2 px-4 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition"
+        >
+          초기화
+        </button>
+        {hasValue && (
+          <button
+            onClick={handleCopy}
+            className="py-2 px-4 bg-green-500 hover:bg-green-600 text-white rounded-lg transition"
+          >
+            복사
+          </button>
+        )}
+      </div>
+
+      {showToast && (
+        <div className="mt-2 p-2 bg-green-100 text-green-700 text-sm text-center rounded-lg">
+          복사되었습니다!
+        </div>
+      )}
 
       <div className="mt-6">
         <p className="text-sm text-gray-600 mb-2">빠른 선택</p>
