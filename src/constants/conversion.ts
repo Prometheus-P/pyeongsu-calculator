@@ -5,6 +5,20 @@ export const PYEONG_TO_SQM_RATIO = 3.3058;
 // 1㎡ = 0.3025평 (정확한 값: 121/400 = 0.3025)
 export const SQM_TO_PYEONG_RATIO = 0.3025;
 
+// 제곱피트 변환 상수
+// 1㎡ = 10.7639 sqft
+export const SQM_TO_SQFT_RATIO = 10.7639;
+
+// 1 sqft = 0.0929 ㎡
+export const SQFT_TO_SQM_RATIO = 0.0929;
+
+// 에이커 변환 상수
+// 1 acre = 4046.86 ㎡
+export const ACRE_TO_SQM_RATIO = 4046.86;
+
+// 1㎡ = 0.000247105 acre
+export const SQM_TO_ACRE_RATIO = 0.000247105;
+
 // 일반적인 평형 참고 데이터
 export const COMMON_SIZES = [
   { pyeong: 10, label: '10평', type: '원룸' },
