@@ -25,6 +25,21 @@ Object.defineProperty(window, 'localStorage', {
   value: localStorageMock,
 });
 
+// matchMedia Mock (다크 모드 테스트용)
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: (query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  }),
+});
+
 // React Testing Library 설정
 configure({
   // 비동기 쿼리 타임아웃 설정 (Flaky 테스트 방지)

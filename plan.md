@@ -116,8 +116,8 @@
 ## Phase 2: 추가 기능 (예정)
 
 - 총 항목: 8개
-- 완료: 3개
-- 진행률: 37.5%
+- 완료: 4개
+- 진행률: 50%
 
 ---
 
@@ -147,10 +147,10 @@
 ## 6. UI/UX 개선
 
 ### 6.1 다크 모드
-- [ ] 다크/라이트 테마 토글 버튼
-- [ ] 시스템 설정 자동 감지 (prefers-color-scheme)
-- [ ] 테마 설정 localStorage 저장
-- 파일: `src/contexts/ThemeContext.tsx`, `tailwind.config.js`
+- [x] 다크/라이트 테마 토글 버튼
+- [x] 시스템 설정 자동 감지 (prefers-color-scheme)
+- [x] 테마 설정 localStorage 저장
+- 파일: `src/contexts/ThemeContext.tsx`, `src/components/ThemeToggle.tsx`, `tailwind.config.js`
 
 ### 6.2 키보드 접근성
 - [ ] Enter 키로 다음 필드 이동
