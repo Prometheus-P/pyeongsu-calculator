@@ -4,6 +4,27 @@ import { configure } from '@testing-library/react';
 import { afterEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 
+// localStorage Mock
+const localStorageMock = (() => {
+  let store: Record<string, string> = {};
+  return {
+    getItem: (key: string) => store[key] || null,
+    setItem: (key: string, value: string) => {
+      store[key] = value;
+    },
+    removeItem: (key: string) => {
+      delete store[key];
+    },
+    clear: () => {
+      store = {};
+    },
+  };
+})();
+
+Object.defineProperty(window, 'localStorage', {
+  value: localStorageMock,
+});
+
 // React Testing Library 설정
 configure({
   // 비동기 쿼리 타임아웃 설정 (Flaky 테스트 방지)

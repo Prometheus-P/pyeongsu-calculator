@@ -20,6 +20,7 @@ export default [
         console: 'readonly',
         document: 'readonly',
         window: 'readonly',
+        localStorage: 'readonly',
         HTMLInputElement: 'readonly',
         HTMLElement: 'readonly',
         HTMLButtonElement: 'readonly',

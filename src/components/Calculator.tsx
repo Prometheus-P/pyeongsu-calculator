@@ -1,18 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   convertSqmToPyeong,
   convertPyeongToSqm,
   formatNumber,
   isValidInput,
 } from '../utils/converter';
+import { saveHistory } from '../utils/storage';
 
 interface CalculatorProps {
   initialPyeong?: number | null;
+  onHistoryUpdate?: () => void;
 }
 
-export default function Calculator({ initialPyeong }: CalculatorProps) {
+export default function Calculator({ initialPyeong, onHistoryUpdate }: CalculatorProps) {
   const [sqm, setSqm] = useState('');
   const [pyeong, setPyeong] = useState('');
+
+  // 히스토리 저장 함수
+  const addToHistory = useCallback(
+    (sqmValue: number, pyeongValue: number) => {
+      saveHistory({
+        sqm: parseFloat(formatNumber(sqmValue)),
+        pyeong: parseFloat(formatNumber(pyeongValue)),
+        timestamp: Date.now(),
+      });
+      onHistoryUpdate?.();
+    },
+    [onHistoryUpdate]
+  );
 
   // 헬퍼: 평 값으로 양쪽 필드 업데이트
   const updateFieldsFromPyeong = (pyeongValue: number) => {
@@ -52,6 +67,19 @@ export default function Calculator({ initialPyeong }: CalculatorProps) {
     }
   };
 
+  // 입력 완료 시 히스토리 저장
+  const handleInputBlur = () => {
+    if (isValidInput(sqm) && isValidInput(pyeong)) {
+      addToHistory(parseFloat(sqm), parseFloat(pyeong));
+    }
+  };
+
+  // 빠른 선택 시 히스토리 저장
+  const handleQuickSelect = (size: number) => {
+    updateFieldsFromPyeong(size);
+    addToHistory(convertPyeongToSqm(size), size);
+  };
+
   const quickSizes = [10, 15, 20, 25, 30, 35, 40];
 
   return (
@@ -68,6 +96,7 @@ export default function Calculator({ initialPyeong }: CalculatorProps) {
             type="text"
             value={sqm}
             onChange={(e) => handleSqmChange(e.target.value)}
+            onBlur={handleInputBlur}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
             placeholder="제곱미터 입력"
           />
@@ -82,6 +111,7 @@ export default function Calculator({ initialPyeong }: CalculatorProps) {
             type="text"
             value={pyeong}
             onChange={(e) => handlePyeongChange(e.target.value)}
+            onBlur={handleInputBlur}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
             placeholder="평수 입력"
           />
@@ -101,7 +131,7 @@ export default function Calculator({ initialPyeong }: CalculatorProps) {
           {quickSizes.map((size) => (
             <button
               key={size}
-              onClick={() => updateFieldsFromPyeong(size)}
+              onClick={() => handleQuickSelect(size)}
               className="py-2 px-3 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg text-sm font-medium transition"
             >
               {size}평
