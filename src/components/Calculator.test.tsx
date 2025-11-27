@@ -220,6 +220,65 @@ describe('Calculator', () => {
     });
   });
 
+  describe('키보드 접근성', () => {
+    it('제곱미터 필드에서 Enter 키 입력 시 평 필드로 포커스 이동', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/);
+      const pyeongInput = screen.getByLabelText(/평/);
+
+      await user.click(sqmInput);
+      await user.keyboard('{Enter}');
+
+      expect(pyeongInput).toHaveFocus();
+    });
+
+    it('평 필드에서 Enter 키 입력 시 포커스가 유지된다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const pyeongInput = screen.getByLabelText(/평/);
+
+      await user.click(pyeongInput);
+      await user.keyboard('{Enter}');
+
+      expect(pyeongInput).toHaveFocus();
+    });
+
+    it('Escape 키 입력 시 모든 필드가 초기화된다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+      const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+
+      await user.type(sqmInput, '33.06');
+      expect(pyeongInput.value).toBe('10.00');
+
+      await user.keyboard('{Escape}');
+
+      expect(sqmInput.value).toBe('');
+      expect(pyeongInput.value).toBe('');
+    });
+
+    it('평 필드에서 Escape 키 입력 시에도 초기화된다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+      const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+
+      await user.type(pyeongInput, '10');
+      expect(sqmInput.value).toBe('33.06');
+
+      await user.keyboard('{Escape}');
+
+      expect(sqmInput.value).toBe('');
+      expect(pyeongInput.value).toBe('');
+    });
+  });
+
   describe('클립보드 복사', () => {
     it('복사 버튼을 렌더링한다', async () => {
       const user = userEvent.setup();

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef, KeyboardEvent } from 'react';
 import {
   convertSqmToPyeong,
   convertPyeongToSqm,
@@ -17,6 +17,7 @@ export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChan
   const [sqm, setSqm] = useState('');
   const [pyeong, setPyeong] = useState('');
   const [showToast, setShowToast] = useState(false);
+  const pyeongInputRef = useRef<HTMLInputElement>(null);
 
   // 히스토리 저장 함수
   const addToHistory = useCallback(
@@ -93,6 +94,15 @@ export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChan
     setTimeout(() => setShowToast(false), 2000);
   };
 
+  // 키보드 이벤트 핸들러
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, field: 'sqm' | 'pyeong') => {
+    if (e.key === 'Escape') {
+      clearFields();
+    } else if (e.key === 'Enter' && field === 'sqm') {
+      pyeongInputRef.current?.focus();
+    }
+  };
+
   const hasValue = isValidInput(sqm) && isValidInput(pyeong);
   const quickSizes = [10, 15, 20, 25, 30, 35, 40];
 
@@ -111,6 +121,7 @@ export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChan
             value={sqm}
             onChange={(e) => handleSqmChange(e.target.value)}
             onBlur={handleInputBlur}
+            onKeyDown={(e) => handleKeyDown(e, 'sqm')}
             className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             placeholder="제곱미터 입력"
           />
@@ -121,11 +132,13 @@ export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChan
             평
           </label>
           <input
+            ref={pyeongInputRef}
             id="pyeong"
             type="text"
             value={pyeong}
             onChange={(e) => handlePyeongChange(e.target.value)}
             onBlur={handleInputBlur}
+            onKeyDown={(e) => handleKeyDown(e, 'pyeong')}
             className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             placeholder="평수 입력"
           />

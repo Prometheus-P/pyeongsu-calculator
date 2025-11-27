@@ -116,8 +116,8 @@
 ## Phase 2: 추가 기능 (예정)
 
 - 총 항목: 8개
-- 완료: 4개
-- 진행률: 50%
+- 완료: 5개
+- 진행률: 62.5%
 
 ---
 
@@ -153,9 +153,9 @@
 - 파일: `src/contexts/ThemeContext.tsx`, `src/components/ThemeToggle.tsx`, `tailwind.config.js`
 
 ### 6.2 키보드 접근성
-- [ ] Enter 키로 다음 필드 이동
-- [ ] Escape 키로 초기화
-- [ ] 키보드 단축키 안내 툴팁
+- [x] Enter 키로 다음 필드 이동
+- [x] Escape 키로 초기화
+- [ ] 키보드 단축키 안내 툴팁 (선택적)
 - 파일: `src/components/Calculator.tsx`
 
 ---
