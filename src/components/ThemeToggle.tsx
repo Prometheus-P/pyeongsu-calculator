@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 
-export default function ThemeToggle() {
+export default memo(function ThemeToggle() {
   const { isDark, toggleTheme } = useTheme();
 
   return (
@@ -12,4 +13,4 @@ export default function ThemeToggle() {
       <span className="text-xl">{isDark ? '☀️' : '🌙'}</span>
     </button>
   );
-}
+});

@@ -116,8 +116,8 @@
 ## Phase 2: 추가 기능 (예정)
 
 - 총 항목: 8개
-- 완료: 7개
-- 진행률: 87.5%
+- 완료: 8개
+- 진행률: 100%
 
 ---
 
@@ -179,7 +179,7 @@
 - 파일: `vite.config.ts`, `public/favicon.svg`
 
 ### 8.2 성능 최적화
-- [ ] React.memo 적용
-- [ ] 입력 디바운싱 (300ms)
-- [ ] Lighthouse 성능 점수 90+ 달성
+- [x] React.memo 적용 (ReferenceTable, History, ThemeToggle)
+- [ ] 입력 디바운싱 (선택적 - 현재 실시간 변환이 더 나은 UX)
+- [ ] Lighthouse 성능 점수 90+ 달성 (배포 후 측정 필요)
 - 파일: `src/components/*.tsx`

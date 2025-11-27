@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { getHistory, clearHistory as clearStorageHistory, HistoryItem } from '../utils/storage';
 
 interface HistoryProps {
@@ -6,7 +6,7 @@ interface HistoryProps {
   historyVersion?: number;
 }
 
-export default function History({ onSelect, historyVersion = 0 }: HistoryProps) {
+export default memo(function History({ onSelect, historyVersion = 0 }: HistoryProps) {
   const [history, setHistory] = useState<HistoryItem[]>([]);
 
   useEffect(() => {
@@ -50,4 +50,4 @@ export default function History({ onSelect, historyVersion = 0 }: HistoryProps) 
       )}
     </div>
   );
-}
+});

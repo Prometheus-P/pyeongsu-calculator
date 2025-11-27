@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { COMMON_SIZES } from '../constants/conversion';
 import { convertPyeongToSqm, formatNumber } from '../utils/converter';
 
@@ -5,7 +6,7 @@ interface ReferenceTableProps {
   onSelect: (pyeong: number) => void;
 }
 
-export default function ReferenceTable({ onSelect }: ReferenceTableProps) {
+export default memo(function ReferenceTable({ onSelect }: ReferenceTableProps) {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 max-w-md w-full transition-colors">
       <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-4">일반적인 평형 참고</h2>
@@ -42,4 +43,4 @@ export default function ReferenceTable({ onSelect }: ReferenceTableProps) {
       </table>
     </div>
   );
-}
+});
