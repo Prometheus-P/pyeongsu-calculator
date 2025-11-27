@@ -24,6 +24,7 @@ export default [
         navigator: 'readonly',
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
+        URLSearchParams: 'readonly',
         HTMLInputElement: 'readonly',
         HTMLElement: 'readonly',
         HTMLButtonElement: 'readonly',

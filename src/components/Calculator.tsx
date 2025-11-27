@@ -10,9 +10,10 @@ import { saveHistory } from '../utils/storage';
 interface CalculatorProps {
   initialPyeong?: number | null;
   onHistoryUpdate?: () => void;
+  onValueChange?: (pyeong: number | null) => void;
 }
 
-export default function Calculator({ initialPyeong, onHistoryUpdate }: CalculatorProps) {
+export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChange }: CalculatorProps) {
   const [sqm, setSqm] = useState('');
   const [pyeong, setPyeong] = useState('');
   const [showToast, setShowToast] = useState(false);
@@ -68,17 +69,20 @@ export default function Calculator({ initialPyeong, onHistoryUpdate }: Calculato
     }
   };
 
-  // 입력 완료 시 히스토리 저장
+  // 입력 완료 시 히스토리 저장 및 URL 업데이트
   const handleInputBlur = () => {
     if (isValidInput(sqm) && isValidInput(pyeong)) {
-      addToHistory(parseFloat(sqm), parseFloat(pyeong));
+      const pyeongValue = parseFloat(pyeong);
+      addToHistory(parseFloat(sqm), pyeongValue);
+      onValueChange?.(pyeongValue);
     }
   };
 
-  // 빠른 선택 시 히스토리 저장
+  // 빠른 선택 시 히스토리 저장 및 URL 업데이트
   const handleQuickSelect = (size: number) => {
     updateFieldsFromPyeong(size);
     addToHistory(convertPyeongToSqm(size), size);
+    onValueChange?.(size);
   };
 
   // 클립보드 복사

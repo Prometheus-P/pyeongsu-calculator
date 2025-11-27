@@ -1,10 +1,16 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import { COMMON_SIZES } from './constants/conversion';
 
 describe('App', () => {
+  beforeEach(() => {
+    // URL 초기화
+    window.history.pushState({}, '', '/');
+    localStorage.clear();
+  });
+
   describe('컴포넌트 렌더링', () => {
     it('Calculator와 ReferenceTable을 모두 렌더링한다', () => {
       render(<App />);
@@ -186,6 +192,39 @@ describe('App', () => {
       const { container } = render(<App />);
       const mainDiv = container.querySelector('.bg-gradient-to-br');
       expect(mainDiv).toBeInTheDocument();
+    });
+  });
+
+  describe('URL 공유', () => {
+    it('URL에 pyeong 파라미터가 있으면 해당 값으로 초기화된다', async () => {
+      window.history.pushState({}, '', '?pyeong=30');
+      render(<App />);
+
+      await waitFor(() => {
+        const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+        expect(pyeongInput.value).toBe('30');
+      });
+    });
+
+    it('빠른 선택 버튼 클릭 시 URL이 업데이트된다', async () => {
+      const user = userEvent.setup();
+      render(<App />);
+
+      const button25 = screen.getByRole('button', { name: '25평' });
+      await user.click(button25);
+
+      expect(window.location.search).toBe('?pyeong=25');
+    });
+
+    it('참고표 클릭 시 URL이 업데이트된다', async () => {
+      const user = userEvent.setup();
+      render(<App />);
+
+      const table = screen.getByRole('table');
+      const rows = table.querySelectorAll('tbody tr');
+      await user.click(rows[2]); // 20평
+
+      expect(window.location.search).toBe('?pyeong=20');
     });
   });
 });
