@@ -1,4 +1,4 @@
-import { useMemo, useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 export function useQueryParams() {
   const [pyeongFromUrl, setPyeongFromUrl] = useState<number | null>(null);

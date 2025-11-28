@@ -32,6 +32,7 @@ export default [
         Event: 'readonly',
         KeyboardEvent: 'readonly',
         performance: 'readonly',
+        Response: 'readonly',
         // React globals
         React: 'readonly',
         JSX: 'readonly',
