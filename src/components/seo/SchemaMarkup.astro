@@ -1,0 +1,88 @@
+---
+interface Props {
+  type: 'calculator' | 'faq' | 'howto' | 'all';
+  faqItems?: Array<{ question: string; answer: string }>;
+}
+
+const { type, faqItems = [] } = Astro.props;
+
+const siteUrl = 'https://pyeongsu-calculator.kr';
+
+// WebApplication Schema
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "평수 계산기",
+  "description": "부동산 평수를 제곱미터로, 제곱미터를 평으로 변환하는 무료 온라인 계산기",
+  "url": siteUrl,
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "KRW"
+  },
+  "featureList": [
+    "평 → 제곱미터 변환",
+    "제곱미터 → 평 변환",
+    "실시간 양방향 계산",
+    "일반 평형 빠른 선택"
+  ],
+  "author": {
+    "@type": "Organization",
+    "name": "평수 계산기"
+  }
+};
+
+// FAQPage Schema
+const faqSchema = faqItems.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+} : null;
+
+// HowTo Schema
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "평수 계산기 사용 방법",
+  "description": "부동산 면적을 평과 제곱미터로 변환하는 방법",
+  "totalTime": "PT1M",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "면적 입력",
+      "text": "평 또는 제곱미터 입력란에 변환하고 싶은 면적을 입력합니다."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "자동 변환 확인",
+      "text": "입력과 동시에 반대 단위로 자동 변환된 결과를 확인합니다."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "빠른 선택 활용",
+      "text": "일반적인 아파트 평형(10평, 20평, 30평 등)은 버튼을 클릭하여 빠르게 계산할 수 있습니다."
+    }
+  ]
+};
+---
+
+{(type === 'calculator' || type === 'all') && (
+  <script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+)}
+
+{(type === 'faq' || type === 'all') && faqSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+)}
+
+{(type === 'howto' || type === 'all') && (
+  <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+)}
