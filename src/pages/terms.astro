@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AdSlot from '../components/ads/AdSlot.astro';
+---
+
+<BaseLayout
+  title="이용약관 | 평수 계산기"
+  description="평수 계산기 서비스 이용약관입니다. 서비스 이용 조건, 이용자의 권리와 의무, 면책조항 등을 안내합니다."
+  canonical="https://pyeongsu-calculator.kr/terms"
+>
+  <main class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+      <AdSlot format="leaderboard" className="mb-8" />
+
+      <article class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-10">
+        <header class="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+            이용약관
+          </h1>
+          <p class="text-gray-500 dark:text-gray-400">
+            최종 수정일: 2024년 1월 1일
+          </p>
+        </header>
+
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">제1조 (목적)</h2>
+            <p class="text-gray-600 dark:text-gray-300">
+              이 약관은 평수 계산기(이하 "서비스")의 이용조건 및 절차, 이용자와 서비스 제공자의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">제2조 (용어의 정의)</h2>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              이 약관에서 사용하는 용어의 정의는 다음과 같습니다:
+            </p>
+            <ul class="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2">
+              <li><strong>"서비스"</strong>란 평수(평)와 제곱미터(㎡) 간의 면적 단위 변환 기능을 제공하는 웹 애플리케이션을 말합니다.</li>
+              <li><strong>"이용자"</strong>란 본 서비스에 접속하여 이 약관에 따라 서비스를 이용하는 자를 말합니다.</li>
+              <li><strong>"콘텐츠"</strong>란 서비스에서 제공하는 계산 결과, 참조 정보, 가이드 등 모든 정보를 말합니다.</li>
+            </ul>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">제3조 (약관의 효력 및 변경)</h2>
+            <ol class="list-decimal pl-6 text-gray-600 dark:text-gray-300 space-y-2">
+              <li>이 약관은 서비스 화면에 게시하거나 기타의 방법으로 이용자에게 공지함으로써 효력이 발생합니다.</li>
+              <li>서비스 제공자는 필요한 경우 관련 법령을 위배하지 않는 범위 내에서 이 약관을 변경할 수 있습니다.</li>
+              <li>약관이 변경되는 경우 서비스 제공자는 변경 내용을 적용일자 7일 전부터 서비스 내에 공지합니다.</li>
+              <li>이용자가 변경된 약관에 동의하지 않는 경우 서비스 이용을 중단할 수 있습니다.</li>
+            </ol>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">제4조 (서비스의 제공)</h2>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              서비스는 다음과 같은 기능을 제공합니다:
+            </p>
+            <ul class="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2">
+              <li>평수(평)와 제곱미터(㎡) 간의 실시간 단위 변환</li>
+              <li>일반적인 아파트 평형 참조 정보 제공</li>
+              <li>변환 기록 저장 및 관리 (로컬 저장)</li>
+              <li>URL을 통한 변환 결과 공유</li>
+              <li>부동산 관련 정보 콘텐츠 제공</li>
+            </ul>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">제5조 (서비스 이용)</h2>
+            <ol class="list-decimal pl-6 text-gray-600 dark:text-gray-300 space-y-2">
+              <li>서비스는 회원가입 없이 누구나 무료로 이용할 수 있습니다.</li>
+              <li>서비스는 연중무휴, 1일 24시간 제공을 원칙으로 합니다.</li>
+              <li>서비스 제공자는 다음 각 호의 경우 서비스 제공을 일시적으로 중단할 수 있습니다:
+                <ul class="list-disc pl-6 mt-2 space-y-1">
+                  <li>시스템 정기 점검, 증설 및 교체</li>
+                  <li>천재지변, 국가비상사태 등 불가항력적 사유가 있는 경우</li>
+                  <li>서비스 설비의 장애가 발생한 경우</li>
+                </ul>
+              </li>
+            </ol>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">제6조 (이용자의 의무)</h2>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              이용자는 다음 행위를 하여서는 안 됩니다:
+            </p>
+            <ul class="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2">
+              <li>서비스의 정상적인 운영을 방해하는 행위</li>
+              <li>서비스를 이용하여 법령 또는 공공질서에 위배되는 행위</li>
+              <li>타인의 명예를 손상시키거나 불이익을 주는 행위</li>
+              <li>서비스의 정보를 무단으로 변경, 삭제하는 행위</li>
+              <li>서비스에 해킹, 악성 코드 유포 등의 행위</li>
+              <li>서비스를 영리 목적으로 무단 복제, 배포하는 행위</li>
+            </ul>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">제7조 (지적재산권)</h2>
+            <ol class="list-decimal pl-6 text-gray-600 dark:text-gray-300 space-y-2">
+              <li>서비스에 대한 저작권 및 지적재산권은 서비스 제공자에게 귀속됩니다.</li>
+              <li>이용자는 서비스를 이용함으로써 얻은 정보를 서비스 제공자의 사전 승낙 없이 복제, 송신, 출판, 배포, 방송 기타 방법에 의하여 영리 목적으로 이용하거나 제3자에게 이용하게 하여서는 안 됩니다.</li>
+              <li>서비스에서 제공하는 계산 결과는 개인적인 용도로 자유롭게 사용할 수 있습니다.</li>
+            </ol>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">제8조 (면책조항)</h2>
+            <ol class="list-decimal pl-6 text-gray-600 dark:text-gray-300 space-y-2">
+              <li>서비스 제공자는 천재지변, 전쟁, 기간통신사업자의 서비스 중지 및 기타 불가항력적인 사유로 서비스를 제공할 수 없는 경우에는 책임이 면제됩니다.</li>
+              <li>서비스 제공자는 이용자의 귀책사유로 인한 서비스 이용 장애에 대하여 책임을 지지 않습니다.</li>
+              <li><strong>서비스에서 제공하는 계산 결과는 참고용이며, 실제 부동산 거래나 법적 목적으로 사용할 경우 공인된 측량 결과를 사용하시기 바랍니다.</strong></li>
+              <li>서비스에서 제공하는 정보의 정확성, 완전성, 적시성을 보장하지 않으며, 이로 인해 발생하는 손해에 대해 책임을 지지 않습니다.</li>
+              <li>서비스 내 광고의 내용과 광고를 통해 연결된 제3자 사이트의 내용에 대해서는 책임을 지지 않습니다.</li>
+            </ol>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">제9조 (분쟁 해결)</h2>
+            <ol class="list-decimal pl-6 text-gray-600 dark:text-gray-300 space-y-2">
+              <li>서비스 이용과 관련하여 서비스 제공자와 이용자 간에 분쟁이 발생한 경우, 양 당사자는 분쟁의 해결을 위해 성실히 협의합니다.</li>
+              <li>협의가 이루어지지 않는 경우, 대한민국 법률에 따라 관할 법원에 소를 제기할 수 있습니다.</li>
+            </ol>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">제10조 (준거법 및 관할)</h2>
+            <ol class="list-decimal pl-6 text-gray-600 dark:text-gray-300 space-y-2">
+              <li>이 약관의 해석 및 서비스 이용에 관하여는 대한민국 법률을 적용합니다.</li>
+              <li>서비스 이용과 관련된 분쟁에 대한 소송은 민사소송법상의 관할 법원에 제기합니다.</li>
+            </ol>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">부칙</h2>
+            <p class="text-gray-600 dark:text-gray-300">
+              이 약관은 2024년 1월 1일부터 시행됩니다.
+            </p>
+          </section>
+        </div>
+
+        <footer class="mt-10 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <a
+            href="/"
+            class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            평수 계산기로 돌아가기
+          </a>
+        </footer>
+      </article>
+
+      <AdSlot format="rectangle" className="mt-8" />
+    </div>
+  </main>
+</BaseLayout>

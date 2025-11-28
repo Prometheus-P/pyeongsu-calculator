@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AdSlot from '../../components/ads/AdSlot.astro';
+
+const guides = [
+  {
+    title: '평수와 제곱미터 완벽 가이드',
+    description: '평(坪)과 제곱미터(㎡)의 유래부터 정확한 변환 공식까지 상세히 알아봅니다.',
+    slug: 'pyeong-sqm-guide',
+    category: '기초 지식'
+  },
+  {
+    title: '아파트 평형별 특징 및 선택 가이드',
+    description: '10평대부터 50평대까지, 가족 구성에 맞는 아파트 평형 선택법을 안내합니다.',
+    slug: 'apartment-size-guide',
+    category: '아파트'
+  },
+  {
+    title: '전용면적 vs 공급면적 완벽 해설',
+    description: '부동산에서 가장 혼란스러운 전용면적과 공급면적의 차이를 명확히 설명합니다.',
+    slug: 'exclusive-vs-supply-area',
+    category: '부동산 용어'
+  },
+  {
+    title: '원룸부터 쓰리룸까지 평수 가이드',
+    description: '1인 가구부터 가족까지, 주거 형태별 적정 평수를 알아봅니다.',
+    slug: 'studio-to-three-room',
+    category: '주거 형태'
+  },
+  {
+    title: '오피스텔 면적 이해하기',
+    description: '오피스텔만의 특수한 면적 표기 방식과 실제 사용 면적 계산법을 설명합니다.',
+    slug: 'officetel-area-guide',
+    category: '오피스텔'
+  },
+  {
+    title: '부동산 면적 용어 총정리',
+    description: '대지면적, 건축면적, 연면적 등 부동산에서 사용하는 모든 면적 용어를 정리합니다.',
+    slug: 'real-estate-terms',
+    category: '부동산 용어'
+  },
+  {
+    title: '평수별 가구 배치 가이드',
+    description: '10평부터 40평까지, 평수에 맞는 효율적인 가구 배치 방법을 안내합니다.',
+    slug: 'furniture-layout-by-size',
+    category: '인테리어'
+  },
+  {
+    title: '세계 각국의 면적 단위 비교',
+    description: '한국의 평, 미국의 평방피트, 일본의 조(畳) 등 세계 면적 단위를 비교합니다.',
+    slug: 'world-area-units',
+    category: '기초 지식'
+  },
+  {
+    title: '부동산 계약서 면적 확인 방법',
+    description: '부동산 계약 시 반드시 확인해야 할 면적 관련 사항을 정리합니다.',
+    slug: 'contract-area-check',
+    category: '계약/법률'
+  },
+  {
+    title: '실평수 정확히 계산하는 방법',
+    description: '서비스 면적, 발코니 확장 등을 고려한 실제 사용 면적 계산법을 알아봅니다.',
+    slug: 'calculate-actual-area',
+    category: '실전 가이드'
+  }
+];
+
+const categories = [...new Set(guides.map(g => g.category))];
+---
+
+<BaseLayout
+  title="부동산 면적 가이드 | 평수 계산기"
+  description="평수 변환, 아파트 평형, 전용면적과 공급면적 등 부동산 면적에 관한 모든 것을 알려드립니다."
+  canonical="https://pyeongsu-calculator.kr/guide"
+>
+  <main class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+      <AdSlot format="leaderboard" className="mb-8" />
+
+      <header class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          부동산 면적 가이드
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          평수 변환부터 부동산 계약까지, 면적에 관한 모든 궁금증을 해결해 드립니다.
+        </p>
+      </header>
+
+      <!-- Category Filter -->
+      <div class="flex flex-wrap justify-center gap-2 mb-8">
+        <span class="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium">
+          전체 ({guides.length})
+        </span>
+        {categories.map(category => (
+          <span class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm">
+            {category} ({guides.filter(g => g.category === category).length})
+          </span>
+        ))}
+      </div>
+
+      <!-- Guide Cards -->
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {guides.map((guide, index) => (
+          <a
+            href={`/guide/${guide.slug}`}
+            class="group bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+          >
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-medium rounded-full">
+                  {guide.category}
+                </span>
+                <span class="text-gray-400 text-sm">#{index + 1}</span>
+              </div>
+              <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                {guide.title}
+              </h2>
+              <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                {guide.description}
+              </p>
+              <div class="mt-4 flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium">
+                자세히 보기
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Back to Calculator -->
+      <div class="mt-12 text-center">
+        <a
+          href="/"
+          class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+          평수 계산기 바로가기
+        </a>
+      </div>
+
+      <AdSlot format="rectangle" className="mt-8" />
+    </div>
+  </main>
+</BaseLayout>
