@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import SEOHead from '../components/seo/SEOHead.astro';
+import GoogleAnalytics from '../components/analytics/GoogleAnalytics.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
@@ -8,9 +10,10 @@ interface Props {
   canonical?: string;
   ogImage?: string;
   noindex?: boolean;
+  hideFooter?: boolean;
 }
 
-const { title, description, canonical, ogImage, noindex } = Astro.props;
+const { title, description, canonical, ogImage, noindex, hideFooter = false } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -21,6 +24,8 @@ const { title, description, canonical, ogImage, noindex } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="theme-color" content="#3b82f6" />
+
+    <GoogleAnalytics />
 
     <SEOHead
       title={title}
@@ -42,7 +47,8 @@ const { title, description, canonical, ogImage, noindex } = Astro.props;
 
     <slot name="head" />
   </head>
-  <body>
+  <body class="min-h-screen flex flex-col">
     <slot />
+    {!hideFooter && <Footer />}
   </body>
 </html>
