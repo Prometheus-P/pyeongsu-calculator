@@ -13,10 +13,19 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const STORAGE_KEY = 'theme';
 
 function getInitialTheme(): Theme {
+  // SSR 환경에서는 기본값 반환
+  if (typeof window === 'undefined') {
+    return 'light';
+  }
+
   // 1. localStorage에서 저장된 테마 확인
-  const savedTheme = localStorage.getItem(STORAGE_KEY) as Theme | null;
-  if (savedTheme === 'dark' || savedTheme === 'light') {
-    return savedTheme;
+  try {
+    const savedTheme = localStorage.getItem(STORAGE_KEY) as Theme | null;
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      return savedTheme;
+    }
+  } catch {
+    // localStorage 접근 불가 시 무시
   }
 
   // 2. 시스템 설정 확인
@@ -29,9 +38,18 @@ function getInitialTheme(): Theme {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [theme, setTheme] = useState<Theme>('light');
+  const [mounted, setMounted] = useState(false);
+
+  // 클라이언트에서 마운트 후 테마 초기화
+  useEffect(() => {
+    setTheme(getInitialTheme());
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
+    if (!mounted) return;
+
     // HTML에 dark 클래스 적용
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -40,8 +58,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
 
     // localStorage에 저장
-    localStorage.setItem(STORAGE_KEY, theme);
-  }, [theme]);
+    try {
+      localStorage.setItem(STORAGE_KEY, theme);
+    } catch {
+      // localStorage 접근 불가 시 무시
+    }
+  }, [theme, mounted]);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));

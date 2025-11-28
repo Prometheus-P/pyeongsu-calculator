@@ -1,21 +1,33 @@
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, useState, useEffect } from 'react';
 
 export function useQueryParams() {
-  // URL에서 pyeong 파라미터 읽기
-  const pyeongFromUrl = useMemo(() => {
+  const [pyeongFromUrl, setPyeongFromUrl] = useState<number | null>(null);
+
+  // 클라이언트에서 마운트 후 URL 파라미터 읽기
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const params = new URLSearchParams(window.location.search);
     const pyeongParam = params.get('pyeong');
 
-    if (!pyeongParam) return null;
+    if (!pyeongParam) {
+      setPyeongFromUrl(null);
+      return;
+    }
 
     const value = parseFloat(pyeongParam);
-    if (isNaN(value) || value < 0) return null;
+    if (isNaN(value) || value < 0) {
+      setPyeongFromUrl(null);
+      return;
+    }
 
-    return value;
+    setPyeongFromUrl(value);
   }, []);
 
   // URL 업데이트 함수
   const updateUrl = useCallback((pyeong: number | null) => {
+    if (typeof window === 'undefined') return;
+
     const params = new URLSearchParams(window.location.search);
 
     if (pyeong === null) {

@@ -3,9 +3,10 @@ import Calculator from './components/Calculator';
 import ReferenceTable from './components/ReferenceTable';
 import History from './components/History';
 import ThemeToggle from './components/ThemeToggle';
+import { ThemeProvider } from './contexts/ThemeContext';
 import { useQueryParams } from './hooks/useQueryParams';
 
-function App() {
+function AppContent() {
   const { pyeongFromUrl, updateUrl } = useQueryParams();
   const [selectedPyeong, setSelectedPyeong] = useState<number | null>(pyeongFromUrl);
   const [historyVersion, setHistoryVersion] = useState(0);
@@ -45,4 +46,10 @@ function App() {
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+}
