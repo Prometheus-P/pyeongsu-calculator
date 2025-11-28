@@ -1,0 +1,21 @@
+# Cloudflare Pages redirects
+# https://developers.cloudflare.com/pages/platform/redirects/
+
+# www to non-www redirect (handled at DNS level, but backup)
+# https://www.pyeongsu-calculator.kr/* https://pyeongsu-calculator.kr/:splat 301
+
+# Pretty URLs (remove .html extension)
+/privacy-policy.html /privacy-policy 301
+/terms.html /terms 301
+/about.html /about 301
+/guide.html /guide 301
+/guide/pyeong-sqm-guide.html /guide/pyeong-sqm-guide 301
+/guide/apartment-size-guide.html /guide/apartment-size-guide 301
+/guide/exclusive-vs-supply-area.html /guide/exclusive-vs-supply-area 301
+/guide/studio-to-three-room.html /guide/studio-to-three-room 301
+/guide/officetel-area-guide.html /guide/officetel-area-guide 301
+/guide/real-estate-terms.html /guide/real-estate-terms 301
+/guide/furniture-layout-by-size.html /guide/furniture-layout-by-size 301
+/guide/world-area-units.html /guide/world-area-units 301
+/guide/contract-area-check.html /guide/contract-area-check 301
+/guide/calculate-actual-area.html /guide/calculate-actual-area 301
