@@ -1,0 +1,39 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="100" cy="100" r="200" fill="white" fill-opacity="0.1"/>
+  <circle cx="1100" cy="530" r="250" fill="white" fill-opacity="0.1"/>
+
+  <!-- Main content area -->
+  <rect x="100" y="140" width="1000" height="350" rx="24" fill="white" fill-opacity="0.95"/>
+
+  <!-- Calculator icon -->
+  <rect x="160" y="200" width="120" height="160" rx="12" fill="#3b82f6"/>
+  <rect x="175" y="215" width="90" height="40" rx="6" fill="#1e40af"/>
+  <circle cx="195" cy="290" r="12" fill="white"/>
+  <circle cx="235" cy="290" r="12" fill="white"/>
+  <circle cx="195" cy="330" r="12" fill="white"/>
+  <circle cx="235" cy="330" r="12" fill="white"/>
+  <rect x="255" y="278" width="10" height="64" rx="5" fill="#fbbf24"/>
+
+  <!-- Title -->
+  <text x="320" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" fill="#1e293b">평수 계산기</text>
+
+  <!-- Subtitle -->
+  <text x="320" y="350" font-family="system-ui, -apple-system, sans-serif" font-size="32" fill="#64748b">제곱미터 ↔ 평 간편 변환</text>
+
+  <!-- Conversion example -->
+  <text x="320" y="420" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="#94a3b8">33.06㎡ = 10평 | 99.17㎡ = 30평</text>
+
+  <!-- Bottom tagline -->
+  <text x="600" y="570" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="white" text-anchor="middle">부동산 면적 단위 변환 도구</text>
+</svg>
