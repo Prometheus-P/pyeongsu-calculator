@@ -1,0 +1,67 @@
+---
+/**
+ * 404.astro
+ * 페이지를 찾을 수 없을 때 표시되는 에러 페이지
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const popularPages = [
+  { href: '/', label: '평수 계산기', desc: '제곱미터 ↔ 평 변환' },
+  { href: '/guide', label: '가이드', desc: '면적 단위 활용 가이드' },
+  { href: '/about', label: '사이트 소개', desc: '서비스 안내' },
+];
+---
+
+<BaseLayout
+  title="페이지를 찾을 수 없습니다 | 평수 계산기"
+  description="요청하신 페이지를 찾을 수 없습니다. 평수 계산기 메인 페이지로 이동하세요."
+  noindex={true}
+>
+  <main class="min-h-[70vh] flex items-center justify-center px-4 py-16">
+    <div class="text-center max-w-lg">
+      <!-- 404 아이콘 -->
+      <div class="mb-8">
+        <span class="text-8xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+          404
+        </span>
+      </div>
+
+      <!-- 메시지 -->
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        페이지를 찾을 수 없습니다
+      </h1>
+      <p class="text-gray-600 dark:text-gray-400 mb-8">
+        요청하신 페이지가 존재하지 않거나 이동되었을 수 있습니다.
+      </p>
+
+      <!-- 메인 버튼 -->
+      <a
+        href="/"
+        class="inline-flex items-center justify-center px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors mb-8"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        평수 계산기로 이동
+      </a>
+
+      <!-- 인기 페이지 링크 -->
+      <div class="border-t border-gray-200 dark:border-gray-700 pt-8">
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+          다음 페이지를 찾고 계신가요?
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-3">
+          {popularPages.map((page) => (
+            <a
+              href={page.href}
+              class="px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg text-sm transition-colors"
+            >
+              <span class="font-medium text-gray-900 dark:text-white">{page.label}</span>
+              <span class="text-gray-500 dark:text-gray-400 ml-1">· {page.desc}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
