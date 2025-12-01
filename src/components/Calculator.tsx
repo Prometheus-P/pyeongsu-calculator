@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback, useRef, KeyboardEvent } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import type { KeyboardEvent } from 'react';
 import {
   convertSqmToPyeong,
   convertPyeongToSqm,

@@ -1,10 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import {
-  saveHistory,
-  getHistory,
-  clearHistory,
-  HistoryItem,
-} from './storage';
+import { saveHistory, getHistory, clearHistory } from './storage';
+import type { HistoryItem } from './storage';
 
 describe('storage', () => {
   beforeEach(() => {

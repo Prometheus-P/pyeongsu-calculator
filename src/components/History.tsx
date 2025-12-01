@@ -1,5 +1,6 @@
 import { useState, useEffect, memo } from 'react';
-import { getHistory, clearHistory as clearStorageHistory, HistoryItem } from '../utils/storage';
+import { getHistory, clearHistory as clearStorageHistory } from '../utils/storage';
+import type { HistoryItem } from '../utils/storage';
 
 interface HistoryProps {
   onSelect: (pyeong: number) => void;
