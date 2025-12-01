@@ -1,0 +1,56 @@
+---
+/**
+ * GoogleAnalytics.astro
+ *
+ * Google Analytics 4 (GA4) 스크립트 컴포넌트
+ *
+ * 사용법:
+ * 1. Google Analytics에서 측정 ID를 받습니다 (G-XXXXXXXXXX 형식)
+ * 2. 환경 변수 PUBLIC_GA_MEASUREMENT_ID에 ID를 설정합니다
+ * 3. BaseLayout.astro의 <head>에 이 컴포넌트를 추가합니다
+ *
+ * 환경 변수 설정:
+ * - 로컬: .env 파일에 PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX 추가
+ * - Cloudflare Pages: 대시보드 > Settings > Environment variables에서 설정
+ */
+
+// 환경 변수에서 GA 측정 ID 가져오기
+// PUBLIC_ 접두사가 있어야 클라이언트에서 접근 가능
+const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX';
+
+// 프로덕션 환경에서만 활성화
+const isProduction = import.meta.env.PROD;
+---
+
+{isProduction && GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX' && (
+  <>
+    <!-- Google tag (gtag.js) -->
+    <script
+      is:inline
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+    />
+    <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', GA_MEASUREMENT_ID, {
+        // 쿠키 동의 전에는 익명화
+        anonymize_ip: true,
+        // 페이지뷰 자동 전송
+        send_page_view: true,
+        // 스크롤 깊이 측정
+        scroll_threshold: [25, 50, 75, 100],
+      });
+    </script>
+  </>
+)}
+
+{/* 개발 환경에서는 콘솔 로그로 대체 */}
+{!isProduction && (
+  <script is:inline>
+    console.log('[Analytics] Google Analytics is disabled in development mode');
+  </script>
+)}

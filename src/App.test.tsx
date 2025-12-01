@@ -1,13 +1,25 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
+import { ThemeProvider } from './contexts/ThemeContext';
 import { COMMON_SIZES } from './constants/conversion';
 
+// ThemeProvider로 감싸는 헬퍼 함수
+const renderWithTheme = (ui: React.ReactElement) => {
+  return render(<ThemeProvider>{ui}</ThemeProvider>);
+};
+
 describe('App', () => {
+  beforeEach(() => {
+    // URL 초기화
+    window.history.pushState({}, '', '/');
+    localStorage.clear();
+  });
+
   describe('컴포넌트 렌더링', () => {
     it('Calculator와 ReferenceTable을 모두 렌더링한다', () => {
-      render(<App />);
+      renderWithTheme(<App />);
       // Calculator
       expect(screen.getByText('평수 계산기')).toBeInTheDocument();
       // ReferenceTable
@@ -15,7 +27,7 @@ describe('App', () => {
     });
 
     it('모든 타입 정보가 표시된다', () => {
-      render(<App />);
+      renderWithTheme(<App />);
       expect(screen.getByText('원룸')).toBeInTheDocument();
       expect(screen.getByText('투룸')).toBeInTheDocument();
       expect(screen.getByText('소형 아파트')).toBeInTheDocument();
@@ -29,7 +41,7 @@ describe('App', () => {
   describe('Calculator ↔ ReferenceTable 통합', () => {
     it('ReferenceTable 항목 클릭 시 Calculator 필드가 업데이트된다', async () => {
       const user = userEvent.setup();
-      render(<App />);
+      renderWithTheme(<App />);
 
       // 테이블 내의 25평 항목 선택 (버튼과 구별)
       const table = screen.getByRole('table');
@@ -48,7 +60,7 @@ describe('App', () => {
       const user = userEvent.setup();
 
       for (let i = 0; i < COMMON_SIZES.length; i++) {
-        const { unmount } = render(<App />);
+        const { unmount } = renderWithTheme(<App />);
 
         const table = screen.getByRole('table');
         const rows = table.querySelectorAll('tbody tr');
@@ -63,7 +75,7 @@ describe('App', () => {
 
     it('테이블 선택 후 수동 입력하면 수동 입력값이 우선된다', async () => {
       const user = userEvent.setup();
-      render(<App />);
+      renderWithTheme(<App />);
 
       // 테이블에서 30평 선택
       const table = screen.getByRole('table');
@@ -83,7 +95,7 @@ describe('App', () => {
   describe('사용자 시나리오', () => {
     it('시나리오: 사용자가 제곱미터를 입력하고 평수를 확인한다', async () => {
       const user = userEvent.setup();
-      render(<App />);
+      renderWithTheme(<App />);
 
       const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
       await user.type(sqmInput, '85');
@@ -95,7 +107,7 @@ describe('App', () => {
 
     it('시나리오: 사용자가 빠른 선택 버튼으로 평수를 선택한다', async () => {
       const user = userEvent.setup();
-      render(<App />);
+      renderWithTheme(<App />);
 
       const button20 = screen.getByRole('button', { name: '20평' });
       await user.click(button20);
@@ -109,7 +121,7 @@ describe('App', () => {
 
     it('시나리오: 사용자가 테이블에서 평형을 선택하고 초기화한다', async () => {
       const user = userEvent.setup();
-      render(<App />);
+      renderWithTheme(<App />);
 
       // 테이블에서 40평 선택
       const table = screen.getByRole('table');
@@ -128,7 +140,7 @@ describe('App', () => {
 
     it('시나리오: 연속으로 다른 평형을 선택한다', async () => {
       const user = userEvent.setup();
-      render(<App />);
+      renderWithTheme(<App />);
 
       const table = screen.getByRole('table');
       const rows = table.querySelectorAll('tbody tr');
@@ -157,7 +169,7 @@ describe('App', () => {
   describe('양방향 변환 일관성', () => {
     it('제곱미터 → 평 → 제곱미터 변환이 일관된다', async () => {
       const user = userEvent.setup();
-      render(<App />);
+      renderWithTheme(<App />);
 
       const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
       const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
@@ -177,15 +189,48 @@ describe('App', () => {
 
   describe('레이아웃', () => {
     it('메인 컨테이너가 렌더링된다', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithTheme(<App />);
       const mainDiv = container.querySelector('.min-h-screen');
       expect(mainDiv).toBeInTheDocument();
     });
 
     it('그라데이션 배경이 적용된다', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithTheme(<App />);
       const mainDiv = container.querySelector('.bg-gradient-to-br');
       expect(mainDiv).toBeInTheDocument();
+    });
+  });
+
+  describe('URL 공유', () => {
+    it('URL에 pyeong 파라미터가 있으면 해당 값으로 초기화된다', async () => {
+      window.history.pushState({}, '', '?pyeong=30');
+      renderWithTheme(<App />);
+
+      await waitFor(() => {
+        const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+        expect(pyeongInput.value).toBe('30');
+      });
+    });
+
+    it('빠른 선택 버튼 클릭 시 URL이 업데이트된다', async () => {
+      const user = userEvent.setup();
+      renderWithTheme(<App />);
+
+      const button25 = screen.getByRole('button', { name: '25평' });
+      await user.click(button25);
+
+      expect(window.location.search).toBe('?pyeong=25');
+    });
+
+    it('참고표 클릭 시 URL이 업데이트된다', async () => {
+      const user = userEvent.setup();
+      renderWithTheme(<App />);
+
+      const table = screen.getByRole('table');
+      const rows = table.querySelectorAll('tbody tr');
+      await user.click(rows[2]); // 20평
+
+      expect(window.location.search).toBe('?pyeong=20');
     });
   });
 });

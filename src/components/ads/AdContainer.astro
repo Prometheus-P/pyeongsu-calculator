@@ -1,0 +1,41 @@
+---
+interface Props {
+  position: 'top' | 'middle' | 'bottom' | 'sidebar';
+  className?: string;
+}
+
+const { position, className = '' } = Astro.props;
+
+const heightMap = {
+  top: 'min-h-[90px]',      // Leaderboard 728x90
+  middle: 'min-h-[250px]',  // Medium Rectangle 300x250
+  bottom: 'min-h-[100px]',  // Mobile Banner
+  sidebar: 'min-h-[600px]', // Skyscraper
+};
+
+const minHeight = heightMap[position];
+---
+
+<div
+  class:list={[
+    'ad-container',
+    minHeight,
+    'w-full max-w-[728px] mx-auto my-4',
+    'bg-gray-100 dark:bg-gray-800',
+    'border border-dashed border-gray-300 dark:border-gray-600',
+    'rounded-lg flex items-center justify-center',
+    'text-gray-400 dark:text-gray-500 text-sm',
+    className
+  ]}
+  data-ad-position={position}
+>
+  <!-- AdSense 코드는 승인 후 삽입 -->
+  <span class="select-none">광고 영역</span>
+</div>
+
+<style>
+  .ad-container {
+    /* CLS 방지: 광고 로드 전 공간 확보 */
+    contain: layout size;
+  }
+</style>

@@ -1,0 +1,195 @@
+---
+/**
+ * AdSlot.astro - CLS 방지 광고 컴포넌트
+ *
+ * 특징:
+ * - aspect-ratio를 통한 정확한 공간 예약
+ * - contain CSS 속성으로 레이아웃 격리
+ * - 반응형 광고 크기 지원
+ * - AdSense 통합 준비
+ */
+
+export interface Props {
+  /** 광고 슬롯 ID (AdSense용) */
+  slotId?: string;
+  /** 광고 포맷 */
+  format: 'banner' | 'rectangle' | 'leaderboard' | 'skyscraper' | 'responsive';
+  /** 추가 CSS 클래스 */
+  className?: string;
+  /** 테스트 모드 (플레이스홀더 표시) */
+  testMode?: boolean;
+}
+
+const { slotId, format, className = '', testMode = true } = Astro.props;
+
+// 광고 크기 정의 (width x height)
+const adSizes = {
+  banner: { width: 468, height: 60, label: '배너 468x60' },
+  rectangle: { width: 300, height: 250, label: '중간 직사각형 300x250' },
+  leaderboard: { width: 728, height: 90, label: '리더보드 728x90' },
+  skyscraper: { width: 160, height: 600, label: '스카이스크래퍼 160x600' },
+  responsive: { width: 728, height: 90, label: '반응형' },
+};
+
+const size = adSizes[format];
+
+// CLS 방지를 위한 정확한 aspect-ratio 계산
+const aspectRatio = `${size.width} / ${size.height}`;
+---
+
+<div
+  class:list={[
+    'ad-slot',
+    `ad-slot--${format}`,
+    className
+  ]}
+  style={`--ad-width: ${size.width}px; --ad-height: ${size.height}px; --ad-aspect-ratio: ${aspectRatio};`}
+  data-ad-slot={slotId}
+  data-ad-format={format}
+>
+  <div class="ad-slot__container">
+    {testMode ? (
+      <!-- 테스트 모드: 플레이스홀더 표시 -->
+      <div class="ad-slot__placeholder">
+        <svg xmlns="http://www.w3.org/2000/svg" class="ad-slot__icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        <span class="ad-slot__label">{size.label}</span>
+      </div>
+    ) : (
+      <!-- 프로덕션 모드: AdSense 코드 -->
+      <ins
+        class="adsbygoogle"
+        style={`display:block; width:${size.width}px; height:${size.height}px;`}
+        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+        data-ad-slot={slotId}
+        data-ad-format={format === 'responsive' ? 'auto' : undefined}
+        data-full-width-responsive={format === 'responsive' ? 'true' : undefined}
+      />
+    )}
+  </div>
+</div>
+
+<style>
+  .ad-slot {
+    /* CLS 방지 핵심: 컨테이너 크기 고정 */
+    contain: layout size style;
+    content-visibility: auto;
+
+    /* 크기 설정 */
+    width: 100%;
+    max-width: var(--ad-width);
+    margin: 1rem auto;
+  }
+
+  .ad-slot__container {
+    /* aspect-ratio로 정확한 비율 유지 */
+    aspect-ratio: var(--ad-aspect-ratio);
+    width: 100%;
+    max-width: var(--ad-width);
+    max-height: var(--ad-height);
+
+    /* 레이아웃 안정성 */
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ad-slot__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    /* 스타일 */
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    border: 1px dashed #d1d5db;
+    border-radius: 0.5rem;
+
+    /* 다크모드 */
+    :global(.dark) & {
+      background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+      border-color: #4b5563;
+    }
+  }
+
+  .ad-slot__icon {
+    width: 2rem;
+    height: 2rem;
+    color: #9ca3af;
+
+    :global(.dark) & {
+      color: #6b7280;
+    }
+  }
+
+  .ad-slot__label {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    user-select: none;
+
+    :global(.dark) & {
+      color: #6b7280;
+    }
+  }
+
+  /* 반응형 광고 */
+  .ad-slot--responsive .ad-slot__container {
+    max-width: 100%;
+  }
+
+  /* 리더보드: 모바일에서 숨김 */
+  .ad-slot--leaderboard {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .ad-slot--leaderboard {
+      display: block;
+    }
+  }
+
+  /* 스카이스크래퍼: 대형 화면에서만 표시 */
+  .ad-slot--skyscraper {
+    display: none;
+  }
+
+  @media (min-width: 1280px) {
+    .ad-slot--skyscraper {
+      display: block;
+    }
+  }
+
+  /* AdSense 스타일 오버라이드 */
+  .adsbygoogle {
+    display: block;
+  }
+</style>
+
+<script>
+  // AdSense 스크립트 로드 (프로덕션 환경에서만)
+  if (typeof window !== 'undefined' && !document.querySelector('script[src*="adsbygoogle"]')) {
+    // 테스트 모드가 아닐 때만 스크립트 로드
+    const adSlots = document.querySelectorAll('[data-ad-slot]');
+    const hasRealAds = Array.from(adSlots).some(slot =>
+      slot.querySelector('.adsbygoogle')
+    );
+
+    if (hasRealAds) {
+      const script = document.createElement('script');
+      script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      document.head.appendChild(script);
+
+      script.onload = () => {
+        // 모든 광고 슬롯 초기화
+        adSlots.forEach(() => {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        });
+      };
+    }
+  }
+</script>

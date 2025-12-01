@@ -1,9 +1,13 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Calculator from './Calculator';
 
 describe('Calculator', () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
   describe('기본 렌더링', () => {
     it('제목 "평수 계산기"를 렌더링한다', () => {
       render(<Calculator />);
@@ -213,6 +217,133 @@ describe('Calculator', () => {
 
       expect(screen.getByPlaceholderText('제곱미터 입력')).toBeInTheDocument();
       expect(screen.getByPlaceholderText('평수 입력')).toBeInTheDocument();
+    });
+  });
+
+  describe('키보드 접근성', () => {
+    it('제곱미터 필드에서 Enter 키 입력 시 평 필드로 포커스 이동', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/);
+      const pyeongInput = screen.getByLabelText(/평/);
+
+      await user.click(sqmInput);
+      await user.keyboard('{Enter}');
+
+      expect(pyeongInput).toHaveFocus();
+    });
+
+    it('평 필드에서 Enter 키 입력 시 포커스가 유지된다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const pyeongInput = screen.getByLabelText(/평/);
+
+      await user.click(pyeongInput);
+      await user.keyboard('{Enter}');
+
+      expect(pyeongInput).toHaveFocus();
+    });
+
+    it('Escape 키 입력 시 모든 필드가 초기화된다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+      const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+
+      await user.type(sqmInput, '33.06');
+      expect(pyeongInput.value).toBe('10.00');
+
+      await user.keyboard('{Escape}');
+
+      expect(sqmInput.value).toBe('');
+      expect(pyeongInput.value).toBe('');
+    });
+
+    it('평 필드에서 Escape 키 입력 시에도 초기화된다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
+      const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
+
+      await user.type(pyeongInput, '10');
+      expect(sqmInput.value).toBe('33.06');
+
+      await user.keyboard('{Escape}');
+
+      expect(sqmInput.value).toBe('');
+      expect(pyeongInput.value).toBe('');
+    });
+  });
+
+  describe('클립보드 복사', () => {
+    it('복사 버튼을 렌더링한다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const sqmInput = screen.getByLabelText(/제곱미터|㎡/);
+      await user.type(sqmInput, '33.06');
+
+      expect(screen.getByRole('button', { name: /복사/i })).toBeInTheDocument();
+    });
+
+    it('값이 없으면 복사 버튼이 표시되지 않는다', () => {
+      render(<Calculator />);
+
+      expect(screen.queryByRole('button', { name: /복사/i })).not.toBeInTheDocument();
+    });
+
+    it('복사 버튼 클릭 시 클립보드에 값이 복사된다', async () => {
+      const writeTextSpy = vi.spyOn(navigator.clipboard, 'writeText');
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const pyeongInput = screen.getByLabelText(/평/);
+      await user.type(pyeongInput, '10');
+
+      const copyButton = screen.getByRole('button', { name: /복사/i });
+      await user.click(copyButton);
+
+      expect(writeTextSpy).toHaveBeenCalled();
+      writeTextSpy.mockRestore();
+    });
+
+    it('복사 완료 시 토스트 메시지가 표시된다', async () => {
+      const user = userEvent.setup();
+      render(<Calculator />);
+
+      const pyeongInput = screen.getByLabelText(/평/);
+      await user.type(pyeongInput, '10');
+
+      const copyButton = screen.getByRole('button', { name: /복사/i });
+      await user.click(copyButton);
+
+      await waitFor(() => {
+        expect(screen.getByText(/복사되었습니다/i)).toBeInTheDocument();
+      });
+    });
+
+    it('토스트 메시지가 일정 시간 후 사라진다', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true });
+      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+      render(<Calculator />);
+
+      const pyeongInput = screen.getByLabelText(/평/);
+      await user.type(pyeongInput, '10');
+
+      const copyButton = screen.getByRole('button', { name: /복사/i });
+      await user.click(copyButton);
+
+      expect(screen.getByText(/복사되었습니다/i)).toBeInTheDocument();
+
+      await vi.advanceTimersByTimeAsync(2100);
+
+      expect(screen.queryByText(/복사되었습니다/i)).not.toBeInTheDocument();
+
+      vi.useRealTimers();
     });
   });
 });

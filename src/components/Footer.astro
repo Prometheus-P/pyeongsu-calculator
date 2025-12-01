@@ -1,0 +1,55 @@
+---
+/**
+ * Footer.astro
+ * 사이트 푸터 컴포넌트 - 법적 페이지 링크 및 저작권 정보
+ */
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="mt-auto py-8 px-4 bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+  <div class="container mx-auto max-w-4xl">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <!-- 링크 섹션 -->
+      <nav class="flex flex-wrap justify-center gap-4 text-sm">
+        <a
+          href="/guide"
+          class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+          가이드
+        </a>
+        <span class="text-gray-300 dark:text-gray-700">|</span>
+        <a
+          href="/about"
+          class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+          사이트 소개
+        </a>
+        <span class="text-gray-300 dark:text-gray-700">|</span>
+        <a
+          href="/privacy-policy"
+          class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+          개인정보처리방침
+        </a>
+        <span class="text-gray-300 dark:text-gray-700">|</span>
+        <a
+          href="/terms"
+          class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+          이용약관
+        </a>
+      </nav>
+
+      <!-- 저작권 -->
+      <p class="text-sm text-gray-500 dark:text-gray-500">
+        &copy; {currentYear} 평수 계산기. All rights reserved.
+      </p>
+    </div>
+
+    <!-- 면책조항 -->
+    <p class="mt-4 text-xs text-center text-gray-400 dark:text-gray-600">
+      본 서비스의 계산 결과는 참고용이며, 실제 부동산 거래나 법적 목적으로 사용할 경우 공인된 측량 결과를 이용하시기 바랍니다.
+    </p>
+  </div>
+</footer>
