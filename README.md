@@ -14,10 +14,10 @@
 
 | 구분 | 기술 |
 |------|------|
-| 프레임워크 | React 18 |
+| 프레임워크 | Astro 4 + React 18 |
 | 스타일링 | Tailwind CSS |
-| 테스트 | Vitest + Testing Library |
-| 빌드 도구 | Vite |
+| 테스트 | Vitest + Playwright |
+| 배포 | Cloudflare Pages |
 | 언어 | TypeScript |
 
 ## 빠른 시작
@@ -59,8 +59,17 @@ npm run build
 
 ## 문서
 
+### 개발 문서
 - [plan.md](./plan.md) - TDD 태스크 목록 및 진행 상황
 - [CONTRIBUTING.md](./CONTRIBUTING.md) - 기여 가이드라인
+
+### 배포 가이드
+- [🚀 배포 빠른 시작](./docs/DEPLOYMENT-QUICKSTART.md) - **여기서 시작하세요!**
+- [Cloudflare Pages 설정](./docs/cloudflare-pages-setup.md) - Cloudflare 배포 가이드
+- [Google Analytics 설정](./docs/google-analytics-setup.md) - GA4 설정 가이드
+- [검색엔진 등록](./docs/search-console-setup.md) - Google/Naver 등록 가이드
+- [전체 배포 체크리스트](./docs/deployment-checklist.md) - 상세 체크리스트
+- [CI/CD 분석](./docs/ci-cd-analysis.md) - CI/CD 상태 및 보안 분석
 
 ## 라이선스
 
