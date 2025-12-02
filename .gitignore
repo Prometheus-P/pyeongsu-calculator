@@ -40,3 +40,6 @@ legacy/
 
 # Astro
 .astro/
+
+# Claude Code
+.claude/settings.local.json
