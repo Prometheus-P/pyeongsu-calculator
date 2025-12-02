@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../../components/ads/AdSlot.astro';
+import BreadcrumbSchema from '../../components/seo/BreadcrumbSchema.astro';
+
+const breadcrumbItems = [
+  { name: '홈', url: '/' },
+  { name: '가이드', url: '/guide' },
+];
 
 const guides = [
   {
@@ -73,6 +79,10 @@ const categories = [...new Set(guides.map(g => g.category))];
   description="평수 변환, 아파트 평형, 전용면적과 공급면적 등 부동산 면적에 관한 모든 것을 알려드립니다."
   canonical="https://pyeongsu-calculator.kr/guide"
 >
+  <Fragment slot="head">
+    <BreadcrumbSchema items={breadcrumbItems} />
+  </Fragment>
+
   <main class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
     <div class="container mx-auto px-4 py-8 max-w-6xl">
       <AdSlot format="leaderboard" className="mb-8" />

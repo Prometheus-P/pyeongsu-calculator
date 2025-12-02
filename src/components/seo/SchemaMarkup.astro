@@ -1,10 +1,19 @@
 ---
-interface Props {
-  type: 'calculator' | 'faq' | 'howto' | 'all';
-  faqItems?: Array<{ question: string; answer: string }>;
+interface BlogPostingData {
+  headline: string;
+  description: string;
+  datePublished: string;
+  dateModified?: string;
+  url: string;
 }
 
-const { type, faqItems = [] } = Astro.props;
+interface Props {
+  type: 'calculator' | 'faq' | 'howto' | 'blogposting' | 'all';
+  faqItems?: Array<{ question: string; answer: string }>;
+  blogPosting?: BlogPostingData;
+}
+
+const { type, faqItems = [], blogPosting } = Astro.props;
 
 const siteUrl = 'https://pyeongsu-calculator.kr';
 
@@ -73,6 +82,29 @@ const howToSchema = {
     }
   ]
 };
+
+// BlogPosting Schema
+const blogPostingSchema = blogPosting ? {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": blogPosting.headline,
+  "description": blogPosting.description,
+  "datePublished": blogPosting.datePublished,
+  "dateModified": blogPosting.dateModified || blogPosting.datePublished,
+  "author": {
+    "@type": "Organization",
+    "name": "평수 계산기"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "평수 계산기",
+    "url": siteUrl
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": blogPosting.url
+  }
+} : null;
 ---
 
 {(type === 'calculator' || type === 'all') && (
@@ -85,4 +117,8 @@ const howToSchema = {
 
 {(type === 'howto' || type === 'all') && (
   <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+)}
+
+{(type === 'blogposting') && blogPostingSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
 )}
