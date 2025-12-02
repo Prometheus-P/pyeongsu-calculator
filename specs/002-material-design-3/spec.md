@@ -5,6 +5,16 @@
 **Status**: Draft
 **Input**: Material Design 3 (M3) 디자인 시스템을 프로젝트에 적용하여 사용자 경험 향상
 
+## Clarifications
+
+### Session 2025-12-02
+
+- Q: 구현 방식 선택 (Option A/B/C)? → A: Option A - Tailwind CSS + M3 Design Tokens
+- Q: Primary Color 선택? → A: Blue (#1976D2) - 신뢰성, 전문성
+- Q: 입력 필드 스타일? → A: Outlined - 테두리 강조, 가벼운 느낌
+- Q: 테마 토글 위치? → A: 헤더 우측 아이콘 버튼
+- Q: 고대비 모드 지원 범위? → A: prefers-contrast 미디어 쿼리로 대비 강화
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - 일관된 시각적 경험 (Priority: P1)
@@ -50,13 +60,13 @@
 **Acceptance Scenarios**:
 
 1. **Given** 시스템이 다크 모드일 때, **When** 페이지를 로드하면, **Then** M3 다크 팔레트가 자동 적용된다
-2. **Given** 사용자가 테마 토글을 클릭할 때, **When** 전환되면, **Then** 300ms 애니메이션으로 부드럽게 변경된다
+2. **Given** 사용자가 헤더 우측의 테마 토글 아이콘을 클릭할 때, **When** 전환되면, **Then** 300ms 애니메이션으로 부드럽게 변경된다
 
 ---
 
 ### Edge Cases
 
-- 고대비 모드 사용자에게 접근성이 유지되는가?
+- 고대비 모드 사용자: `prefers-contrast: more` 미디어 쿼리로 대비 강화 적용
 - 매우 작은 화면(320px)에서 M3 간격이 적절한가?
 - 색약 사용자를 위한 색상 조합이 WCAG 기준을 충족하는가?
 
@@ -67,9 +77,10 @@
 - **FR-001**: Tailwind CSS 설정에 M3 색상 토큰 (primary, secondary, tertiary, error, surface, on-surface 등) 통합
 - **FR-002**: M3 타이포그래피 스케일 (display, headline, title, body, label) 적용
 - **FR-003**: 모든 버튼에 M3 state layer (hover: 8%, focus: 12%, pressed: 12%) 적용
-- **FR-004**: 입력 필드에 M3 outlined/filled 스타일 적용
+- **FR-004**: 입력 필드에 M3 **Outlined** 스타일 적용 (테두리 강조)
 - **FR-005**: M3 elevation 시스템 (level 0-5) 카드/모달에 적용
 - **FR-006**: 다크/라이트 모드 색상 팔레트 분리 정의
+- **FR-006a**: 헤더 우측에 테마 토글 아이콘 버튼 배치 (sun/moon 아이콘)
 - **FR-007**: M3 간격 시스템 (4px 기반 그리드) 적용
 - **FR-008**: 모든 인터랙티브 요소에 최소 48px 터치 타겟 보장
 
@@ -79,10 +90,11 @@
 - **NFR-002**: 테마 전환 애니메이션 300ms 이하
 - **NFR-003**: 추가 번들 크기 증가 최소화 (CSS 토큰 기반, JS 라이브러리 미사용)
 - **NFR-004**: 기존 Tailwind 유틸리티 클래스와 호환 유지
+- **NFR-005**: `prefers-contrast: more` 미디어 쿼리 지원으로 고대비 모드 접근성 확보
 
 ### Key Entities
 
-- **Color Token**: M3 색상 변수 (primary, on-primary, primary-container, on-primary-container 등)
+- **Color Token**: M3 색상 변수 - **Seed Color: Blue (#1976D2)** 기반 팔레트 생성 (primary, on-primary, primary-container, on-primary-container 등)
 - **Typography Token**: M3 폰트 크기/무게/행간 조합
 - **Elevation Token**: M3 그림자 레벨 정의
 - **State Layer**: 상호작용 상태별 오버레이 투명도
@@ -105,19 +117,19 @@
 
 ## Implementation Options
 
-### Option A: Tailwind CSS + M3 Design Tokens (권장)
+### ✅ Option A: Tailwind CSS + M3 Design Tokens (선택됨)
 - Tailwind `theme.extend`에 M3 색상/타이포그래피/간격 토큰 추가
 - 기존 유틸리티 클래스 활용, 최소 변경
 - 장점: 가벼움, 기존 스택과 완전 호환
 - 단점: M3 컴포넌트 직접 구현 필요
 
-### Option B: MDUI 라이브러리 도입
+### Option B: MDUI 라이브러리 도입 (미채택)
 - [mdui](https://www.mdui.org/) 웹 컴포넌트 사용
 - 30+ M3 컴포넌트 즉시 사용 가능
 - 장점: 빠른 구현, 완성도 높은 컴포넌트
 - 단점: 추가 의존성, React 통합 복잡성
 
-### Option C: Beer CSS
+### Option C: Beer CSS (미채택)
 - CSS-only M3 프레임워크
 - 장점: 매우 가벼움, 쉬운 통합
 - 단점: Tailwind와의 스타일 충돌 가능성
