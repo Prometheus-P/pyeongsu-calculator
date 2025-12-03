@@ -1,42 +1,156 @@
+# ============================================
 # Dependencies
+# ============================================
 node_modules/
+.pnp/
+.pnp.js
 
+# ============================================
 # Build outputs
+# ============================================
 dist/
 build/
+out/
+.next/
+.nuxt/
 
-# IDE
+# ============================================
+# IDE & Editors
+# ============================================
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/
 
-# OS
+# ============================================
+# OS Files
+# ============================================
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+desktop.ini
 
+# ============================================
 # Logs
+# ============================================
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Environment
+# ============================================
+# Environment & Secrets (CRITICAL)
+# ============================================
 .env
 .env.local
 .env.*.local
+.env.development
+.env.test
+.env.production
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets/
+credentials/
+*.credentials
+*.secret
+api-keys.json
+service-account*.json
 
-# Test coverage
+# ============================================
+# AI/LLM Development Tools
+# ============================================
+# Claude Code
+.claude/
+
+# Cursor AI
+.cursor/
+.cursorignore
+
+# GitHub Copilot
+.copilot/
+
+# Codeium
+.codeium/
+
+# Other AI tools
+.ai/
+.llm/
+
+# ============================================
+# Speckit / Design Workflow
+# ============================================
+.specify/
+.speckit/
+
+# ============================================
+# Test & Coverage
+# ============================================
 coverage/
+.nyc_output/
+*.lcov
 
 # Playwright
 playwright-report/
 test-results/
 .playwright/
+blob-report/
+playwright/.cache/
 
-# Legacy files
-legacy/
+# Jest
+jest-results/
 
-# Vite
+# Vitest
+vitest-results/
+
+# ============================================
+# Vite & Astro
+# ============================================
 *.local
-
-# Astro
 .astro/
+
+# ============================================
+# Cache
+# ============================================
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+
+# ============================================
+# Misc
+# ============================================
+legacy/
+*.bak
+*.backup
+*.tmp
+*.temp
+*.orig
+*~
+
+# ============================================
+# Debug
+# ============================================
+*.cpuprofile
+*.heapprofile
+*.heapsnapshot
+
+# ============================================
+# Lighthouse Reports
+# ============================================
+lighthouse-report*.html
+lighthouse-report*.json
