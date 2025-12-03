@@ -19,14 +19,15 @@ export default memo(function History({ onSelect, historyVersion = 0 }: HistoryPr
     setHistory([]);
   };
 
+  // T014: M3 list item styling
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-4 max-w-md w-full transition-colors">
-      <div className="flex justify-between items-center mb-3">
-        <h2 className="text-lg font-semibold text-gray-800 dark:text-white">최근 변환 기록</h2>
+    <div className="bg-m3-surface rounded-m3-md shadow-m3-1 p-m3-4 max-w-md w-full transition-colors">
+      <div className="flex justify-between items-center mb-m3-3">
+        <h2 className="text-title-medium text-m3-on-surface">최근 변환 기록</h2>
         {history.length > 0 && (
           <button
             onClick={handleClear}
-            className="text-sm text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition"
+            className="text-label-medium text-m3-error hover:opacity-80 transition"
           >
             전체 삭제
           </button>
@@ -34,17 +35,17 @@ export default memo(function History({ onSelect, historyVersion = 0 }: HistoryPr
       </div>
 
       {history.length === 0 ? (
-        <p className="text-gray-500 dark:text-gray-400 text-sm text-center py-4">변환 기록이 없습니다</p>
+        <p className="text-body-medium text-m3-on-surface-variant text-center py-m3-4">변환 기록이 없습니다</p>
       ) : (
-        <div className="space-y-2">
+        <div className="space-y-m3-2">
           {history.map((item, index) => (
             <button
               key={`${item.pyeong}-${item.timestamp}-${index}`}
               onClick={() => onSelect(item.pyeong)}
-              className="w-full flex justify-between items-center p-3 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg transition"
+              className="w-full flex justify-between items-center p-m3-3 bg-m3-surface-variant hover:bg-m3-outline-variant rounded-m3-sm transition-colors"
             >
-              <span className="font-medium text-blue-600 dark:text-blue-400">{item.pyeong}평</span>
-              <span className="text-gray-600 dark:text-gray-300">{item.sqm}㎡</span>
+              <span className="text-label-large text-m3-primary">{item.pyeong}평</span>
+              <span className="text-body-medium text-m3-on-surface-variant">{item.sqm}㎡</span>
             </button>
           ))}
         </div>
