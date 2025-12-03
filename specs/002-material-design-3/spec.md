@@ -7,6 +7,13 @@
 
 ## Clarifications
 
+### Session 2025-12-03
+- Q: M3 색상 토큰을 `tailwind.config.js`에 어떤 구조로 정의해야 할까요? → A: 계층적 구조: `colors: { m3: { primary: { DEFAULT: '...', on: '...' } } }`
+- Q: 매우 작은 화면(320px)에서 계산기 레이아웃을 어떻게 처리해야 할까요? → A: 수직으로 쌓기: 계산기 입력 필드와 결과 영역을 수직으로 쌓아 표시합니다.
+- Q: 성공 기준 SC-001의 "Lighthouse Accessibility 점수 유지"를 어떻게 구체화해야 할까요? → A: 95점 이상
+- Q: 페이지가 처음 로드될 때, 계산기 컴포넌트가 사용자에게 표시되기 전까지의 로딩 상태를 어떻게 처리해야 할까요? → A: 스켈레톤 UI: 실제 UI와 유사한 모양의 회색 상자(placeholder)를 먼저 표시합니다.
+- Q: "Typography Token"을 `tailwind.config.js`에서 어떻게 정의해야 할까요? → A: 배열 사용: `fontSize: { 'm3-headline-large': ['32px', { lineHeight: '40px', fontWeight: '400' }] }`
+
 ### Session 2025-12-02
 
 - Q: 구현 방식 선택 (Option A/B/C)? → A: Option A - Tailwind CSS + M3 Design Tokens
@@ -67,7 +74,7 @@
 ### Edge Cases
 
 - 고대비 모드 사용자: `prefers-contrast: more` 미디어 쿼리로 대비 강화 적용
-- 매우 작은 화면(320px)에서 M3 간격이 적절한가?
+- **320px 너비의 작은 화면에서는 계산기 레이아웃이 수직으로 쌓여야 합니다.**
 - 색약 사용자를 위한 색상 조합이 WCAG 기준을 충족하는가?
 
 ## Requirements *(mandatory)*
@@ -83,6 +90,8 @@
 - **FR-006a**: 헤더 우측에 테마 토글 아이콘 버튼 배치 (sun/moon 아이콘)
 - **FR-007**: M3 간격 시스템 (4px 기반 그리드) 적용
 - **FR-008**: 모든 인터랙티브 요소에 최소 48px 터치 타겟 보장
+- **FR-009**: 320px 너비의 뷰포트에서 계산기 UI 요소(입력, 결과)가 수직으로 쌓여야 한다.
+- **FR-010**: 페이지 초기 로드 시, 계산기 컴포넌트는 스켈레톤 UI(UI 윤곽을 보여주는 플레이스홀더)를 먼저 표시해야 한다.
 
 ### Non-Functional Requirements
 
@@ -94,8 +103,8 @@
 
 ### Key Entities
 
-- **Color Token**: M3 색상 변수 - **Seed Color: Blue (#1976D2)** 기반 팔레트 생성 (primary, on-primary, primary-container, on-primary-container 등)
-- **Typography Token**: M3 폰트 크기/무게/행간 조합
+- **Color Token**: M3 색상 변수. `tailwind.config.js` 내에서 `colors: { m3: { primary: { DEFAULT: '...', on: '...' } } }`와 같은 계층적 객체 구조로 정의되어야 한다. **Seed Color: Blue (#1976D2)** 기반 팔레트 생성 (primary, on-primary, primary-container, on-primary-container 등).
+- **Typography Token**: M3 폰트 크기, 행간, 무게의 조합. `tailwind.config.js`의 `fontSize` 설정에서 `['32px', { lineHeight: '40px', fontWeight: '400' }]`와 같은 배열 구문을 사용하여 정의한다.
 - **Elevation Token**: M3 그림자 레벨 정의
 - **State Layer**: 상호작용 상태별 오버레이 투명도
 
@@ -103,7 +112,7 @@
 
 ### Measurable Outcomes
 
-- **SC-001**: 모든 색상 조합이 WCAG AA 대비 기준 충족 (Lighthouse Accessibility 점수 유지)
+- **SC-001**: 모든 색상 조합이 WCAG AA 대비 기준 충족 및 Lighthouse Accessibility 점수 95점 이상 달성
 - **SC-002**: 기존 E2E 테스트 100% 통과 (시각적 변경이 기능에 영향 없음)
 - **SC-003**: 번들 크기 증가 5KB 미만 (CSS 토큰만 추가)
 - **SC-004**: LCP, CLS 등 Core Web Vitals 성능 지표 유지
