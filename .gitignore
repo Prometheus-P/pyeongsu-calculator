@@ -73,28 +73,9 @@ service-account*.json
 # ============================================
 # AI/LLM Development Tools
 # ============================================
-# Claude Code
-.claude/
-
-# Cursor AI
-.cursor/
-.cursorignore
-
-# GitHub Copilot
-.copilot/
-
-# Codeium
-.codeium/
-
-# Other AI tools
-.ai/
-.llm/
-
-# ============================================
-# Speckit / Design Workflow
-# ============================================
-.specify/
-.speckit/
+# NOTE: .claude/, .cursor/, .specify/ 등 AI 도구 설정은
+# 개발 환경 공유를 위해 의도적으로 버전 관리에 포함합니다.
+# 단, 개인 API 키나 인증 정보는 별도 환경 변수로 관리하세요.
 
 # ============================================
 # Test & Coverage
