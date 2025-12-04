@@ -112,16 +112,16 @@ describe('ReferenceTable', () => {
       expect(row).toHaveClass('cursor-pointer');
     });
 
-    it('행에 hover 효과가 있다', () => {
+    it('행에 M3 hover 효과가 있다', () => {
       render(<ReferenceTable onSelect={() => {}} />);
       const row = screen.getByText('10평').closest('tr')!;
-      expect(row).toHaveClass('hover:bg-blue-50');
+      expect(row).toHaveClass('hover:bg-m3-surface-variant');
     });
 
     it('행에 transition 효과가 있다', () => {
       render(<ReferenceTable onSelect={() => {}} />);
       const row = screen.getByText('10평').closest('tr')!;
-      expect(row).toHaveClass('transition');
+      expect(row).toHaveClass('transition-colors');
     });
   });
 });

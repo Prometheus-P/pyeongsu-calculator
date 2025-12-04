@@ -143,10 +143,9 @@ test.describe('Material Design 3 디자인 시스템 테스트', () => {
           try {
             const rules = Array.from(sheet.cssRules || []);
             for (const rule of rules) {
-              if (rule instanceof CSSMediaRule) {
-                if (rule.conditionText?.includes('prefers-contrast: more')) {
-                  return true;
-                }
+              // Check if rule has conditionText property (media rules)
+              if ('conditionText' in rule && (rule as { conditionText?: string }).conditionText?.includes('prefers-contrast: more')) {
+                return true;
               }
             }
           } catch {
