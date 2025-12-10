@@ -108,18 +108,15 @@ export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChan
   const quickSizes = [10, 15, 20, 25, 30, 35, 40];
 
   return (
-    // T012: M3 card elevation (level 2)
-    <div className="bg-m3-surface rounded-m3-md shadow-m3-2 p-m3-6 max-w-md w-full transition-colors">
-      {/* T013: M3 typography - headline-medium for title */}
-      <h1 className="text-headline-small text-m3-on-surface text-center mb-m3-6">평수 계산기</h1>
+    // Kinetic Minimalism Style
+    <div className="dark bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-[4px_8px_16px_rgba(0,0,0,0.2)] p-6 max-w-md w-full">
+      <h1 className="text-2xl font-bold text-gray-100 text-center mb-6 tracking-tight">평수 계산기</h1>
 
-      <div className="space-y-m3-4">
+      <div className="space-y-4">
         <div>
-          {/* T013: M3 typography - label-large for labels */}
-          <label htmlFor="sqm" className="block text-label-large text-m3-on-surface-variant mb-m3-1">
+          <label htmlFor="sqm" className="block text-sm font-medium text-gray-400 mb-1">
             제곱미터 (㎡)
           </label>
-          {/* T010: M3 outlined input style */}
           <input
             id="sqm"
             type="text"
@@ -127,13 +124,13 @@ export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChan
             onChange={(e) => handleSqmChange(e.target.value)}
             onBlur={handleInputBlur}
             onKeyDown={(e) => handleKeyDown(e, 'sqm')}
-            className="m3-outlined-input w-full"
+            className="w-full p-4 bg-gray-900 text-gray-100 border-2 border-gray-600 rounded-md focus:border-cyan-400 focus:ring-0 transition-colors placeholder-gray-500 min-h-[48px]"
             placeholder="제곱미터 입력"
           />
         </div>
 
         <div>
-          <label htmlFor="pyeong" className="block text-label-large text-m3-on-surface-variant mb-m3-1">
+          <label htmlFor="pyeong" className="block text-sm font-medium text-gray-400 mb-1">
             평
           </label>
           <input
@@ -144,45 +141,44 @@ export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChan
             onChange={(e) => handlePyeongChange(e.target.value)}
             onBlur={handleInputBlur}
             onKeyDown={(e) => handleKeyDown(e, 'pyeong')}
-            className="m3-outlined-input w-full"
+            className="w-full p-4 bg-gray-900 text-gray-100 border-2 border-gray-600 rounded-md focus:border-cyan-400 focus:ring-0 transition-colors placeholder-gray-500 min-h-[48px]"
             placeholder="평수 입력"
           />
         </div>
       </div>
 
-      {/* T011, T018, T020: M3 button styles with state layer and 48px touch target */}
-      <div className="flex gap-m3-2 mt-m3-4">
+      <div className="flex gap-3 mt-4">
         <button
           onClick={clearFields}
-          className="m3-state-layer flex-1 py-m3-3 px-m3-4 min-h-[48px] bg-m3-surface-variant text-m3-on-surface-variant rounded-m3-sm text-label-large transition-colors"
+          className="flex-1 py-3 px-4 min-h-[48px] bg-gray-600 text-gray-100 font-semibold rounded-md hover:bg-gray-500 transition-colors"
         >
           초기화
         </button>
         {hasValue && (
+          // Kinetic element: skewed button
           <button
             onClick={handleCopy}
-            className="m3-state-layer py-m3-3 px-m3-4 min-h-[48px] bg-m3-primary text-m3-on-primary rounded-m3-sm text-label-large transition-colors"
+            className="py-3 px-4 min-h-[48px] bg-cyan-500 text-black font-bold rounded-md hover:bg-cyan-400 transition-colors transform -skew-x-12"
           >
-            복사
+            <span className="inline-block transform skew-x-12">복사</span>
           </button>
         )}
       </div>
 
       {showToast && (
-        <div className="mt-m3-2 p-m3-2 bg-m3-tertiary-container text-m3-on-tertiary-container text-body-small text-center rounded-m3-xs">
+        <div className="mt-2 p-2 bg-cyan-500 text-black text-sm text-center rounded-md">
           복사되었습니다!
         </div>
       )}
 
-      <div className="mt-m3-6">
-        <p className="text-body-medium text-m3-on-surface-variant mb-m3-2">빠른 선택</p>
-        {/* T018, T020: Quick select buttons with state layer and 48px touch target */}
-        <div className="grid grid-cols-4 gap-m3-2">
+      <div className="mt-6">
+        <p className="text-base text-gray-400 mb-2">빠른 선택</p>
+        <div className="grid grid-cols-4 gap-2">
           {quickSizes.map((size) => (
             <button
               key={size}
               onClick={() => handleQuickSelect(size)}
-              className="m3-state-layer py-m3-2 px-m3-3 min-h-[48px] bg-m3-primary-container text-m3-on-primary-container rounded-m3-sm text-label-medium transition-colors"
+              className="py-2 px-3 min-h-[48px] bg-gray-700 text-gray-200 rounded-md hover:bg-cyan-500 hover:text-black transition-colors"
             >
               {size}평
             </button>

@@ -50,7 +50,8 @@
       "WebSearch",
       "SlashCommand(/speckit.clarify)",
       "mcp__filesystem__read_multiple_files",
-      "Bash(git rebase:*)"
+      "Bash(git rebase:*)",
+      "Bash(gh pr checks:*)"
     ],
     "deny": [],
     "ask": []
