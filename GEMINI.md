@@ -91,6 +91,8 @@ The project is organized as follows:
 ## Active Technologies
 - TypeScript 5.5.x + Astro 4.16.x, React 18.3.x, Tailwind CSS 3.4.x (002-material-design-3)
 - N/A (localStorage for theme persistence) (002-material-design-3)
+- TypeScript 5.5 + None (pure TypeScript, no external libraries) (003-converter-strategy-pattern)
+- N/A (stateless utility functions) (003-converter-strategy-pattern)
 
 ## Recent Changes
 - 002-material-design-3: Added TypeScript 5.5.x + Astro 4.16.x, React 18.3.x, Tailwind CSS 3.4.x
