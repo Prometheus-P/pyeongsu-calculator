@@ -7,99 +7,290 @@ import App from '../App';
 const faqItems = [
   {
     question: '1평은 몇 제곱미터(㎡)인가요?',
-    answer: '1평은 약 3.3058㎡입니다. 정확한 값은 400/121 ≈ 3.305785...㎡입니다.',
+    answer: '1평은 정확히 3.305785㎡입니다. 계산 편의상 3.3058로 사용하며, 1㎡는 반대로 약 0.3025평입니다.',
   },
   {
-    question: '1제곱미터(㎡)는 몇 평인가요?',
-    answer: '1㎡는 약 0.3025평입니다. 정확한 값은 121/400 = 0.3025평입니다.',
+    question: '84㎡는 몇 평이고, 왜 34평형이라고 부르나요?',
+    answer:
+      '전용면적 84㎡는 약 25.7평으로, 공급면적 기준으로는 흔히 34평형 아파트로 분류됩니다. 공급면적에는 계단·복도·엘리베이터 등 공용면적이 함께 포함됩니다.',
   },
   {
-    question: '아파트 30평은 몇 제곱미터인가요?',
-    answer: '30평은 약 99.17㎡입니다. 전용면적과 공급면적에 따라 다를 수 있습니다.',
+    question: '34평 아파트는 전용면적이 얼마인가요?',
+    answer:
+      '흔히 말하는 34평형 아파트의 전용면적은 보통 84㎡(약 25.7평)입니다. 나머지 약 8~9평은 계단, 복도, 엘리베이터 등 공용면적으로, 실생활에 쓰지 않는 공간입니다.',
   },
   {
-    question: '전용면적과 공급면적의 차이는 무엇인가요?',
-    answer: '전용면적은 실제 거주 공간만의 면적이고, 공급면적은 공용면적(복도, 계단 등)을 포함한 총 면적입니다.',
+    question: '실평수는 어떻게 계산하나요?',
+    answer:
+      '실평수는 전용면적에 발코니 확장 등 서비스면적을 더한 값입니다. 예를 들어 전용 84㎡에 확장 발코니 3~5평이 더해지면 체감 실평수는 28~30평 수준이 됩니다.',
   },
   {
-    question: '평수 계산기는 어떻게 사용하나요?',
-    answer: '평 또는 제곱미터 입력란에 숫자를 입력하면 자동으로 반대 단위로 변환됩니다. 빠른 선택 버튼으로 일반 평형도 바로 확인할 수 있습니다.',
+    question: '59㎡, 84㎡ 아파트는 몇 평이고 누가 살기에 적당한가요?',
+    answer:
+      '59㎡는 약 18평으로 2~3인 가구에 적당한 소형 평형이고, 84㎡는 약 25.7평(34평형)으로 3~4인 가족이 가장 많이 선택하는 국민평형입니다.',
   },
 ];
+
+const pageTitle = '평수 계산기 | 제곱미터(㎡) ↔ 평 변환 & 아파트 평형 가이드';
+const pageDescription =
+  '1평은 몇 제곱미터인지, 84㎡는 몇 평인지 한 번에 계산하세요. 한국 아파트 전용·공급면적 차이와 59㎡·84㎡ 평형표까지 제공하는 평수 특화 계산기입니다.';
+const canonicalUrl = 'https://www.pyeongcalc.kr';
+const ogImage = 'https://www.pyeongcalc.kr/images/og-image.png';
 ---
 
-<BaseLayout
-  title="평수 계산기 | 제곱미터를 평으로 변환"
-  description="부동산 평수를 제곱미터(㎡)로 빠르게 변환하세요. 아파트 평형 계산, 전용면적 공급면적 변환을 실시간으로 계산합니다."
->
+<BaseLayout title={pageTitle} description={pageDescription} canonical={canonicalUrl} ogImage={ogImage}>
   <SchemaMarkup type="all" faqItems={faqItems} slot="head" />
 
   <main class="max-w-3xl mx-auto px-4 py-10">
-
     <AdContainer position="top" className="hidden sm:flex" />
     <App client:load />
+    <section class="mt-6 bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm leading-relaxed">
+      <p>
+        이 평수 계산기는 <strong>제곱미터(㎡)와 평(坪)을 상호 변환</strong>하고, 전용면적·공급면적·실평수 등 한국 아파트 면적
+        체계를 사람 눈높이에 맞게 정리해 주는 도구입니다. 1평은 3.3058㎡, 1㎡는 0.3025평을 기준으로 계산하며, 59㎡·84㎡ 같은 대표 평형도 버튼 한 번으로 바로
+        확인할 수 있습니다.
+      </p>
+    </section>
     <AdContainer position="bottom" />
 
-    <!-- =========================== -->
-    <!--     SEO / AEO 본문 영역     -->
-    <!-- =========================== -->
-    <section class="prose mt-12">
-      <h2>한국 아파트 면적 계산의 기준 — 전용/공급/실평수 완전 정리</h2>
-
+    <article class="max-w-4xl mx-auto px-4 py-12 prose prose-slate lg:prose-lg">
+      <h1 class="text-3xl font-bold text-slate-900">평수 계산기: 제곱미터(㎡)와 평 간단 변환</h1>
       <p>
-        한국의 아파트 시장에서는 같은 84㎡라 하더라도 체감되는 공간이 크게 달라집니다. 
-        그 이유는 평수뿐 아니라 전용면적, 공급면적, 계약면적, 서비스면적 등이 혼용되기 때문입니다. 
-        이러한 개념을 이해하지 못하면 같은 가격이라도 실제 생활 공간을 비교하기 어렵고, 
-        대출 규제나 세금 판단에서도 불리해질 수 있습니다.
+        실시간으로 제곱미터와 평을 변환하고, 전용면적·공급면적 등 한국 부동산에서 자주 사용하는 면적 구분을 한눈에 확인할 수 있습니다.
+        아래 계산기와 표, FAQ를 참고해 정확한 면적 정보를 얻어보세요.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-slate-900">평수 계산기 사용법</h2>
+      <ul>
+        <li>위 계산기에 평 또는 ㎡를 입력하면 다른 단위가 자동 계산됩니다.</li>
+        <li>자주 쓰는 아파트 평형(25평, 34평 등)은 빠른 선택 버튼으로 즉시 확인할 수 있습니다.</li>
+        <li>전용면적과 공급면적 차이를 참고해 실제 체감 면적을 추정해 보세요.</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold text-slate-900">한국 아파트 면적 개념 한눈에 보기</h2>
+      <p>
+        한국 아파트는 전용면적, 공급면적, 계약면적, 서비스면적이 서로 다른 범위를 가리킵니다. 전용면적은 현관문 안쪽 실제 생활 공간을
+        뜻하고, 공급면적은 전용면적에 복도·계단·엘리베이터 같은 공용면적을 더한 값입니다. 계약면적은 공급면적에 기타 공용면적을 포함하며,
+        서비스면적은 발코니 등 확장 가능한 부분을 말합니다. 실평수는 전용면적과 서비스면적을 합쳐 실제 체감 크기를 계산할 때 활용됩니다.
+      </p>
+      <ul>
+        <li>1평 = 3.3058㎡, 1㎡ = 0.3025평을 기준으로 계산합니다.</li>
+        <li>34평형(공급 112㎡ 내외)의 전용면적은 보통 84㎡(약 25.7평)입니다.</li>
+        <li>발코니 확장이 있는 경우 실평수는 전용면적 대비 3~5평 정도 더 넓게 체감됩니다.</li>
+        <li>전용 59㎡(약 18평)는 2~3인 가구, 전용 84㎡(약 25.7평)는 3~4인 가족에게 많이 선택됩니다.</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold text-slate-900">빠른 변환 공식과 계산 팁</h2>
+      <p>
+        평수 계산은 소수점 네 자리 정도만 기억해도 충분합니다. 제곱미터를 평으로 바꿀 때는 <strong>㎡ × 0.3025</strong>, 평을
+        제곱미터로 바꿀 때는 <strong>평 × 3.3058</strong> 공식을 사용하세요. 59㎡·84㎡처럼 대표적인 평형은 버튼으로 바로 불러
+        계산기를 통해 결과를 즉시 확인할 수 있습니다.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-slate-900">아파트 평형별 실제 크기 (공급면적 vs 전용면적)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>평형 (호칭)</th>
+            <th>공급면적 (㎡)</th>
+            <th>전용면적 (㎡)</th>
+            <th>비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>20평형</td>
+            <td>약 66㎡</td>
+            <td>약 49㎡ (15평)</td>
+            <td>1~2인 가족 선호</td>
+          </tr>
+          <tr>
+            <td>25평형</td>
+            <td>약 82㎡</td>
+            <td>약 59㎡ (18평)</td>
+            <td>신혼·소형 가족형</td>
+          </tr>
+          <tr>
+            <td>34평형 (국민평형)</td>
+            <td>약 112㎡</td>
+            <td>84㎡ (25.4평)</td>
+            <td>가장 보편적인 구조</td>
+          </tr>
+          <tr>
+            <td>40평형대</td>
+            <td>132㎡ 이상</td>
+            <td>102㎡ 이상</td>
+            <td>대형 가족·복층/팬트리 포함</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="text-2xl font-semibold text-slate-900">전용면적과 공급면적, 무엇이 다를까?</h2>
+      <p>
+        <strong>전용면적</strong>은 현관문 안쪽의 실제 거주 공간만을 말하며, 방·거실·주방·욕실 등이 포함됩니다. 세금과 청약, 대출 심사에서 핵심 기준이 되는 면적입니다.
+        <br />
+        <strong>공급면적</strong>은 전용면적에 공용 복도·엘리베이터·계단 등을 더한 면적입니다. 한국에서 "34평형"이라고 부를 때 대체로 공급면적을 의미합니다.
+      </p>
+      <p>
+        <strong>계약면적</strong>은 공급면적에 기타 공용면적까지 포함하며, <strong>서비스면적</strong>은 발코니 등 확장 가능한 공간을 뜻합니다. 실제 체감 크기를 알고 싶다면 전용면적과 서비스면적을 합한 실평수를 확인하는 것이 좋습니다.
       </p>
 
       <p>
-        평수 계산의 기본은 1평 = 3.305785㎡이며, 1㎡ = 약 0.3025평입니다. 
-        예를 들어 84㎡는 약 25.41평입니다. 
-        그러나 한국에서는 “34평 아파트”라고 부르는 경우가 많은데, 
-        이는 공급면적을 기준으로 평형을 부르기 때문입니다.
+        이 서비스는 한국 아파트 면적 계산에 특화된 웹 도구인 <strong>PyeongCalc</strong>에서 제공하며,
+        언제든지
+        <a href="https://www.pyeongcalc.kr" class="text-blue-600 underline">
+          https://www.pyeongcalc.kr
+        </a>
+        에 접속해 다시 확인할 수 있습니다.
       </p>
 
-      <p>
-        실평수(실사용면적)는 전용면적에 발코니 확장 등 서비스 면적을 포함한 체감 면적입니다. 
-        최근 신축 아파트는 발코니 확장을 거의 기본으로 제공하기 때문에 
-        전용 59㎡도 실평수는 20~22평까지 나옵니다. 
-        pyeongcalc.kr은 이 개념을 정확하게 반영해 계산 결과를 제공합니다.
+      <section class="mt-16">
+        <h2 class="text-2xl font-semibold text-slate-900">자주 묻는 질문 (FAQ)</h2>
+        <p>
+          평수 환산과 전용·공급면적 개념을 가장 많이 묻는 질문 위주로 정리했습니다. 아래 항목은 FAQ 마크업과 동일한 데이터를 활용해
+          검색·AI 엔진이 이해하기 쉬운 구조를 유지합니다.
+        </p>
+        <div class="space-y-4">
+          {faqItems.map((item) => (
+            <details
+              class="group bg-white border border-gray-200 rounded-lg open:ring-2 open:ring-blue-100 open:border-blue-300 transition-all duration-200"
+            >
+              <summary class="flex items-center justify-between cursor-pointer p-4 font-medium text-gray-900 list-none">
+                <span class="flex items-center gap-3">
+                  <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-bold">
+                    Q
+                  </span>
+                  {item.question}
+                </span>
+                <span class="transition group-open:rotate-180">
+                  <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <div class="text-gray-600 px-4 pb-4 pl-[3.25rem] border-t border-gray-100 pt-3">
+                {item.answer}
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+    </article>
+    <!-- ============================= -->
+    <!--   SEO / AEO용 설명 본문 섹션   -->
+    <!-- ============================= -->
+    <section class="mt-10 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-10 leading-relaxed space-y-4">
+      <h2 class="text-xl md:text-2xl font-bold text-slate-900 mb-2">
+        한국 아파트 평수 계산, 여기서 한 번에 끝내기
+      </h2>
+      <p class="text-slate-700 text-sm md:text-base">
+        한국 부동산 시장에서는 여전히 평(坪)과 제곱미터(m²)가 함께 사용됩니다.
+        실무에서는 제곱미터가 법정 단위이지만, 사람들은 여전히
+        "이 집이 몇 평이냐"로 크기를 가늠합니다. 그래서 매물 정보에
+        <strong>59m², 74m², 84m²</strong>가 적혀 있어도 머릿속에서는
+        "25평, 30평, 34평"으로 자동 변환해 버리죠.
       </p>
-
-      <p>
-        면적 정보는 가격 평가 및 대출 한도 판단에도 매우 중요합니다. 
-        2025년 기준 LTV는 9억 이하 50%, 9억~15억 구간 초과분 40%이며, 
-        지역별 규제도 다르게 적용됩니다. 
-        따라서 자신이 계산한 면적이 어느 가격대의 아파트인지 이해하는 것이 필수입니다.
+      <p class="text-slate-700 text-sm md:text-base">
+        평수 계산의 기준은 간단합니다.
+        <strong>1평은 약 3.3058m²</strong>이고,
+        <strong>1m²는 약 0.3025평</strong>입니다.
+        예를 들어 84m² × 0.3025를 적용하면 약 25.41평이 됩니다.
+        반대로 25평에 3.3058을 곱하면 약 82.64m²가 되고,
+        이 숫자들이 전용·공급면적에 따라 다시 다르게 보입니다.
       </p>
-
-      <p>
-        pyeongcalc.kr은 평수 → 전용면적 → 실평수 → 가격대 → 대출 규제까지 
-        주거 판단의 핵심 흐름을 이해하는 데 도움을 주는 도구입니다.
+      <p class="text-slate-700 text-sm md:text-base">
+        여기서 혼란이 시작됩니다.
+        <strong>전용면적</strong>은 현관 안쪽, 실제로 생활하는
+        방·거실·주방·욕실 등의 면적이고,
+        <strong>공급면적</strong>은 전용면적에 계단·복도·엘리베이터
+        같은 <strong>공용면적</strong>을 더한 값입니다.
+        부동산 광고에서 흔히 말하는 "34평 아파트"는 전용 84m²가 아니라,
+        전용 84m²에 공용면적을 더한 공급면적 기준의 평형입니다.
+      </p>
+      <p class="text-slate-700 text-sm md:text-base">
+        또 하나 많이 헷갈리는 개념이 <strong>실평수</strong>입니다.
+        실평수는 전용면적에 발코니(베란다) 확장 등
+        <strong>서비스 면적</strong>까지 더한 체감 면적입니다.
+        최근 신축 아파트는 발코니 확장을 거의 기본 옵션처럼 제공하기 때문에
+        전용 59m²라도 실제 사용하는 공간은 20평 안팎까지 나옵니다.
+        같은 59m²라도 구조와 확장 여부에 따라 체감 크기가 크게 달라지는 이유입니다.
+      </p>
+      <p class="text-slate-700 text-sm md:text-base">
+        이 평수 계산기는 단순히 숫자만 보여주지 않고,
+        <strong>59m², 74m², 84m², 102m²</strong>처럼
+        자주 쓰이는 전용면적을 기준으로 대략적인 평형과 명칭을 함께 보여줍니다.
+        "지금 보고 있는 매물이 실제로 어느 정도 크기인지",
+        "우리 가족이 살기에 어느 정도 평형이 맞는지"를
+        감각적으로 이해할 수 있게 돕는 것이 목표입니다.
+      </p>
+      <p class="text-slate-700 text-sm md:text-base">
+        계산 방법은 직관적입니다.
+        위쪽 입력창에 평을 입력하면 제곱미터가 자동으로 계산되고,
+        제곱미터를 입력하면 반대로 평수가 바로 계산됩니다.
+        복잡한 수식은 모두 도구가 처리하니,
+        사용자는 단지 <strong>숫자를 입력하고 대표 평형만 비교</strong>하면 됩니다.
+        특히 59m²와 84m²처럼 많이 찾는 전용면적은 표로 한 번에 확인할 수 있어,
+        <strong>아파트 청약, 전세 계약, 매매가 비교</strong> 시 시간을 절약할 수 있습니다.
+      </p>
+      <p class="text-slate-700 text-sm md:text-base">
+        부동산 계약은 결국 <strong>면적 × 가격</strong>의 조합입니다.
+        같은 가격이라면 조금이라도 넓은 집을 찾고 싶고,
+        같은 평수라면 조금이라도 가격이 낮은 집을 찾고 싶습니다.
+        그 판단의 첫 단계가 바로 평수 계산이고,
+        PyeongCalc는 그 첫 단계를 최대한 정확하고 빠르게 만들어 주는
+        <strong>한국 아파트 전용 면적 계산기</strong>입니다.
       </p>
     </section>
 
-    <!-- =========================== -->
-    <!--           FAQ 영역           -->
-    <!-- =========================== -->
-    <section class="mt-16">
-      <h2 class="text-2xl font-semibold mb-6">추가로 많이 묻는 질문</h2>
+    <!-- ============================= -->
+    <!--   추가 FAQ 섹션 (UI용)         -->
+    <!-- ============================= -->
+    <section class="mt-10 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-lg md:text-xl font-bold text-slate-900 mb-4">
+        자주 묻는 질문 (FAQ)
+      </h2>
+      <div class="space-y-3">
+        <details class="group border border-slate-200 rounded-lg px-4 py-3 open:border-primary open:bg-slate-50">
+          <summary class="flex justify-between items-center cursor-pointer text-sm md:text-base font-medium text-slate-900">
+            <span>34평 아파트는 전용면적이 얼마인가요?</span>
+            <span class="text-slate-400 group-open:rotate-180 transition">
+              ▼
+            </span>
+          </summary>
+          <div class="mt-2 text-sm text-slate-700">
+            일반적으로 34평형으로 부르는 아파트는
+            <strong>전용면적 84m²</strong> 안팎인 경우가 많습니다.
+            공급면적에 공용면적이 포함되기 때문에,
+            실제 거주 공간은 약 25평대라고 보면 됩니다.
+          </div>
+        </details>
 
-      <details class="mb-4">
-        <summary>84㎡는 몇 평인가요?</summary>
-        84㎡는 약 25.41평이며, 한국에서는 34평형으로 불립니다.
-      </details>
+        <details class="group border border-slate-200 rounded-lg px-4 py-3 open:border-primary open:bg-slate-50">
+          <summary class="flex justify-between items-center cursor-pointer text-sm md:text-base font-medium text-slate-900">
+            <span>59m²와 84m² 중 어느 평형이 더 적당한가요?</span>
+            <span class="text-slate-400 group-open:rotate-180 transition">
+              ▼
+            </span>
+          </summary>
+          <div class="mt-2 text-sm text-slate-700">
+            <strong>59m²(약 18평)</strong>는 1~2인 가구 또는 첫 내 집 마련 용도로,
+            <strong>84m²(약 25평)</strong>는 3~4인 가족의 장기 거주용으로 많이 선택됩니다.
+            가족 수, 방 개수, 예산을 함께 고려하는 것이 좋습니다.
+          </div>
+        </details>
 
-      <details class="mb-4">
-        <summary>실평수는 어떻게 계산하나요?</summary>
-        전용면적에 발코니 확장 등의 서비스면적을 포함하여 계산합니다.
-      </details>
-
-      <details class="mb-4">
-        <summary>아파트 발코니 확장은 평수에 얼마나 영향을 주나요?</summary>
-        평균 2~5평까지 사용하는 공간이 늘어납니다.
-      </details>
+        <details class="group border border-slate-200 rounded-lg px-4 py-3 open:border-primary open:bg-slate-50">
+          <summary class="flex justify-between items-center cursor-pointer text-sm md:text-base font-medium text-slate-900">
+            <span>실평수와 등기부상의 평수가 다른 이유는 무엇인가요?</span>
+            <span class="text-slate-400 group-open:rotate-180 transition">
+              ▼
+            </span>
+          </summary>
+          <div class="mt-2 text-sm text-slate-700">
+            등기부등본에는 전용면적과 공급면적이 표시되지만,
+            발코니 확장, 구조 변경 등에 따라 실제 사용하는 공간은 더 넓어질 수 있습니다.
+            그래서 사람들이 말하는 "실평수"가 등기부상의 숫자와 다르게 느껴지는 것입니다.
+          </div>
+        </details>
+      </div>
     </section>
   </main>
 </BaseLayout>
