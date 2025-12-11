@@ -29,6 +29,12 @@ TypeScript 5.5, Astro 4.16: Follow standard conventions
 - 003-converter-strategy-pattern: Added TypeScript 5.5 + None (pure TypeScript, no external libraries)
 - 003-converter-strategy-pattern: Added TypeScript 5.5 + None (pure TypeScript, no external libraries)
 - 001-seo-i18n: Added TypeScript 5.5, Astro 4.16 + Astro built-in i18n (astro:i18n module), @astrojs/sitemap
+- JSON-LD Schema Centralization: Refactored SchemaMarkup.astro, ArticleLayout.astro, and GuideLayout.astro to centralize JSON-LD generation.
+- `useQueryParams` `act` Usage Review: Reviewed and confirmed correct `act` usage in `useQueryParams` tests.
+- Fix `App.test.tsx` failure: Refactored `App.test.tsx` to render `App` once per test, resolving a timing issue.
+- M3 State Layer E2E Tests Fix: Modified `Calculator.tsx` to apply `m3-state-layer` and `m3-outlined-input` classes.
+- BlogPosting Schema Presence Fix: Corrected `GuideLayout.astro` and `SchemaMarkup.astro` to properly generate and pass `BlogPosting` schema data.
+- Dark Mode Visibility Improvement: Adjusted dark mode color variables in `src/styles/global.css` for better contrast.
 
 
 <!-- MANUAL ADDITIONS START -->
