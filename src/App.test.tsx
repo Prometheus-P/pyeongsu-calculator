@@ -58,19 +58,19 @@ describe('App', () => {
 
     it('모든 테이블 행 클릭이 Calculator를 업데이트한다', async () => {
       const user = userEvent.setup();
+      const { unmount } = renderWithTheme(<App />); // Render App once
 
       for (let i = 0; i < COMMON_SIZES.length; i++) {
-        const { unmount } = renderWithTheme(<App />);
-
         const table = screen.getByRole('table');
         const rows = table.querySelectorAll('tbody tr');
         await user.click(rows[i]);
 
         const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
-        expect(pyeongInput.value).toBe(String(COMMON_SIZES[i].pyeong));
-
-        unmount();
+        await waitFor(() => {
+          expect(pyeongInput.value).toBe(String(COMMON_SIZES[i].pyeong));
+        });
       }
+      unmount(); // Unmount after the loop
     });
 
     it('테이블 선택 후 수동 입력하면 수동 입력값이 우선된다', async () => {
