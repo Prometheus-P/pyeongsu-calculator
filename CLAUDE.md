@@ -1,12 +1,14 @@
 # pyeongsu-calculator Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2025-12-02
+Auto-generated from all feature plans. Last updated: 2025-12-11
 
 ## Active Technologies
-- TypeScript 5.5, Astro 4.16 + Astro Content Collections (built-in), Zod (built-in via Astro), @astrojs/sitemap 3.6 (004-astro-guides-aeo)
-- N/A (static site, content in Markdown files) (004-astro-guides-aeo)
+- TypeScript 5.5, Astro 4.16 + Astro built-in i18n (astro:i18n module), @astrojs/sitemap (001-seo-i18n)
+- N/A (static site, translations in JSON/TS files) (001-seo-i18n)
+- TypeScript 5.5 + None (pure TypeScript, no external libraries) (003-converter-strategy-pattern)
+- N/A (stateless utility functions) (003-converter-strategy-pattern)
 
-- TypeScript 5.x (strict mode) + Astro 4.x, React 18, Tailwind CSS, @astrojs/sitemap (001-seo-improvements)
+- TypeScript 5.5, Astro 4.16 + Astro Content Collections (built-in), Zod (built-in via Astro), @astrojs/sitemap 3.6 (004-astro-guides-aeo)
 
 ## Project Structure
 
@@ -21,12 +23,13 @@ npm test && npm run lint
 
 ## Code Style
 
-TypeScript 5.x (strict mode): Follow standard conventions
+TypeScript 5.5, Astro 4.16: Follow standard conventions
 
 ## Recent Changes
-- 004-astro-guides-aeo: Added TypeScript 5.5, Astro 4.16 + Astro Content Collections (built-in), Zod (built-in via Astro), @astrojs/sitemap 3.6
+- 003-converter-strategy-pattern: Added TypeScript 5.5 + None (pure TypeScript, no external libraries)
+- 001-seo-i18n: Added TypeScript 5.5, Astro 4.16 + Astro built-in i18n (astro:i18n module), @astrojs/sitemap
+- 001-seo-i18n: Added [if applicable, e.g., PostgreSQL, CoreData, files or N/A]
 
-- 001-seo-improvements: Added TypeScript 5.x (strict mode) + Astro 4.x, React 18, Tailwind CSS, @astrojs/sitemap
 
 <!-- MANUAL ADDITIONS START -->
 
