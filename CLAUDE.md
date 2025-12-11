@@ -27,8 +27,8 @@ TypeScript 5.5, Astro 4.16: Follow standard conventions
 
 ## Recent Changes
 - 003-converter-strategy-pattern: Added TypeScript 5.5 + None (pure TypeScript, no external libraries)
+- 003-converter-strategy-pattern: Added TypeScript 5.5 + None (pure TypeScript, no external libraries)
 - 001-seo-i18n: Added TypeScript 5.5, Astro 4.16 + Astro built-in i18n (astro:i18n module), @astrojs/sitemap
-- 001-seo-i18n: Added [if applicable, e.g., PostgreSQL, CoreData, files or N/A]
 
 
 <!-- MANUAL ADDITIONS START -->

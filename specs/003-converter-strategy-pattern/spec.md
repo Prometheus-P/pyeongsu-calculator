@@ -61,6 +61,7 @@ A developer needs to add support for a new area unit (e.g., hectare, tsubo) to t
 - What happens when a user enters a negative number? The system treats negative values as invalid per existing validation logic.
 - How does the system handle extremely large numbers that exceed safe integer range? The system uses standard JavaScript number handling and displays the result with appropriate precision.
 - What happens when converting between the same unit (sqm → sqm)? The system returns the input value unchanged without unnecessary computation.
+- What happens when input is NaN, undefined, or a non-numeric string? The system returns `NaN`, following JavaScript math operation conventions.
 
 ## Requirements *(mandatory)*
 
@@ -84,7 +85,7 @@ A developer needs to add support for a new area unit (e.g., hectare, tsubo) to t
 
 ### Key Entities
 
-- **ConversionRegistry**: A central registry that maps unit identifiers to their conversion strategies. Provides O(1) lookup for any unit's conversion logic.
+- **ConversionRegistry**: A module-scoped `Map` that maps unit identifiers to their conversion strategies. Provides O(1) lookup for any unit's conversion logic. Accessed via exported functions rather than direct Map access.
 - **ConversionStrategy**: Represents a unit's conversion logic, containing the ratio to convert to/from the base unit (sqm). Each strategy is a pure function or function pair.
 - **UnitType**: An identifier representing a supported unit (sqm, pyeong, sqft, acre). Used as keys in the ConversionRegistry.
 
@@ -97,6 +98,14 @@ A developer needs to add support for a new area unit (e.g., hectare, tsubo) to t
 - **SC-003**: The refactored module bundle size increase is less than 500 bytes gzipped compared to the current implementation.
 - **SC-004**: A new unit can be added by a developer in under 5 minutes by registering a single conversion ratio.
 - **SC-005**: The codebase maintains zero linting errors and zero formatting issues after the refactor.
+
+## Clarifications
+
+### Session 2025-12-11
+
+- Q: NaN, undefined, 빈 문자열 등 invalid input 처리 방식? → A: `return NaN` (JavaScript 수학 연산 컨벤션 따름)
+- Q: ConversionRegistry 구조 패턴? → A: Module-scoped `Map` (ES 모듈 스코프에 Map 객체, 함수로 접근)
+- Q: Registry export 전략? → A: Wrapper functions only (registry 내부 숨김, 함수만 export)
 
 ## Assumptions
 
