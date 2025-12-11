@@ -43,3 +43,6 @@ legacy/
 
 # Claude Code
 .claude/settings.local.json
+
+# Gemini AI
+.gemini/
