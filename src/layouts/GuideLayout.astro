@@ -7,6 +7,7 @@ import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import AdSlot from '../components/ads/AdSlot.astro';
 import BreadcrumbSchema from '../components/seo/BreadcrumbSchema.astro';
+import SchemaMarkup from '../components/seo/SchemaMarkup.astro';
 import { generateSchemaGraph } from '../utils/schema';
 
 interface Props {
@@ -56,7 +57,7 @@ const schemaGraph = generateSchemaGraph(guide);
     )}
 
     <!-- Schema.org JSON-LD for AEO -->
-    <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
+    <SchemaMarkup schemaGraph={schemaGraph} />
 
     <!-- Breadcrumb Schema -->
     <BreadcrumbSchema items={breadcrumbItems} />

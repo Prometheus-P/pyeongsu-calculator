@@ -11,9 +11,10 @@ interface Props {
   type: 'calculator' | 'faq' | 'howto' | 'blogposting' | 'all';
   faqItems?: Array<{ question: string; answer: string }>;
   blogPosting?: BlogPostingData;
+  schemaGraph?: any; // Add this line
 }
 
-const { type, faqItems = [], blogPosting } = Astro.props;
+const { type, faqItems = [], blogPosting, schemaGraph } = Astro.props;
 
 const siteUrl = 'https://pyeongsu-calculator.kr';
 
@@ -121,4 +122,8 @@ const blogPostingSchema = blogPosting ? {
 
 {(type === 'blogposting') && blogPostingSchema && (
   <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
+)}
+
+{schemaGraph && (
+  <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
 )}
