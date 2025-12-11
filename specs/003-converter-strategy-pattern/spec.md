@@ -104,7 +104,7 @@ A developer needs to add support for a new area unit (e.g., hectare, tsubo) to t
 ### Session 2025-12-11
 
 - Q: NaN, undefined, 빈 문자열 등 invalid input 처리 방식? → A: `return NaN` (JavaScript 수학 연산 컨벤션 따름)
-- Q: ConversionRegistry 구조 패턴? → A: Module-scoped `Map` (ES 모듈 스코프에 Map 객체, 함수로 접근)
+- Q: ConversionRegistry 구조 패턴? → A: Module-scoped `Record<UnitType, ConversionStrategy>` object (ES 모듈 스코프에 객체 리터럴, 함수로 접근). Object literal chosen over `Map` for simpler syntax while maintaining O(1) lookup.
 - Q: Registry export 전략? → A: Wrapper functions only (registry 내부 숨김, 함수만 export)
 
 ## Assumptions
