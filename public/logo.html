@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>평수 계산기 로고 미리보기</title>
+    <style>
+        body {
+            background-color: #F3F4F6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #1F2937;
+            margin-bottom: 40px;
+            font-size: 24px;
+        }
+
+        .preview-container {
+            display: flex;
+            gap: 40px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .label {
+            margin-top: 15px;
+            color: #6B7280;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* SVG 공통 스타일 */
+        svg {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>평수 계산기 (PyeongCalc) 로고 디자인</h1>
+
+    <div class="preview-container">
+        <!-- 원본 사이즈 (Large) -->
+        <div class="card">
+            <svg width="256" height="256" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="512" height="512" rx="128" fill="#2563EB" />
+                <g transform="translate(106, 106)">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M150 0L0 130H30V300H270V130H300L150 0ZM240 270V140H60V270H240Z" fill="white" />
+                    <rect x="90" y="190" width="30" height="30" rx="4" fill="white" />
+                    <rect x="135" y="190" width="30" height="30" rx="4" fill="white" />
+                    <rect x="180" y="190" width="30" height="30" rx="4" fill="white" />
+                    <rect x="90" y="235" width="30" height="30" rx="4" fill="white" />
+                    <rect x="135" y="235" width="30" height="30" rx="4" fill="white" />
+                    <rect x="180" y="235" width="30" height="30" rx="4" fill="white" />
+                    <rect x="60" y="160" width="15" height="4" fill="#2563EB" />
+                    <rect x="60" y="180" width="10" height="4" fill="#2563EB" />
+                    <rect x="60" y="200" width="15" height="4" fill="#2563EB" />
+                    <rect x="60" y="220" width="10" height="4" fill="#2563EB" />
+                    <rect x="60" y="240" width="15" height="4" fill="#2563EB" />
+                    <rect x="90" y="155" width="120" height="20" rx="4" fill="#2563EB" fill-opacity="0.2" />
+                </g>
+            </svg>
+            <span class="label">Main Logo (256px)</span>
+        </div>
+
+        <!-- 앱 아이콘 사이즈 (Medium) -->
+        <div class="card">
+            <svg width="128" height="128" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="512" height="512" rx="128" fill="#2563EB" />
+                <g transform="translate(106, 106)">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M150 0L0 130H30V300H270V130H300L150 0ZM240 270V140H60V270H240Z" fill="white" />
+                    <rect x="90" y="190" width="30" height="30" rx="4" fill="white" />
+                    <rect x="135" y="190" width="30" height="30" rx="4" fill="white" />
+                    <rect x="180" y="190" width="30" height="30" rx="4" fill="white" />
+                    <rect x="90" y="235" width="30" height="30" rx="4" fill="white" />
+                    <rect x="135" y="235" width="30" height="30" rx="4" fill="white" />
+                    <rect x="180" y="235" width="30" height="30" rx="4" fill="white" />
+                    <rect x="60" y="160" width="15" height="4" fill="#2563EB" />
+                    <rect x="60" y="180" width="10" height="4" fill="#2563EB" />
+                    <rect x="60" y="200" width="15" height="4" fill="#2563EB" />
+                    <rect x="60" y="220" width="10" height="4" fill="#2563EB" />
+                    <rect x="60" y="240" width="15" height="4" fill="#2563EB" />
+                    <rect x="90" y="155" width="120" height="20" rx="4" fill="#2563EB" fill-opacity="0.2" />
+                </g>
+            </svg>
+            <span class="label">App Icon (128px)</span>
+        </div>
+
+        <!-- 파비콘 사이즈 (Small) -->
+        <div class="card">
+            <svg width="32" height="32" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="512" height="512" rx="128" fill="#2563EB" />
+                <g transform="translate(106, 106)">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M150 0L0 130H30V300H270V130H300L150 0ZM240 270V140H60V270H240Z" fill="white" />
+                    <rect x="90" y="190" width="30" height="30" rx="4" fill="white" />
+                    <rect x="135" y="190" width="30" height="30" rx="4" fill="white" />
+                    <rect x="180" y="190" width="30" height="30" rx="4" fill="white" />
+                    <rect x="90" y="235" width="30" height="30" rx="4" fill="white" />
+                    <rect x="135" y="235" width="30" height="30" rx="4" fill="white" />
+                    <rect x="180" y="235" width="30" height="30" rx="4" fill="white" />
+                    <rect x="60" y="160" width="15" height="4" fill="#2563EB" />
+                    <rect x="60" y="180" width="10" height="4" fill="#2563EB" />
+                    <rect x="60" y="200" width="15" height="4" fill="#2563EB" />
+                    <rect x="60" y="220" width="10" height="4" fill="#2563EB" />
+                    <rect x="60" y="240" width="15" height="4" fill="#2563EB" />
+                    <rect x="90" y="155" width="120" height="20" rx="4" fill="#2563EB" fill-opacity="0.2" />
+                </g>
+            </svg>
+            <span class="label">Favicon (32px)</span>
+        </div>
+    </div>
+
+    <p style="margin-top: 50px; color: #9CA3AF; font-size: 12px;">Vector graphics provided by Pyeongsu Calculator
+        Project</p>
+
+</body>
+
+</html>
