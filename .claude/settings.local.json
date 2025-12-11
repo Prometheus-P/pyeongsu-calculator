@@ -51,7 +51,14 @@
       "SlashCommand(/speckit.clarify)",
       "mcp__filesystem__read_multiple_files",
       "Bash(git rebase:*)",
-      "Bash(gh pr checks:*)"
+      "Bash(gh pr checks:*)",
+      "Bash(git branch:*)",
+      "Bash(git remote:*)",
+      "Bash(echo:*)",
+      "Bash(.specify/scripts/bash/check-prerequisites.sh:*)",
+      "Bash(.specify/scripts/bash/setup-plan.sh:*)",
+      "Bash(.specify/scripts/bash/update-agent-context.sh:*)",
+      "Bash(gh pr diff:*)"
     ],
     "deny": [],
     "ask": []
