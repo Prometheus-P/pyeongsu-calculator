@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 import { useQueryParams } from './useQueryParams';
 
 describe('useQueryParams', () => {
@@ -51,35 +51,36 @@ describe('useQueryParams', () => {
   });
 
   describe('updateUrl', () => {
-    it('pyeong 값으로 URL을 업데이트한다', () => {
+    it('pyeong 값으로 URL을 업데이트한다', async () => {
       const { result } = renderHook(() => useQueryParams());
 
-      act(() => {
-        result.current.updateUrl(30);
+      result.current.updateUrl(30);
+
+      await waitFor(() => {
+        expect(window.location.search).toBe('?pyeong=30');
       });
 
-      expect(window.location.search).toBe('?pyeong=30');
     });
 
-    it('null 값이면 pyeong 파라미터를 제거한다', () => {
+    it('null 값이면 pyeong 파라미터를 제거한다', async () => {
       window.history.pushState({}, '', '?pyeong=30');
       const { result } = renderHook(() => useQueryParams());
 
-      act(() => {
-        result.current.updateUrl(null);
-      });
+      result.current.updateUrl(null);
 
-      expect(window.location.search).toBe('');
+      await waitFor(() => {
+        expect(window.location.search).toBe('');
+      });
     });
 
-    it('0 값도 유효하게 처리한다', () => {
+    it('0 값도 유효하게 처리한다', async () => {
       const { result } = renderHook(() => useQueryParams());
 
-      act(() => {
-        result.current.updateUrl(0);
-      });
+      result.current.updateUrl(0);
 
-      expect(window.location.search).toBe('?pyeong=0');
+      await waitFor(() => {
+        expect(window.location.search).toBe('?pyeong=0');
+      });
     });
   });
 });

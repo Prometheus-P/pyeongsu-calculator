@@ -52,16 +52,17 @@ describe('App', () => {
       const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
       const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
 
-      expect(pyeongInput.value).toBe('25');
+      await waitFor(() => {
+        expect(pyeongInput.value).toBe('25');
+      });
       expect(sqmInput.value).toBe('82.64');
     });
 
     it('모든 테이블 행 클릭이 Calculator를 업데이트한다', async () => {
       const user = userEvent.setup();
+      const { unmount } = renderWithTheme(<App />); // Render App once
 
       for (let i = 0; i < COMMON_SIZES.length; i++) {
-        const { unmount } = renderWithTheme(<App />);
-
         const table = screen.getByRole('table');
         const rows = table.querySelectorAll('tbody tr');
         await user.click(rows[i]);
@@ -70,9 +71,8 @@ describe('App', () => {
         await waitFor(() => {
           expect(pyeongInput.value).toBe(String(COMMON_SIZES[i].pyeong));
         });
-
-        unmount();
       }
+      unmount(); // Unmount after the loop
     });
 
     it('테이블 선택 후 수동 입력하면 수동 입력값이 우선된다', async () => {
@@ -131,7 +131,9 @@ describe('App', () => {
       await user.click(rows[6]); // 40평
 
       const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
-      expect(pyeongInput.value).toBe('40');
+      await waitFor(() => {
+        expect(pyeongInput.value).toBe('40');
+      });
 
       // 초기화
       const resetButton = screen.getByRole('button', { name: /초기화/ });
@@ -232,7 +234,9 @@ describe('App', () => {
       const rows = table.querySelectorAll('tbody tr');
       await user.click(rows[2]); // 20평
 
-      expect(window.location.search).toBe('?pyeong=20');
+      await waitFor(() => {
+        expect(window.location.search).toBe('?pyeong=20');
+      });
     });
   });
 });
