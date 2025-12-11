@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import AdSlot from '../components/ads/AdSlot.astro';
 import BreadcrumbSchema from '../components/seo/BreadcrumbSchema.astro';
+import JsonLdScript from '../components/seo/JsonLdScript.astro';
 
 interface Props {
   title: string;
@@ -67,27 +68,29 @@ const siteUrl = 'https://pyeongsu-calculator.kr';
     {updateDate && <meta property="article:modified_time" content={updateDate} />}
 
     <!-- BlogPosting Schema -->
-    <script type="application/ld+json" is:inline set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": title,
-      "description": description,
-      "datePublished": publishDate,
-      "dateModified": updateDate || publishDate,
-      "author": {
-        "@type": "Organization",
-        "name": "평수 계산기"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "평수 계산기",
-        "url": siteUrl
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": canonical || Astro.url.href
-      }
-    })} />
+    <JsonLdScript
+      schema={{
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": title,
+        "description": description,
+        "datePublished": publishDate,
+        "dateModified": updateDate || publishDate,
+        "author": {
+          "@type": "Organization",
+          "name": "평수 계산기"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "평수 계산기",
+          "url": siteUrl
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": canonical || Astro.url.href
+        }
+      }}
+    />
 
     <!-- Breadcrumb Schema -->
     <BreadcrumbSchema items={breadcrumbItems} />

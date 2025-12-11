@@ -1,4 +1,6 @@
 ---
+import JsonLdScript from './JsonLdScript.astro';
+
 interface BlogPostingData {
   headline: string;
   description: string;
@@ -108,17 +110,17 @@ const blogPostingSchema = blogPosting ? {
 ---
 
 {(type === 'calculator' || type === 'all') && (
-  <script type="application/ld+json" is:inline set:html={JSON.stringify(webAppSchema)} />
+  <JsonLdScript schema={webAppSchema} />
 )}
 
 {(type === 'faq' || type === 'all') && faqSchema && (
-  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+  <JsonLdScript schema={faqSchema} />
 )}
 
 {(type === 'howto' || type === 'all') && (
-  <script type="application/ld+json" is:inline set:html={JSON.stringify(howToSchema)} />
+  <JsonLdScript schema={howToSchema} />
 )}
 
-{(type === 'blogposting') && blogPostingSchema && (
-  <script type="application/ld+json" is:inline set:html={JSON.stringify(blogPostingSchema)} />
+{type === 'blogposting' && blogPostingSchema && (
+  <JsonLdScript schema={blogPostingSchema} />
 )}

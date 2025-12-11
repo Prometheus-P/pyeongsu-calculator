@@ -1,4 +1,6 @@
 ---
+import JsonLdScript from './JsonLdScript.astro';
+
 interface BreadcrumbItem {
   name: string;
   url: string;
@@ -24,4 +26,4 @@ const breadcrumbSchema = {
 };
 ---
 
-<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
+<JsonLdScript schema={breadcrumbSchema} />
