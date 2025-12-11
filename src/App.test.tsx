@@ -131,7 +131,9 @@ describe('App', () => {
       await user.click(rows[6]); // 40평
 
       const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
-      expect(pyeongInput.value).toBe('40');
+      await waitFor(() => {
+        expect(pyeongInput.value).toBe('40');
+      });
 
       // 초기화
       const resetButton = screen.getByRole('button', { name: /초기화/ });
@@ -232,7 +234,9 @@ describe('App', () => {
       const rows = table.querySelectorAll('tbody tr');
       await user.click(rows[2]); // 20평
 
-      expect(window.location.search).toBe('?pyeong=20');
+      await waitFor(() => {
+        expect(window.location.search).toBe('?pyeong=20');
+      });
     });
   });
 });
