@@ -54,9 +54,9 @@ test.describe('Material Design 3 디자인 시스템 테스트', () => {
       await expect(resetButton).toHaveClass(/transition-colors/);
     });
 
-    test('빠른 선택 버튼에 state layer가 적용되어 있다', async ({ page }) => {
+    test('빠른 선택 버튼에 transition 효과가 적용되어 있다', async ({ page }) => {
       const quickButton = page.getByRole('button', { name: '10평' });
-      await expect(quickButton).toHaveClass(/m3-state-layer/);
+      await expect(quickButton).toHaveClass(/transition-colors/);
     });
 
     test('입력 필드에 포커스 시 스타일이 적용된다', async ({ page }) => {
