@@ -200,8 +200,8 @@ test.describe('SEO E2E 테스트', () => {
   });
 
   test.describe('User Story 3: 가이드 콘텐츠 발견', () => {
-    test.describe('BlogPosting 스키마 (T016)', () => {
-      test('가이드 페이지에 BlogPosting 스키마가 있다', async ({ page }) => {
+    test.describe('Article 스키마 (T016)', () => {
+      test('가이드 페이지에 Article 스키마가 있다', async ({ page }) => {
         await page.goto('/guide/pyeong-sqm-guide');
 
         const jsonLd = await page.evaluate(() => {
@@ -217,13 +217,23 @@ test.describe('SEO E2E 테스트', () => {
           });
         });
 
-        const blogPosting = jsonLd.find(
-          (s) => s && s['@type'] === 'BlogPosting'
-        );
-        expect(blogPosting).toBeTruthy();
-        expect(blogPosting.headline).toBeTruthy();
-        expect(blogPosting.author).toBeTruthy();
-        expect(blogPosting.datePublished).toBeTruthy();
+        // Schema can be in @graph format or standalone
+        let article = jsonLd.find((s) => s && s['@type'] === 'Article');
+
+        // Check if it's in @graph format
+        if (!article) {
+          const graphSchema = jsonLd.find((s) => s && s['@graph']);
+          if (graphSchema && Array.isArray(graphSchema['@graph'])) {
+            article = graphSchema['@graph'].find(
+              (item: { '@type'?: string }) => item && item['@type'] === 'Article'
+            );
+          }
+        }
+
+        expect(article).toBeTruthy();
+        expect(article.headline).toBeTruthy();
+        expect(article.author).toBeTruthy();
+        expect(article.datePublished).toBeTruthy();
       });
     });
 
