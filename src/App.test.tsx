@@ -52,7 +52,9 @@ describe('App', () => {
       const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
       const sqmInput = screen.getByLabelText(/제곱미터|㎡/) as HTMLInputElement;
 
-      expect(pyeongInput.value).toBe('25');
+      await waitFor(() => {
+        expect(pyeongInput.value).toBe('25');
+      });
       expect(sqmInput.value).toBe('82.64');
     });
 
