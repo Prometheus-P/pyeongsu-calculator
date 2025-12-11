@@ -67,7 +67,9 @@ describe('App', () => {
         await user.click(rows[i]);
 
         const pyeongInput = screen.getByLabelText(/평/) as HTMLInputElement;
-        expect(pyeongInput.value).toBe(String(COMMON_SIZES[i].pyeong));
+        await waitFor(() => {
+          expect(pyeongInput.value).toBe(String(COMMON_SIZES[i].pyeong));
+        });
 
         unmount();
       }
