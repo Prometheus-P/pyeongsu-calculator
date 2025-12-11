@@ -1,4 +1,5 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../../components/ads/AdSlot.astro';
 import BreadcrumbSchema from '../../components/seo/BreadcrumbSchema.astro';
@@ -8,70 +9,20 @@ const breadcrumbItems = [
   { name: '가이드', url: '/guide' },
 ];
 
-const guides = [
-  {
-    title: '평수와 제곱미터 완벽 가이드',
-    description: '평(坪)과 제곱미터(㎡)의 유래부터 정확한 변환 공식까지 상세히 알아봅니다.',
-    slug: 'pyeong-sqm-guide',
-    category: '기초 지식'
-  },
-  {
-    title: '아파트 평형별 특징 및 선택 가이드',
-    description: '10평대부터 50평대까지, 가족 구성에 맞는 아파트 평형 선택법을 안내합니다.',
-    slug: 'apartment-size-guide',
-    category: '아파트'
-  },
-  {
-    title: '전용면적 vs 공급면적 완벽 해설',
-    description: '부동산에서 가장 혼란스러운 전용면적과 공급면적의 차이를 명확히 설명합니다.',
-    slug: 'exclusive-vs-supply-area',
-    category: '부동산 용어'
-  },
-  {
-    title: '원룸부터 쓰리룸까지 평수 가이드',
-    description: '1인 가구부터 가족까지, 주거 형태별 적정 평수를 알아봅니다.',
-    slug: 'studio-to-three-room',
-    category: '주거 형태'
-  },
-  {
-    title: '오피스텔 면적 이해하기',
-    description: '오피스텔만의 특수한 면적 표기 방식과 실제 사용 면적 계산법을 설명합니다.',
-    slug: 'officetel-area-guide',
-    category: '오피스텔'
-  },
-  {
-    title: '부동산 면적 용어 총정리',
-    description: '대지면적, 건축면적, 연면적 등 부동산에서 사용하는 모든 면적 용어를 정리합니다.',
-    slug: 'real-estate-terms',
-    category: '부동산 용어'
-  },
-  {
-    title: '평수별 가구 배치 가이드',
-    description: '10평부터 40평까지, 평수에 맞는 효율적인 가구 배치 방법을 안내합니다.',
-    slug: 'furniture-layout-by-size',
-    category: '인테리어'
-  },
-  {
-    title: '세계 각국의 면적 단위 비교',
-    description: '한국의 평, 미국의 평방피트, 일본의 조(畳) 등 세계 면적 단위를 비교합니다.',
-    slug: 'world-area-units',
-    category: '기초 지식'
-  },
-  {
-    title: '부동산 계약서 면적 확인 방법',
-    description: '부동산 계약 시 반드시 확인해야 할 면적 관련 사항을 정리합니다.',
-    slug: 'contract-area-check',
-    category: '계약/법률'
-  },
-  {
-    title: '실평수 정확히 계산하는 방법',
-    description: '서비스 면적, 발코니 확장 등을 고려한 실제 사용 면적 계산법을 알아봅니다.',
-    slug: 'calculate-actual-area',
-    category: '실전 가이드'
-  }
-];
+// Fetch guides from Content Collections
+const guidesCollection = await getCollection('guides');
 
-const categories = [...new Set(guides.map(g => g.category))];
+// Transform to the format expected by the template
+const guides = guidesCollection
+  .sort((a, b) => a.data.publishDate.getTime() - b.data.publishDate.getTime())
+  .map((guide) => ({
+    title: guide.data.title,
+    description: guide.data.description,
+    slug: guide.slug,
+    category: guide.data.category,
+  }));
+
+const categories = [...new Set(guides.map((g) => g.category))];
 ---
 
 <BaseLayout
