@@ -25,8 +25,8 @@
 
 **Purpose**: No setup required - this is a refactor of existing code in place
 
-- [ ] T001 Verify existing tests pass before refactor: `npm run test:run`
-- [ ] T002 Record current bundle size baseline: `npm run build`
+- [x] T001 Verify existing tests pass before refactor: `npm run test:run`
+- [x] T002 Record current bundle size baseline: `npm run build`
 
 ---
 
@@ -36,9 +36,9 @@
 
 **CRITICAL**: These types must be defined before any strategy implementation
 
-- [ ] T003 Define `UnitType` type alias in `src/utils/converter.ts`
-- [ ] T004 Define `ConversionStrategy` interface with `toBase` and `fromBase` functions in `src/utils/converter.ts`
-- [ ] T005 Define internal `registry` constant with type `Record<UnitType, ConversionStrategy>` in `src/utils/converter.ts`
+- [x] T003 Define `UnitType` type alias in `src/utils/converter.ts`
+- [x] T004 Define `ConversionStrategy` interface with `toBase` and `fromBase` functions in `src/utils/converter.ts`
+- [x] T005 Define internal `registry` constant with type `Record<UnitType, ConversionStrategy>` in `src/utils/converter.ts`
 
 **Checkpoint**: Foundation ready - type structure in place
 
@@ -52,22 +52,22 @@
 
 ### Implementation for User Stories 1 & 2
 
-- [ ] T006 [US1] Implement `sqm` strategy (identity functions) in registry in `src/utils/converter.ts`
-- [ ] T007 [P] [US1] Implement `pyeong` strategy using `PYEONG_TO_SQM_RATIO` and `SQM_TO_PYEONG_RATIO` in `src/utils/converter.ts`
-- [ ] T008 [P] [US1] Implement `sqft` strategy using `SQFT_TO_SQM_RATIO` and `SQM_TO_SQFT_RATIO` in `src/utils/converter.ts`
-- [ ] T009 [P] [US1] Implement `acre` strategy using `ACRE_TO_SQM_RATIO` and `SQM_TO_ACRE_RATIO` in `src/utils/converter.ts`
-- [ ] T010 [US2] Refactor `convertSqmToPyeong` to use `registry.pyeong.fromBase()` in `src/utils/converter.ts`
-- [ ] T011 [P] [US2] Refactor `convertPyeongToSqm` to use `registry.pyeong.toBase()` in `src/utils/converter.ts`
-- [ ] T012 [P] [US2] Refactor `convertSqmToSqft` to use `registry.sqft.fromBase()` in `src/utils/converter.ts`
-- [ ] T013 [P] [US2] Refactor `convertSqftToSqm` to use `registry.sqft.toBase()` in `src/utils/converter.ts`
-- [ ] T014 [P] [US2] Refactor `convertSqmToAcre` to use `registry.acre.fromBase()` in `src/utils/converter.ts`
-- [ ] T015 [P] [US2] Refactor `convertAcreToSqm` to use `registry.acre.toBase()` in `src/utils/converter.ts`
-- [ ] T016 [US2] Refactor `convertPyeongToSqft` to use generic conversion via registry in `src/utils/converter.ts`
-- [ ] T017 [P] [US2] Refactor `convertSqftToPyeong` to use generic conversion via registry in `src/utils/converter.ts`
-- [ ] T018 [P] [US2] Refactor `convertPyeongToAcre` to use generic conversion via registry in `src/utils/converter.ts`
-- [ ] T019 [P] [US2] Refactor `convertAcreToPyeong` to use generic conversion via registry in `src/utils/converter.ts`
-- [ ] T020 [US1] Add generic `convert(value: number, from: UnitType, to: UnitType): number` function in `src/utils/converter.ts`
-- [ ] T021 [US2] Run existing test suite to verify accuracy: `npm run test:run`
+- [x] T006 [US1] Implement `sqm` strategy (identity functions) in registry in `src/utils/converter.ts`
+- [x] T007 [P] [US1] Implement `pyeong` strategy using `PYEONG_TO_SQM_RATIO` and `SQM_TO_PYEONG_RATIO` in `src/utils/converter.ts`
+- [x] T008 [P] [US1] Implement `sqft` strategy using `SQFT_TO_SQM_RATIO` and `SQM_TO_SQFT_RATIO` in `src/utils/converter.ts`
+- [x] T009 [P] [US1] Implement `acre` strategy using `ACRE_TO_SQM_RATIO` and `SQM_TO_ACRE_RATIO` in `src/utils/converter.ts`
+- [x] T010 [US2] Refactor `convertSqmToPyeong` to use `registry.pyeong.fromBase()` in `src/utils/converter.ts`
+- [x] T011 [P] [US2] Refactor `convertPyeongToSqm` to use `registry.pyeong.toBase()` in `src/utils/converter.ts`
+- [x] T012 [P] [US2] Refactor `convertSqmToSqft` to use `registry.sqft.fromBase()` in `src/utils/converter.ts`
+- [x] T013 [P] [US2] Refactor `convertSqftToSqm` to use `registry.sqft.toBase()` in `src/utils/converter.ts`
+- [x] T014 [P] [US2] Refactor `convertSqmToAcre` to use `registry.acre.fromBase()` in `src/utils/converter.ts`
+- [x] T015 [P] [US2] Refactor `convertAcreToSqm` to use `registry.acre.toBase()` in `src/utils/converter.ts`
+- [x] T016 [US2] Refactor `convertPyeongToSqft` to use generic conversion via registry in `src/utils/converter.ts`
+- [x] T017 [P] [US2] Refactor `convertSqftToPyeong` to use generic conversion via registry in `src/utils/converter.ts`
+- [x] T018 [P] [US2] Refactor `convertPyeongToAcre` to use generic conversion via registry in `src/utils/converter.ts`
+- [x] T019 [P] [US2] Refactor `convertAcreToPyeong` to use generic conversion via registry in `src/utils/converter.ts`
+- [x] T020 [US1] Add generic `convert(value: number, from: UnitType, to: UnitType): number` function in `src/utils/converter.ts`
+- [x] T021 [US2] Run existing test suite to verify accuracy: `npm run test:run`
 
 **Checkpoint**: User Stories 1 & 2 complete - O(1) lookups with 100% test pass
 
@@ -81,11 +81,11 @@
 
 ### Implementation for User Story 3
 
-- [ ] T022 [US3] Implement `registerUnit(unitType, toBase, fromBase)` function in `src/utils/converter.ts`
-- [ ] T023 [US3] Export `UnitType` type for external use in `src/utils/converter.ts`
-- [ ] T024 [US3] Export `ConversionStrategy` interface for external use in `src/utils/converter.ts`
-- [ ] T025 [US3] Export `convert` function for external use in `src/utils/converter.ts`
-- [ ] T026 [US3] Export `registerUnit` function for external use in `src/utils/converter.ts`
+- [x] T022 [US3] Implement `registerUnit(unitType, toBase, fromBase)` function in `src/utils/converter.ts`
+- [x] T023 [US3] Export `UnitType` type for external use in `src/utils/converter.ts`
+- [x] T024 [US3] Export `ConversionStrategy` interface for external use in `src/utils/converter.ts`
+- [x] T025 [US3] Export `convert` function for external use in `src/utils/converter.ts`
+- [x] T026 [US3] Export `registerUnit` function for external use in `src/utils/converter.ts`
 
 **Checkpoint**: User Story 3 complete - new units can be registered at runtime
 
@@ -95,11 +95,11 @@
 
 **Purpose**: Final verification of all requirements
 
-- [ ] T027 Run lint check: `npm run lint`
-- [ ] T028 Run format check: `npm run format:check`
-- [ ] T029 Run full test suite: `npm run test:run`
-- [ ] T030 Build and verify bundle size increase <500 bytes: `npm run build`
-- [ ] T031 Verify all exports are tree-shakeable (manual code review)
+- [x] T027 Run lint check: `npm run lint`
+- [x] T028 Run format check: `npm run format:check`
+- [x] T029 Run full test suite: `npm run test:run`
+- [x] T030 Build and verify bundle size increase <500 bytes: `npm run build`
+- [x] T031 Verify all exports are tree-shakeable (manual code review)
 
 ---
 
