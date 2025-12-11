@@ -13,7 +13,7 @@ const {
   title,
   description,
   canonical = Astro.url.href,
-  ogImage = '/og-image.svg',
+  ogImage = '/og-image.png',
   noindex = false,
   publishDate,
   modifiedDate,
@@ -25,6 +25,10 @@ const truncatedDesc = description.length > 80 ? description.slice(0, 77) + '...'
 
 const siteName = '평수 계산기';
 const siteUrl = 'https://pyeongsu-calculator.kr';
+
+// Environment-based verification codes
+const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const naverVerification = import.meta.env.PUBLIC_NAVER_SITE_VERIFICATION;
 ---
 
 <!-- Primary Meta Tags -->
@@ -56,5 +60,5 @@ const siteUrl = 'https://pyeongsu-calculator.kr';
 {modifiedDate && <meta property="article:modified_time" content={modifiedDate.toISOString()} />}
 
 <!-- Search Console Verification -->
-<meta name="naver-site-verification" content="NAVER_CODE_HERE" />
-<meta name="google-site-verification" content="GOOGLE_CODE_HERE" />
+{naverVerification && <meta name="naver-site-verification" content={naverVerification} />}
+{googleVerification && <meta name="google-site-verification" content={googleVerification} />}
