@@ -108,12 +108,13 @@ export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChan
   const quickSizes = [10, 15, 20, 25, 30, 35, 40];
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 max-w-md w-full transition-colors">
-      <h1 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">평수 계산기</h1>
+    // Kinetic Minimalism Style
+    <div className="dark bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-[4px_8px_16px_rgba(0,0,0,0.2)] p-6 max-w-md w-full">
+      <h1 className="text-2xl font-bold text-gray-100 text-center mb-6 tracking-tight">평수 계산기</h1>
 
       <div className="space-y-4">
         <div>
-          <label htmlFor="sqm" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="sqm" className="block text-sm font-medium text-gray-400 mb-1">
             제곱미터 (㎡)
           </label>
           <input
@@ -123,13 +124,13 @@ export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChan
             onChange={(e) => handleSqmChange(e.target.value)}
             onBlur={handleInputBlur}
             onKeyDown={(e) => handleKeyDown(e, 'sqm')}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            className="w-full p-4 bg-gray-900 text-gray-100 border-2 border-gray-600 rounded-md focus:border-cyan-400 focus:ring-0 transition-colors placeholder-gray-500 min-h-[48px]"
             placeholder="제곱미터 입력"
           />
         </div>
 
         <div>
-          <label htmlFor="pyeong" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="pyeong" className="block text-sm font-medium text-gray-400 mb-1">
             평
           </label>
           <input
@@ -140,43 +141,44 @@ export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChan
             onChange={(e) => handlePyeongChange(e.target.value)}
             onBlur={handleInputBlur}
             onKeyDown={(e) => handleKeyDown(e, 'pyeong')}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            className="w-full p-4 bg-gray-900 text-gray-100 border-2 border-gray-600 rounded-md focus:border-cyan-400 focus:ring-0 transition-colors placeholder-gray-500 min-h-[48px]"
             placeholder="평수 입력"
           />
         </div>
       </div>
 
-      <div className="flex gap-2 mt-4">
+      <div className="flex gap-3 mt-4">
         <button
           onClick={clearFields}
-          className="flex-1 py-2 px-4 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg transition"
+          className="flex-1 py-3 px-4 min-h-[48px] bg-gray-600 text-gray-100 font-semibold rounded-md hover:bg-gray-500 transition-colors"
         >
           초기화
         </button>
         {hasValue && (
+          // Kinetic element: skewed button
           <button
             onClick={handleCopy}
-            className="py-2 px-4 bg-green-500 hover:bg-green-600 text-white rounded-lg transition"
+            className="py-3 px-4 min-h-[48px] bg-cyan-500 text-black font-bold rounded-md hover:bg-cyan-400 transition-colors transform -skew-x-12"
           >
-            복사
+            <span className="inline-block transform skew-x-12">복사</span>
           </button>
         )}
       </div>
 
       {showToast && (
-        <div className="mt-2 p-2 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 text-sm text-center rounded-lg">
+        <div className="mt-2 p-2 bg-cyan-500 text-black text-sm text-center rounded-md">
           복사되었습니다!
         </div>
       )}
 
       <div className="mt-6">
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">빠른 선택</p>
+        <p className="text-base text-gray-400 mb-2">빠른 선택</p>
         <div className="grid grid-cols-4 gap-2">
           {quickSizes.map((size) => (
             <button
               key={size}
               onClick={() => handleQuickSelect(size)}
-              className="py-2 px-3 bg-blue-100 hover:bg-blue-200 dark:bg-blue-900 dark:hover:bg-blue-800 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium transition"
+              className="py-2 px-3 min-h-[48px] bg-gray-700 text-gray-200 rounded-md hover:bg-cyan-500 hover:text-black transition-colors"
             >
               {size}평
             </button>

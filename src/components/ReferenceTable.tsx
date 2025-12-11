@@ -6,16 +6,17 @@ interface ReferenceTableProps {
   onSelect: (pyeong: number) => void;
 }
 
+// T015: M3 table styling
 export default memo(function ReferenceTable({ onSelect }: ReferenceTableProps) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 max-w-md w-full transition-colors">
-      <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-4">일반적인 평형 참고</h2>
+    <div className="bg-m3-surface rounded-m3-md shadow-m3-1 p-m3-6 max-w-md w-full transition-colors">
+      <h2 className="text-title-medium text-m3-on-surface mb-m3-4">일반적인 평형 참고</h2>
       <table className="w-full">
         <thead>
-          <tr className="border-b border-gray-200 dark:border-gray-700">
-            <th className="text-left py-2 text-sm font-medium text-gray-600 dark:text-gray-400">평형</th>
-            <th className="text-left py-2 text-sm font-medium text-gray-600 dark:text-gray-400">면적</th>
-            <th className="text-left py-2 text-sm font-medium text-gray-600 dark:text-gray-400">타입</th>
+          <tr className="border-b border-m3-outline-variant">
+            <th className="text-left py-m3-2 text-label-medium text-m3-on-surface-variant">평형</th>
+            <th className="text-left py-m3-2 text-label-medium text-m3-on-surface-variant">면적</th>
+            <th className="text-left py-m3-2 text-label-medium text-m3-on-surface-variant">타입</th>
           </tr>
         </thead>
         <tbody>
@@ -30,13 +31,13 @@ export default memo(function ReferenceTable({ onSelect }: ReferenceTableProps) {
                   onSelect(item.pyeong);
                 }
               }}
-              className="border-b border-gray-100 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700 cursor-pointer transition focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border-b border-m3-outline-variant hover:bg-m3-surface-variant cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-m3-primary"
             >
-              <td className="py-3 text-gray-800 dark:text-white font-medium">{item.label}</td>
-              <td className="py-3 text-gray-600 dark:text-gray-300">
+              <td className="py-m3-3 text-body-medium text-m3-on-surface">{item.label}</td>
+              <td className="py-m3-3 text-body-medium text-m3-on-surface-variant">
                 {formatNumber(convertPyeongToSqm(item.pyeong))}㎡
               </td>
-              <td className="py-3 text-gray-500 dark:text-gray-400 text-sm">{item.type}</td>
+              <td className="py-m3-3 text-body-small text-m3-on-surface-variant">{item.type}</td>
             </tr>
           ))}
         </tbody>

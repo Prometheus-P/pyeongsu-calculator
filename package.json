@@ -1,6 +1,6 @@
 {
   "name": "pyeongsu-calculator",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "SEO 최적화 평수 계산기 - Astro + React Islands",
   "type": "module",
   "scripts": {
@@ -21,10 +21,11 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,astro,css}\""
   },
   "dependencies": {
-    "@astrojs/react": "^3.6.0",
-    "@astrojs/sitemap": "^3.1.6",
-    "@astrojs/tailwind": "^5.1.0",
-    "astro": "^4.15.0",
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/react": "^3.6.3",
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/tailwind": "^5.1.5",
+    "astro": "^4.16.19",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -50,7 +51,7 @@
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "tailwindcss": "^3.4.10",
-    "typescript": "^5.5.4",
+    "typescript": "^5.9.3",
     "vitest": "^2.0.5"
   },
   "keywords": [

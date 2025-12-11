@@ -31,7 +31,13 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+| Principle | Status | Notes |
+|---|---|---|
+| I. User-Centric Design | ☐ Pass / ⚠ Fail | |
+| II. Progressive Enhancement | ☐ Pass / ⚠ Fail | |
+| III. Performance First | ☐ Pass / ⚠ Fail | |
+| IV. Code Quality | ☐ Pass / ⚠ Fail | |
+| V. Maintainability | ☐ Pass / ⚠ Fail | |
 
 ## Project Structure
 

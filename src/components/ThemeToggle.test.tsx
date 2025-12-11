@@ -19,14 +19,17 @@ describe('ThemeToggle', () => {
     expect(screen.getByRole('button', { name: /테마|다크|라이트|모드/i })).toBeInTheDocument();
   });
 
-  it('라이트 모드에서 달 아이콘을 표시한다', () => {
+  it('라이트 모드에서 달 아이콘(SVG)을 표시한다', () => {
     render(
       <ThemeProvider>
         <ThemeToggle />
       </ThemeProvider>
     );
 
-    expect(screen.getByText('🌙')).toBeInTheDocument();
+    const button = screen.getByRole('button');
+    const svg = button.querySelector('svg');
+    expect(svg).toBeInTheDocument();
+    expect(button).toHaveAttribute('aria-label', '다크 모드로 전환');
   });
 
   it('클릭 시 다크 모드로 전환된다', () => {
@@ -39,7 +42,7 @@ describe('ThemeToggle', () => {
     const button = screen.getByRole('button');
     fireEvent.click(button);
 
-    expect(screen.getByText('☀️')).toBeInTheDocument();
+    expect(button).toHaveAttribute('aria-label', '라이트 모드로 전환');
     expect(document.documentElement.classList.contains('dark')).toBe(true);
   });
 
@@ -54,7 +57,7 @@ describe('ThemeToggle', () => {
     fireEvent.click(button); // dark
     fireEvent.click(button); // light
 
-    expect(screen.getByText('🌙')).toBeInTheDocument();
+    expect(button).toHaveAttribute('aria-label', '다크 모드로 전환');
     expect(document.documentElement.classList.contains('dark')).toBe(false);
   });
 });
