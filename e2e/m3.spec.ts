@@ -23,8 +23,8 @@ test.describe('Material Design 3 디자인 시스템 테스트', () => {
     });
 
     test('타이포그래피가 적용되어 있다', async ({ page }) => {
-      // 헤드라인 스타일 확인
-      const heading = page.getByRole('heading', { name: '평수 계산기' });
+      // 헤드라인 스타일 확인 (exact: true로 정확한 매칭)
+      const heading = page.getByRole('heading', { name: '평수 계산기', exact: true });
       await expect(heading).toBeVisible();
       await expect(heading).toHaveClass(/text-2xl/);
     });
@@ -178,7 +178,7 @@ test.describe('Material Design 3 디자인 시스템 테스트', () => {
   // Additional visual regression tests
   test.describe('시각적 일관성 추가 테스트', () => {
     test('라이트 모드에서 모든 컴포넌트가 렌더링된다', async ({ page }) => {
-      await expect(page.getByRole('heading', { name: '평수 계산기' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: '평수 계산기', exact: true })).toBeVisible();
       await expect(page.getByText('일반적인 평형 참고')).toBeVisible();
       await expect(page.getByText('최근 변환 기록')).toBeVisible();
       await expect(page.locator('footer')).toBeVisible();
@@ -189,7 +189,7 @@ test.describe('Material Design 3 디자인 시스템 테스트', () => {
       const themeToggle = page.getByRole('button', { name: /다크 모드로 전환/ });
       await themeToggle.click();
 
-      await expect(page.getByRole('heading', { name: '평수 계산기' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: '평수 계산기', exact: true })).toBeVisible();
       await expect(page.getByText('일반적인 평형 참고')).toBeVisible();
       await expect(page.getByText('최근 변환 기록')).toBeVisible();
       await expect(page.locator('footer')).toBeVisible();
