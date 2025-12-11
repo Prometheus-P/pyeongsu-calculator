@@ -18,32 +18,26 @@ interface Props {
 
 const { type, faqItems = [], blogPosting, schemaGraph } = Astro.props;
 
-const siteUrl = 'https://pyeongsu-calculator.kr';
+const siteUrl = 'https://www.pyeongcalc.kr';
 
 // WebApplication Schema
 const webAppSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "평수 계산기",
-  "description": "부동산 평수를 제곱미터로, 제곱미터를 평으로 변환하는 무료 온라인 계산기",
+  "name": "PyeongCalc 평수 계산기",
   "url": siteUrl,
-  "applicationCategory": "UtilityApplication",
-  "operatingSystem": "Web Browser",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
   "offers": {
     "@type": "Offer",
     "price": "0",
-    "priceCurrency": "KRW"
+    "priceCurrency": "KRW",
   },
   "featureList": [
-    "평 → 제곱미터 변환",
-    "제곱미터 → 평 변환",
-    "실시간 양방향 계산",
-    "일반 평형 빠른 선택"
+    "제곱미터 평수 변환",
+    "아파트 전용·공급면적 평형표",
+    "실평수(발코니 확장) 개념 안내",
   ],
-  "author": {
-    "@type": "Organization",
-    "name": "평수 계산기"
-  }
 };
 
 // FAQPage Schema
@@ -96,11 +90,11 @@ const blogPostingSchema = blogPosting ? {
   "dateModified": blogPosting.dateModified || blogPosting.datePublished,
   "author": {
     "@type": "Organization",
-    "name": "평수 계산기"
+    "name": "PyeongCalc"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "평수 계산기",
+    "name": "PyeongCalc",
     "url": siteUrl
   },
   "mainEntityOfPage": {

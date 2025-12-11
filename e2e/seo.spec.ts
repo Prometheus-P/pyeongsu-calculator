@@ -56,8 +56,8 @@ test.describe('SEO E2E 테스트', () => {
 
         const webApp = jsonLd.find((s) => s && s['@type'] === 'WebApplication');
         expect(webApp).toBeTruthy();
-        expect(webApp.name).toBe('평수 계산기');
-        expect(webApp.applicationCategory).toBe('UtilityApplication');
+        expect(webApp.name).toBe('PyeongCalc 평수 계산기');
+        expect(webApp.applicationCategory).toBe('FinanceApplication');
       });
 
       test('홈페이지에 FAQPage 스키마가 있다', async ({ page }) => {
