@@ -8,7 +8,7 @@ test.describe('평수 계산기 E2E 테스트', () => {
   test.describe('페이지 로딩', () => {
     test('페이지가 정상적으로 로드된다', async ({ page }) => {
       await expect(page).toHaveTitle(/평수/i);
-      await expect(page.getByRole('heading', { name: '평수 계산기' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: '평수 계산기', exact: true })).toBeVisible();
     });
 
     test('모든 UI 요소가 표시된다', async ({ page }) => {
@@ -25,7 +25,7 @@ test.describe('평수 계산기 E2E 테스트', () => {
 
       // Reference table
       await expect(page.getByText('일반적인 평형 참고')).toBeVisible();
-      await expect(page.getByRole('table')).toBeVisible();
+      await expect(page.getByRole('table').first()).toBeVisible();
     });
   });
 
@@ -206,7 +206,7 @@ test.describe('평수 계산기 E2E 테스트', () => {
     test('모바일 뷰포트에서 정상 표시된다', async ({ page }) => {
       await page.setViewportSize({ width: 375, height: 667 });
 
-      await expect(page.getByRole('heading', { name: '평수 계산기' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: '평수 계산기', exact: true })).toBeVisible();
       await expect(page.getByLabel(/제곱미터/)).toBeVisible();
       await expect(page.getByLabel(/평/)).toBeVisible();
     });
@@ -214,8 +214,8 @@ test.describe('평수 계산기 E2E 테스트', () => {
     test('태블릿 뷰포트에서 정상 표시된다', async ({ page }) => {
       await page.setViewportSize({ width: 768, height: 1024 });
 
-      await expect(page.getByRole('heading', { name: '평수 계산기' })).toBeVisible();
-      await expect(page.getByRole('table')).toBeVisible();
+      await expect(page.getByRole('heading', { name: '평수 계산기', exact: true })).toBeVisible();
+      await expect(page.getByRole('table').first()).toBeVisible();
     });
   });
 

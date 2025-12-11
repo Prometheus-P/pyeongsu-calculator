@@ -12,8 +12,8 @@ interface Props {
 const {
   title,
   description,
-  canonical = Astro.url.href,
-  ogImage = '/og-image.png',
+  canonical = 'https://www.pyeongcalc.kr',
+  ogImage = 'https://www.pyeongcalc.kr/images/og-image.png',
   noindex = false,
   publishDate,
   modifiedDate,
@@ -23,8 +23,8 @@ const {
 const truncatedTitle = title.length > 40 ? title.slice(0, 37) + '...' : title;
 const truncatedDesc = description.length > 80 ? description.slice(0, 77) + '...' : description;
 
-const siteName = '평수 계산기';
-const siteUrl = 'https://pyeongsu-calculator.kr';
+const siteName = 'PyeongCalc 평수 계산기';
+const siteUrl = 'https://www.pyeongcalc.kr';
 
 // Environment-based verification codes
 const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
