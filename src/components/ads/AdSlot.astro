@@ -187,7 +187,7 @@ const aspectRatio = `${size.width} / ${size.height}`;
       script.onload = () => {
         // 모든 광고 슬롯 초기화
         adSlots.forEach(() => {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
+          ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
         });
       };
     }
