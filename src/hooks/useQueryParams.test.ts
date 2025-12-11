@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { renderHook, act } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 import { useQueryParams } from './useQueryParams';
 
 describe('useQueryParams', () => {
@@ -54,9 +54,7 @@ describe('useQueryParams', () => {
     it('pyeong 값으로 URL을 업데이트한다', () => {
       const { result } = renderHook(() => useQueryParams());
 
-      act(() => {
-        result.current.updateUrl(30);
-      });
+      result.current.updateUrl(30);
 
       expect(window.location.search).toBe('?pyeong=30');
     });
@@ -65,9 +63,7 @@ describe('useQueryParams', () => {
       window.history.pushState({}, '', '?pyeong=30');
       const { result } = renderHook(() => useQueryParams());
 
-      act(() => {
-        result.current.updateUrl(null);
-      });
+      result.current.updateUrl(null);
 
       expect(window.location.search).toBe('');
     });
@@ -75,9 +71,7 @@ describe('useQueryParams', () => {
     it('0 값도 유효하게 처리한다', () => {
       const { result } = renderHook(() => useQueryParams());
 
-      act(() => {
-        result.current.updateUrl(0);
-      });
+      result.current.updateUrl(0);
 
       expect(window.location.search).toBe('?pyeong=0');
     });

@@ -108,17 +108,17 @@ const blogPostingSchema = blogPosting ? {
 ---
 
 {(type === 'calculator' || type === 'all') && (
-  <script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(webAppSchema)} />
 )}
 
 {(type === 'faq' || type === 'all') && faqSchema && (
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
 )}
 
 {(type === 'howto' || type === 'all') && (
-  <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(howToSchema)} />
 )}
 
 {(type === 'blogposting') && blogPostingSchema && (
-  <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(blogPostingSchema)} />
 )}
