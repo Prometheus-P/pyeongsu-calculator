@@ -3,6 +3,8 @@
 Auto-generated from all feature plans. Last updated: 2025-12-02
 
 ## Active Technologies
+- TypeScript 5.5, Astro 4.16 + Astro Content Collections (built-in), Zod (built-in via Astro), @astrojs/sitemap 3.6 (004-astro-guides-aeo)
+- N/A (static site, content in Markdown files) (004-astro-guides-aeo)
 
 - TypeScript 5.x (strict mode) + Astro 4.x, React 18, Tailwind CSS, @astrojs/sitemap (001-seo-improvements)
 
@@ -22,6 +24,7 @@ npm test && npm run lint
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 004-astro-guides-aeo: Added TypeScript 5.5, Astro 4.16 + Astro Content Collections (built-in), Zod (built-in via Astro), @astrojs/sitemap 3.6
 
 - 001-seo-improvements: Added TypeScript 5.x (strict mode) + Astro 4.x, React 18, Tailwind CSS, @astrojs/sitemap
 
