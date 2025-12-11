@@ -70,8 +70,8 @@
   --md-sys-color-on-error-container: #FFDAD6;
 
   /* Surface */
-  --md-sys-color-surface: #111418;
-  --md-sys-color-on-surface: #E1E2E9;
+  --md-sys-color-surface: #0A0D10; /* Even darker gray */
+  --md-sys-color-on-surface: #F0F1F5; /* Slightly brighter white */
   --md-sys-color-surface-variant: #42474E;
   --md-sys-color-on-surface-variant: #C2C6CF;
 
