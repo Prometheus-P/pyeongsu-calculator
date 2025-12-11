@@ -35,6 +35,7 @@ TypeScript 5.5, Astro 4.16: Follow standard conventions
 - M3 State Layer E2E Tests Fix: Modified `Calculator.tsx` to apply `m3-state-layer` and `m3-outlined-input` classes.
 - BlogPosting Schema Presence Fix: Corrected `GuideLayout.astro` and `SchemaMarkup.astro` to properly generate and pass `BlogPosting` schema data.
 - Dark Mode Visibility Improvement: Adjusted dark mode color variables in `src/styles/global.css` for better contrast.
+- Refactor App.test.tsx: Refactored `App.test.tsx` to render `App` once per test, resolving a timing issue.
 
 
 <!-- MANUAL ADDITIONS START -->
