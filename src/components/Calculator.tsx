@@ -6,6 +6,7 @@ import {
   formatNumber,
   isValidInput,
 } from '../utils/converter';
+import { CalculatorEvents } from '../utils/analytics';
 import { saveHistory } from '../utils/storage';
 
 interface CalculatorProps {
@@ -74,9 +75,11 @@ export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChan
   // 입력 완료 시 히스토리 저장 및 URL 업데이트
   const handleInputBlur = () => {
     if (isValidInput(sqm) && isValidInput(pyeong)) {
+      const sqmValue = parseFloat(sqm);
       const pyeongValue = parseFloat(pyeong);
-      addToHistory(parseFloat(sqm), pyeongValue);
+      addToHistory(sqmValue, pyeongValue);
       onValueChange?.(pyeongValue);
+      CalculatorEvents.conversion(sqmValue, pyeongValue);
     }
   };
 
@@ -85,6 +88,7 @@ export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChan
     updateFieldsFromPyeong(size);
     addToHistory(convertPyeongToSqm(size), size);
     onValueChange?.(size);
+    CalculatorEvents.quickSelect(size);
   };
 
   // 클립보드 복사
@@ -93,6 +97,7 @@ export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChan
     await navigator.clipboard.writeText(text);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2000);
+    CalculatorEvents.copyResult(parseFloat(sqm), parseFloat(pyeong));
   };
 
   // 키보드 이벤트 핸들러

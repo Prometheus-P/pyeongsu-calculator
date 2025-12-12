@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import { ThemeEvents } from '../utils/analytics';
 
 // T024: SVG sun/moon icons for theme toggle
 const SunIcon = () => (
@@ -34,9 +35,14 @@ const MoonIcon = () => (
 export default memo(function ThemeToggle() {
   const { isDark, toggleTheme } = useTheme();
 
+  const handleToggle = () => {
+    toggleTheme();
+    ThemeEvents.toggle(isDark ? 'light' : 'dark');
+  };
+
   return (
     <button
-      onClick={toggleTheme}
+      onClick={handleToggle}
       className="m3-state-layer p-m3-2 min-w-[48px] min-h-[48px] flex items-center justify-center rounded-m3-full bg-m3-surface-variant text-m3-on-surface-variant transition-colors"
       aria-label={isDark ? '라이트 모드로 전환' : '다크 모드로 전환'}
     >

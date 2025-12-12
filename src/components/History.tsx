@@ -1,6 +1,7 @@
 import { useState, useEffect, memo } from 'react';
 import { getHistory, clearHistory as clearStorageHistory } from '../utils/storage';
 import type { HistoryItem } from '../utils/storage';
+import { HistoryEvents } from '../utils/analytics';
 
 interface HistoryProps {
   onSelect: (pyeong: number) => void;
@@ -17,6 +18,12 @@ export default memo(function History({ onSelect, historyVersion = 0 }: HistoryPr
   const handleClear = () => {
     clearStorageHistory();
     setHistory([]);
+    HistoryEvents.clearAll();
+  };
+
+  const handleSelect = (pyeong: number) => {
+    onSelect(pyeong);
+    HistoryEvents.selectItem(pyeong);
   };
 
   // T014: M3 list item styling
@@ -41,7 +48,7 @@ export default memo(function History({ onSelect, historyVersion = 0 }: HistoryPr
           {history.map((item, index) => (
             <button
               key={`${item.pyeong}-${item.timestamp}-${index}`}
-              onClick={() => onSelect(item.pyeong)}
+              onClick={() => handleSelect(item.pyeong)}
               className="w-full flex justify-between items-center p-m3-3 bg-m3-surface-variant hover:bg-m3-outline-variant rounded-m3-sm transition-colors"
             >
               <span className="text-label-large text-m3-primary">{item.pyeong}평</span>

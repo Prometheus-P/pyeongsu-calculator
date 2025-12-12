@@ -61,7 +61,9 @@
       "Bash(gh pr diff:*)",
       "Bash(gh pr checkout:*)",
       "Bash(git merge:*)",
-      "Bash(gh issue close:*)"
+      "Bash(gh issue close:*)",
+      "Bash(npm test:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []
