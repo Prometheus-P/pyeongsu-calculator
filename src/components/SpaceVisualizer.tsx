@@ -4,7 +4,7 @@
  * 텍스트 기반 계산기 시장을 파괴하는 '공간 시뮬레이터'
  * 사용자가 숫자가 아닌 '공간감'을 느끼게 함.
  */
-import React from 'react';
+
 
 interface SpaceVisualizerProps {
   sqm: number;
@@ -14,10 +14,6 @@ export default function SpaceVisualizer({ sqm }: SpaceVisualizerProps) {
   // 방의 한 변의 길이 (미터) - 정사각형 가정
   // 1평 = 3.3㎡ = 약 1.8m x 1.8m
   const sideLength = Math.sqrt(sqm);
-  
-  // 시각적 스케일 조정을 위한 제한 (너무 작거나 크지 않게)
-  const displaySize = Math.min(Math.max(sqm, 10), 200); 
-  const scaleRatio = 100 / Math.sqrt(200); // 최대 200sqm 기준
 
   return (
     <div className="mt-6 p-4 bg-gray-800 rounded-lg border border-gray-700 shadow-inner">

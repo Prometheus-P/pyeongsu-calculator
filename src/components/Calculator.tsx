@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import type { KeyboardEvent } from 'react';
+import { useState, useRef } from 'react';
+
 import {
   convertSqmToPyeong,
   convertPyeongToSqm,
@@ -10,7 +10,7 @@ import {
 } from '../utils/converter';
 import SpaceVisualizer from './SpaceVisualizer'; // Visual Moat Import
 import BudgetEstimator from './BudgetEstimator'; // Cashflow Protocol Import
-import { CalculatorEvents } from '../utils/analytics';
+
 
 export default function Calculator() {
   const [sqm, setSqm] = useState('');

@@ -3,7 +3,7 @@
  * [Cash Generator]
  * 공간에 대한 호기심을 '구매 의사'로 전환하는 컴포넌트
  */
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { INTERIOR_COSTS, LOAN_RATES } from '../constants/costs';
 import { formatNumber } from '../utils/converter';
 
