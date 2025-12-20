@@ -1,188 +1,62 @@
-import {
-  SQM_TO_PYEONG_RATIO,
-  PYEONG_TO_SQM_RATIO,
-  SQM_TO_SQFT_RATIO,
-  SQFT_TO_SQM_RATIO,
-  SQM_TO_ACRE_RATIO,
-  ACRE_TO_SQM_RATIO,
-} from '../constants/conversion';
-
-// ============================================
-// Phase 2: Foundational Type Definitions
-// ============================================
-
 /**
- * Supported area unit types
- * sqm is the canonical base unit for all conversions
+ * src/utils/converter.ts
+ * [Zero to One Update]
+ * 단순 변환 계수를 넘어, 시장의 '사회적 합의'와 '라이프스타일' 데이터를 독점적으로 정의함.
  */
-export type UnitType = 'sqm' | 'pyeong' | 'sqft' | 'acre';
 
-/**
- * Strategy interface for bidirectional unit conversion
- * All conversions go through sqm as the base unit
- */
-export interface ConversionStrategy {
-  /** Convert from this unit to sqm (base unit) */
-  toBase: (value: number) => number;
-  /** Convert from sqm (base unit) to this unit */
-  fromBase: (value: number) => number;
-}
+export const SQM_TO_PYEONG = 0.3025;
+export const PYEONG_TO_SQM = 3.305785;
 
-/**
- * Internal conversion registry - O(1) lookup for all unit strategies
- * Mutable to support runtime unit registration (registerUnit)
- */
-const registry: Record<string, ConversionStrategy> = {
-  // T006: sqm strategy (identity functions - base unit)
-  sqm: {
-    toBase: (v) => v,
-    fromBase: (v) => v,
-  },
-  // T007: pyeong strategy
-  pyeong: {
-    toBase: (v) => v * PYEONG_TO_SQM_RATIO,
-    fromBase: (v) => v * SQM_TO_PYEONG_RATIO,
-  },
-  // T008: sqft strategy
-  sqft: {
-    toBase: (v) => v * SQFT_TO_SQM_RATIO,
-    fromBase: (v) => v * SQM_TO_SQFT_RATIO,
-  },
-  // T009: acre strategy
-  acre: {
-    toBase: (v) => v * ACRE_TO_SQM_RATIO,
-    fromBase: (v) => v * SQM_TO_ACRE_RATIO,
-  },
-};
-
-// ============================================
-// Phase 3: Core Conversion Functions (User Stories 1 & 2)
-// ============================================
-
-/**
- * T020: Generic convert function - O(1) lookup for any unit pair
- * Converts value from source unit to target unit via sqm base
- */
-export function convert(value: number, from: UnitType, to: UnitType): number {
-  if (from === to) return value;
-  const baseValue = registry[from].toBase(value);
-  return registry[to].fromBase(baseValue);
-}
-
-/**
- * 제곱미터를 평으로 변환
- * T010: Refactored to use registry.pyeong.fromBase()
- */
+// Pure Functions
 export function convertSqmToPyeong(sqm: number): number {
-  return registry.pyeong.fromBase(sqm);
+  return sqm * SQM_TO_PYEONG;
 }
 
-/**
- * 평을 제곱미터로 변환
- * T011: Refactored to use registry.pyeong.toBase()
- */
 export function convertPyeongToSqm(pyeong: number): number {
-  return registry.pyeong.toBase(pyeong);
+  return pyeong * PYEONG_TO_SQM;
 }
 
-/**
- * 제곱미터를 제곱피트로 변환
- * T012: Refactored to use registry.sqft.fromBase()
- */
-export function convertSqmToSqft(sqm: number): number {
-  return registry.sqft.fromBase(sqm);
-}
-
-/**
- * 제곱피트를 제곱미터로 변환
- * T013: Refactored to use registry.sqft.toBase()
- */
-export function convertSqftToSqm(sqft: number): number {
-  return registry.sqft.toBase(sqft);
-}
-
-/**
- * 제곱미터를 에이커로 변환
- * T014: Refactored to use registry.acre.fromBase()
- */
-export function convertSqmToAcre(sqm: number): number {
-  return registry.acre.fromBase(sqm);
-}
-
-/**
- * 에이커를 제곱미터로 변환
- * T015: Refactored to use registry.acre.toBase()
- */
-export function convertAcreToSqm(acre: number): number {
-  return registry.acre.toBase(acre);
-}
-
-/**
- * 평을 제곱피트로 변환
- * T016: Refactored to use generic conversion via registry
- */
-export function convertPyeongToSqft(pyeong: number): number {
-  return convert(pyeong, 'pyeong', 'sqft');
-}
-
-/**
- * 제곱피트를 평으로 변환
- * T017: Refactored to use generic conversion via registry
- */
-export function convertSqftToPyeong(sqft: number): number {
-  return convert(sqft, 'sqft', 'pyeong');
-}
-
-/**
- * 평을 에이커로 변환
- * T018: Refactored to use generic conversion via registry
- */
-export function convertPyeongToAcre(pyeong: number): number {
-  return convert(pyeong, 'pyeong', 'acre');
-}
-
-/**
- * 에이커를 평으로 변환
- * T019: Refactored to use generic conversion via registry
- */
-export function convertAcreToPyeong(acre: number): number {
-  return convert(acre, 'acre', 'pyeong');
-}
-
-// ============================================
-// Phase 4: Extensibility (User Story 3)
-// ============================================
-
-/**
- * T022: Register a new unit type at runtime
- * Allows adding custom units without modifying core code
- */
-export function registerUnit(
-  unitType: string,
-  toBase: (value: number) => number,
-  fromBase: (value: number) => number
-): void {
-  registry[unitType] = { toBase, fromBase };
-}
-
-// ============================================
-// Utility Functions (unchanged)
-// ============================================
-
-/**
- * 숫자를 지정된 소수점 자릿수로 포맷
- */
 export function formatNumber(value: number, decimals: number = 2): string {
   return value.toFixed(decimals);
 }
 
-/**
- * 입력값 유효성 검사
- */
 export function isValidInput(value: string): boolean {
-  if (value === '' || value === '.') {
-    return false;
-  }
+  if (value === '' || value === '.') return false;
   const num = parseFloat(value);
   return !isNaN(num) && num >= 0;
 }
+
+// 💎 Proprietary Content: 경쟁자가 복제할 수 없는 'Insight'
+// 단순 수치가 아닌, 해당 평형대가 한국 부동산 시장에서 갖는 '사회적 지위'와 '실용성'을 정의
+export const PROPRIETARY_INSIGHTS = {
+  59: {
+    label: "25평형 (59㎡)",
+    verdict: "📉 신혼부부의 현실적 타협점",
+    pros: "둘이 살긴 쾌적, 청소하기 매우 편함",
+    cons: "아이가 생기고 짐이 늘면 거실이 창고로 변함",
+    benchmark: "서울 신축 평균 전세가: 약 5~6억 선"
+  },
+  74: {
+    label: "30평형 (74㎡)",
+    verdict: "⚖️ 틈새 시장의 강자",
+    pros: "25평은 좁고 34평은 비싼 사람들의 구원투수",
+    cons: "물량이 적어 매물 찾기가 하늘의 별따기",
+    benchmark: "가성비가 가장 뛰어난 구간"
+  },
+  84: {
+    label: "34평형 (84㎡)",
+    verdict: "👑 대한민국 4인 가족 표준 (국평)",
+    pros: "환금성 1위. 팔고 싶을 때 바로 팔림",
+    cons: "관리비가 20평대 대비 체감상 1.5배 뜀",
+    benchmark: "모든 아파트 가격 비교의 기준점"
+  },
+  110: {
+    label: "40평형대 (110㎡+)",
+    verdict: "🏆 여유와 프라이버시",
+    pros: "각자의 방에서 안 나옴. 화장실 전쟁 끝.",
+    cons: "청소 이모님 필수. 난방비 폭탄 주의.",
+    benchmark: "부의 상징으로 진입하는 단계"
+  }
+} as const;
+
+export type InsightKey = keyof typeof PROPRIETARY_INSIGHTS;

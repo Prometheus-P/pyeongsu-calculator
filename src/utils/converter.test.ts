@@ -4,14 +4,6 @@ import {
   convertPyeongToSqm,
   formatNumber,
   isValidInput,
-  convertSqmToSqft,
-  convertSqftToSqm,
-  convertSqmToAcre,
-  convertAcreToSqm,
-  convertPyeongToSqft,
-  convertSqftToPyeong,
-  convertPyeongToAcre,
-  convertAcreToPyeong,
 } from './converter';
 
 describe('convertSqmToPyeong', () => {
@@ -186,106 +178,5 @@ describe('isValidInput', () => {
     it('선행 0이 있는 숫자는 유효하다', () => {
       expect(isValidInput('00010')).toBe(true);
     });
-  });
-});
-
-// 제곱피트 변환 테스트
-describe('convertSqmToSqft', () => {
-  it('1㎡를 10.764 sqft로 변환한다', () => {
-    expect(convertSqmToSqft(1)).toBeCloseTo(10.764, 2);
-  });
-
-  it('0㎡를 0 sqft로 변환한다', () => {
-    expect(convertSqmToSqft(0)).toBe(0);
-  });
-
-  it('100㎡를 약 1076.4 sqft로 변환한다', () => {
-    expect(convertSqmToSqft(100)).toBeCloseTo(1076.4, 0);
-  });
-});
-
-describe('convertSqftToSqm', () => {
-  it('10.764 sqft를 약 1㎡로 변환한다', () => {
-    expect(convertSqftToSqm(10.764)).toBeCloseTo(1, 2);
-  });
-
-  it('0 sqft를 0㎡로 변환한다', () => {
-    expect(convertSqftToSqm(0)).toBe(0);
-  });
-
-  it('1000 sqft를 약 92.9㎡로 변환한다', () => {
-    expect(convertSqftToSqm(1000)).toBeCloseTo(92.9, 0);
-  });
-});
-
-// 에이커 변환 테스트
-describe('convertSqmToAcre', () => {
-  it('4046.86㎡를 1 acre로 변환한다', () => {
-    expect(convertSqmToAcre(4046.86)).toBeCloseTo(1, 2);
-  });
-
-  it('0㎡를 0 acre로 변환한다', () => {
-    expect(convertSqmToAcre(0)).toBe(0);
-  });
-
-  it('10000㎡를 약 2.47 acre로 변환한다', () => {
-    expect(convertSqmToAcre(10000)).toBeCloseTo(2.47, 1);
-  });
-});
-
-describe('convertAcreToSqm', () => {
-  it('1 acre를 약 4046.86㎡로 변환한다', () => {
-    expect(convertAcreToSqm(1)).toBeCloseTo(4046.86, 0);
-  });
-
-  it('0 acre를 0㎡로 변환한다', () => {
-    expect(convertAcreToSqm(0)).toBe(0);
-  });
-});
-
-// 평 ↔ 제곱피트 변환 테스트
-describe('convertPyeongToSqft', () => {
-  it('1평을 약 35.58 sqft로 변환한다', () => {
-    expect(convertPyeongToSqft(1)).toBeCloseTo(35.58, 1);
-  });
-
-  it('10평을 약 355.8 sqft로 변환한다', () => {
-    expect(convertPyeongToSqft(10)).toBeCloseTo(355.8, 0);
-  });
-
-  it('0평을 0 sqft로 변환한다', () => {
-    expect(convertPyeongToSqft(0)).toBe(0);
-  });
-});
-
-describe('convertSqftToPyeong', () => {
-  it('35.58 sqft를 약 1평으로 변환한다', () => {
-    expect(convertSqftToPyeong(35.58)).toBeCloseTo(1, 1);
-  });
-
-  it('0 sqft를 0평으로 변환한다', () => {
-    expect(convertSqftToPyeong(0)).toBe(0);
-  });
-});
-
-// 평 ↔ 에이커 변환 테스트
-describe('convertPyeongToAcre', () => {
-  it('1224평을 약 1 acre로 변환한다', () => {
-    // 1 acre = 4046.86㎡, 1평 = 3.3058㎡ → 4046.86 / 3.3058 ≈ 1224
-    expect(convertPyeongToAcre(1224)).toBeCloseTo(1, 1);
-  });
-
-  it('0평을 0 acre로 변환한다', () => {
-    expect(convertPyeongToAcre(0)).toBe(0);
-  });
-});
-
-describe('convertAcreToPyeong', () => {
-  it('1 acre를 약 1224평으로 변환한다', () => {
-    expect(convertAcreToPyeong(1)).toBeCloseTo(1224, 0);
-  });
-
-  it('0 acre를 0평으로 변환한다', () => {
-    expect(convertAcreToPyeong(0)).toBe(0);
   });
 });

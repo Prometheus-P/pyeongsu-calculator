@@ -1,194 +1,169 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { KeyboardEvent } from 'react';
 import {
   convertSqmToPyeong,
   convertPyeongToSqm,
   formatNumber,
   isValidInput,
+  PROPRIETARY_INSIGHTS,
+  type InsightKey
 } from '../utils/converter';
+import SpaceVisualizer from './SpaceVisualizer'; // Visual Moat Import
+import BudgetEstimator from './BudgetEstimator'; // Cashflow Protocol Import
 import { CalculatorEvents } from '../utils/analytics';
-import { saveHistory } from '../utils/storage';
 
-interface CalculatorProps {
-  initialPyeong?: number | null;
-  onHistoryUpdate?: () => void;
-  onValueChange?: (pyeong: number | null) => void;
-}
-
-export default function Calculator({ initialPyeong, onHistoryUpdate, onValueChange }: CalculatorProps) {
+export default function Calculator() {
   const [sqm, setSqm] = useState('');
   const [pyeong, setPyeong] = useState('');
-  const [showToast, setShowToast] = useState(false);
+  const [insight, setInsight] = useState<typeof PROPRIETARY_INSIGHTS[InsightKey] | null>(null);
+  
   const pyeongInputRef = useRef<HTMLInputElement>(null);
 
-  // 히스토리 저장 함수
-  const addToHistory = useCallback(
-    (sqmValue: number, pyeongValue: number) => {
-      saveHistory({
-        sqm: parseFloat(formatNumber(sqmValue)),
-        pyeong: parseFloat(formatNumber(pyeongValue)),
-        timestamp: Date.now(),
-      });
-      onHistoryUpdate?.();
-    },
-    [onHistoryUpdate]
-  );
+  // Insight Finder: 입력값과 가장 가까운 독점 데이터 매칭 (오차 범위 ±5%)
+  const findInsight = (sqmValue: number) => {
+    const targets = Object.keys(PROPRIETARY_INSIGHTS).map(Number);
+    // 가장 가까운 평형대 찾기
+    const closest = targets.reduce((prev, curr) => 
+      Math.abs(curr - sqmValue) < Math.abs(prev - sqmValue) ? curr : prev
+    );
 
-  // 헬퍼: 평 값으로 양쪽 필드 업데이트
-  const updateFieldsFromPyeong = (pyeongValue: number) => {
-    setPyeong(String(pyeongValue));
-    setSqm(formatNumber(convertPyeongToSqm(pyeongValue)));
-  };
-
-  // 헬퍼: 필드 초기화
-  const clearFields = () => {
-    setSqm('');
-    setPyeong('');
-  };
-
-  useEffect(() => {
-    if (initialPyeong === null || initialPyeong === undefined) {
-      clearFields();
-      return;
+    // 오차 범위 10% 이내일 때만 인사이트 표시 (너무 동떨어진 값 방지)
+    if (Math.abs(closest - sqmValue) <= closest * 0.15) {
+      setInsight(PROPRIETARY_INSIGHTS[closest as InsightKey]);
+    } else {
+      setInsight(null);
     }
-    updateFieldsFromPyeong(initialPyeong);
-  }, [initialPyeong]);
+  };
+
+  const updateFieldsFromSqm = (sqmValue: number) => {
+    setSqm(String(sqmValue));
+    setPyeong(formatNumber(convertSqmToPyeong(sqmValue)));
+    findInsight(sqmValue);
+  };
 
   const handleSqmChange = (value: string) => {
     setSqm(value);
     if (isValidInput(value)) {
-      setPyeong(formatNumber(convertSqmToPyeong(parseFloat(value))));
+      const num = parseFloat(value);
+      setPyeong(formatNumber(convertSqmToPyeong(num)));
+      findInsight(num);
     } else {
       setPyeong('');
+      setInsight(null);
     }
   };
 
   const handlePyeongChange = (value: string) => {
     setPyeong(value);
     if (isValidInput(value)) {
-      setSqm(formatNumber(convertPyeongToSqm(parseFloat(value))));
+      const num = parseFloat(value);
+      const calculatedSqm = convertPyeongToSqm(num);
+      setSqm(formatNumber(calculatedSqm));
+      findInsight(calculatedSqm);
     } else {
       setSqm('');
+      setInsight(null);
     }
   };
 
-  // 입력 완료 시 히스토리 저장 및 URL 업데이트
-  const handleInputBlur = () => {
-    if (isValidInput(sqm) && isValidInput(pyeong)) {
-      const sqmValue = parseFloat(sqm);
-      const pyeongValue = parseFloat(pyeong);
-      addToHistory(sqmValue, pyeongValue);
-      onValueChange?.(pyeongValue);
-      CalculatorEvents.conversion(sqmValue, pyeongValue);
-    }
-  };
-
-  // 빠른 선택 시 히스토리 저장 및 URL 업데이트
-  const handleQuickSelect = (size: number) => {
-    updateFieldsFromPyeong(size);
-    addToHistory(convertPyeongToSqm(size), size);
-    onValueChange?.(size);
-    CalculatorEvents.quickSelect(size);
-  };
-
-  // 클립보드 복사
-  const handleCopy = async () => {
-    const text = `${sqm}㎡ = ${pyeong}평`;
-    await navigator.clipboard.writeText(text);
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 2000);
-    CalculatorEvents.copyResult(parseFloat(sqm), parseFloat(pyeong));
-  };
-
-  // 키보드 이벤트 핸들러
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, field: 'sqm' | 'pyeong') => {
-    if (e.key === 'Escape') {
-      clearFields();
-    } else if (e.key === 'Enter' && field === 'sqm') {
-      pyeongInputRef.current?.focus();
-    }
-  };
-
-  const hasValue = isValidInput(sqm) && isValidInput(pyeong);
-  const quickSizes = [10, 15, 20, 25, 30, 35, 40];
+  // 빠른 선택 버튼 (주요 아파트 평형)
+  const quickSizes = [59, 74, 84, 110];
 
   return (
-    // Kinetic Minimalism Style
-    <div className="dark bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-[4px_8px_16px_rgba(0,0,0,0.2)] p-6 max-w-md w-full">
-      <h1 className="text-2xl font-bold text-gray-100 text-center mb-6 tracking-tight">평수 계산기</h1>
+    <div className="dark bg-gray-900 rounded-xl shadow-2xl p-6 max-w-md w-full border border-gray-800">
+      {/* 1. Monopoly Title: 타겟 명확화 */}
+      <div className="text-center mb-8">
+        <h1 className="text-2xl font-black text-white tracking-tight mb-1">
+          아파트 공간 시뮬레이터
+        </h1>
+        <p className="text-sm text-cyan-400 font-medium">
+          "숫자가 아닌, 당신의 라이프스타일을 계산합니다"
+        </p>
+      </div>
 
-      <div className="space-y-4">
-        <div>
-          <label htmlFor="sqm" className="block text-sm font-medium text-gray-400 mb-1">
-            제곱미터 (㎡)
-          </label>
+      {/* 2. Input Fields */}
+      <div className="grid grid-cols-2 gap-4 mb-6">
+        <div className="space-y-1">
+          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">전용면적 (㎡)</label>
           <input
-            id="sqm"
             type="text"
             value={sqm}
             onChange={(e) => handleSqmChange(e.target.value)}
-            onBlur={handleInputBlur}
-            onKeyDown={(e) => handleKeyDown(e, 'sqm')}
-            className="w-full p-4 bg-gray-900 text-gray-100 border-2 border-gray-600 rounded-md focus:border-cyan-400 focus:ring-0 transition-colors placeholder-gray-500 min-h-[48px]"
-            placeholder="제곱미터 입력"
+            className="w-full bg-gray-800 text-white text-xl font-bold p-3 rounded border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all text-center"
+            placeholder="84"
           />
         </div>
-
-        <div>
-          <label htmlFor="pyeong" className="block text-sm font-medium text-gray-400 mb-1">
-            평
-          </label>
+        <div className="space-y-1">
+          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">평수 (평)</label>
           <input
             ref={pyeongInputRef}
-            id="pyeong"
             type="text"
             value={pyeong}
             onChange={(e) => handlePyeongChange(e.target.value)}
-            onBlur={handleInputBlur}
-            onKeyDown={(e) => handleKeyDown(e, 'pyeong')}
-            className="w-full p-4 bg-gray-900 text-gray-100 border-2 border-gray-600 rounded-md focus:border-cyan-400 focus:ring-0 transition-colors placeholder-gray-500 min-h-[48px]"
-            placeholder="평수 입력"
+            className="w-full bg-gray-800 text-white text-xl font-bold p-3 rounded border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all text-center"
+            placeholder="25.4"
           />
         </div>
       </div>
 
-      <div className="flex gap-3 mt-4">
-        <button
-          onClick={clearFields}
-          className="flex-1 py-3 px-4 min-h-[48px] bg-gray-600 text-gray-100 font-semibold rounded-md hover:bg-gray-500 transition-colors"
-        >
-          초기화
-        </button>
-        {hasValue && (
-          // Kinetic element: skewed button
-          <button
-            onClick={handleCopy}
-            className="py-3 px-4 min-h-[48px] bg-cyan-500 text-black font-bold rounded-md hover:bg-cyan-400 transition-colors transform -skew-x-12"
-          >
-            <span className="inline-block transform skew-x-12">복사</span>
-          </button>
-        )}
-      </div>
-
-      {showToast && (
-        <div className="mt-2 p-2 bg-cyan-500 text-black text-sm text-center rounded-md">
-          복사되었습니다!
+      {/* 3. Proprietary Insight Card: 독점 콘텐츠 표시 */}
+      {insight && (
+        <div className="mb-6 bg-gradient-to-r from-gray-800 to-gray-800 border-l-4 border-cyan-500 p-4 rounded-r shadow-lg animate-fade-in">
+          <h3 className="text-lg font-bold text-white mb-1">{insight.label}</h3>
+          <p className="text-cyan-400 font-bold text-sm mb-3">"{insight.verdict}"</p>
+          
+          <div className="space-y-2 text-sm">
+            <div className="flex gap-2">
+              <span className="text-green-400 font-bold min-w-[30px]">장점</span>
+              <span className="text-gray-300">{insight.pros}</span>
+            </div>
+            <div className="flex gap-2">
+              <span className="text-red-400 font-bold min-w-[30px]">주의</span>
+              <span className="text-gray-300">{insight.cons}</span>
+            </div>
+            <div className="mt-2 pt-2 border-t border-gray-700 text-xs text-gray-500 flex justify-between">
+              <span>시장 기준</span>
+              <span>{insight.benchmark}</span>
+            </div>
+          </div>
         </div>
       )}
 
-      <div className="mt-6">
-        <p className="text-base text-gray-400 mb-2">빠른 선택</p>
-        <div className="grid grid-cols-4 gap-2">
+      {/* 4. Visual Moat: 공간 시뮬레이터 */}
+      {isValidInput(sqm) && <SpaceVisualizer sqm={parseFloat(sqm)} />}
+
+      {/* 💰 Cashflow Protocol: The Venom */}
+      {insight && isValidInput(pyeong) && (
+        <BudgetEstimator pyeong={parseFloat(pyeong)} insightLabel={insight.label} />
+      )}
+
+      {/* 5. Quick Select & Vertical Integration */}
+      <div className="mt-8">
+        <p className="text-xs text-gray-500 mb-2 font-bold uppercase">주요 평형 바로보기</p>
+        <div className="grid grid-cols-4 gap-2 mb-6">
           {quickSizes.map((size) => (
             <button
               key={size}
-              onClick={() => handleQuickSelect(size)}
-              className="py-2 px-3 min-h-[48px] bg-gray-700 text-gray-200 rounded-md hover:bg-cyan-500 hover:text-black transition-colors"
+              onClick={() => updateFieldsFromSqm(size)}
+              className={`py-2 px-1 text-sm font-bold rounded transition-colors ${
+                Math.abs(parseFloat(sqm) - size) < 1 
+                  ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-500/30' 
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
             >
-              {size}평
+              {size}㎡
             </button>
           ))}
         </div>
+
+        {/* Vertical Integration: Next Step Button */}
+        <button 
+          onClick={() => alert('Vertical Integration: 인테리어/이사 견적 파트너사 연결 예정')}
+          className="w-full py-4 bg-white text-gray-900 font-black rounded text-sm hover:bg-gray-100 transition-transform active:scale-95 flex items-center justify-center gap-2"
+        >
+          <span>🔨 이 평수 인테리어 견적 미리보기</span>
+          <span className="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded-full animate-pulse">HOT</span>
+        </button>
       </div>
     </div>
   );

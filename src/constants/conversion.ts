@@ -19,13 +19,20 @@ export const ACRE_TO_SQM_RATIO = 4046.86;
 // 1㎡ = 0.000247105 acre
 export const SQM_TO_ACRE_RATIO = 0.000247105;
 
-// 일반적인 평형 참고 데이터
-export const COMMON_SIZES = [
-  { pyeong: 10, label: '10평', type: '원룸' },
-  { pyeong: 15, label: '15평', type: '투룸' },
-  { pyeong: 20, label: '20평', type: '소형 아파트' },
-  { pyeong: 25, label: '25평', type: '중소형 아파트' },
-  { pyeong: 30, label: '30평', type: '중형 아파트' },
-  { pyeong: 35, label: '35평', type: '중대형 아파트' },
-  { pyeong: 40, label: '40평', type: '대형 아파트' },
-] as const;
+// 일반적인 평형에 대한 독점적 인사이트 데이터
+export const PROPRIETARY_INSIGHTS = {
+  59: {
+    label: "25평형 (59㎡)",
+    verdict: "신혼부부의 현실적 타협점",
+    pros: "둘이 살긴 쾌적, 아이 하나까진 OK",
+    cons: "짐이 많다면 팬트리 부족으로 거실이 창고됨",
+    benchmark: "서울 신축 평균 전세가: 5.2억 (예시 데이터)"
+  },
+  84: {
+    label: "34평형 (84㎡)",
+    verdict: "대한민국 4인 가족 표준",
+    pros: "되팔 때 가장 잘 팔림 (환금성 1위)",
+    cons: "관리비가 20평대 대비 1.5배 상승 구간",
+    benchmark: "국민평형(국평)이라 불림"
+  }
+} as const;
