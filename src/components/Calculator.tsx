@@ -1,13 +1,6 @@
-// Allow for custom element types in JSX
-declare namespace JSX {
-  interface IntrinsicElements {
-    'md-outlined-text-field': any;
-    'md-filled-tonal-button': any;
-    'md-filled-button': any;
-  }
-}
 
-import { useState, useRef } from 'react';
+
+import { useState } from 'react';
 import {
   convertSqmToPyeong,
   convertPyeongToSqm,
@@ -26,7 +19,7 @@ export default function Calculator() {
     (typeof PROPRIETARY_INSIGHTS)[InsightKey] | null
   >(null);
 
-  const pyeongInputRef = useRef<HTMLInputElement>(null);
+  
 
   const findInsight = (sqmValue: number) => {
     const targets = Object.keys(PROPRIETARY_INSIGHTS).map(Number);

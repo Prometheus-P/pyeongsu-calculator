@@ -1,12 +1,3 @@
-// Allow for custom element types in JSX
-declare namespace JSX {
-  interface IntrinsicElements {
-    'md-outlined-button': any;
-    'md-filled-button': any;
-    'md-outlined-text-field': any;
-  }
-}
-
 import { useState } from 'react';
 import { INTERIOR_COSTS, LOAN_RATES } from '../constants/costs';
 import { formatNumber } from '../utils/converter';

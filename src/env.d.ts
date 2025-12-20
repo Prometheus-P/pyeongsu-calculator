@@ -14,6 +14,16 @@ declare global {
   interface Window {
     adsbygoogle?: unknown[];
   }
+
+  // For Material Web Components
+  namespace JSX {
+    interface IntrinsicElements {
+      'md-outlined-text-field': any;
+      'md-filled-tonal-button': any;
+      'md-filled-button': any;
+      'md-outlined-button': any;
+    }
+  }
 }
 
 export {};
