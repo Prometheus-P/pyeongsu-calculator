@@ -49,7 +49,7 @@ export default function BudgetEstimator({ pyeong, insightLabel }: BudgetEstimato
           </div>
         </div>
         <button 
-          onClick={() => alert("지인 시공사 연결 폼(Typeform/Tally) 연동 예정")}
+          onClick={() => window.alert("지인 시공사 연결 폼(Typeform/Tally) 연동 예정")}
           className="w-full mt-3 py-3 bg-gray-700 hover:bg-gray-600 text-gray-200 text-sm font-bold rounded flex justify-center items-center gap-2"
         >
           👷 호구 당하지 않는 '실적 견적' 받기
@@ -85,7 +85,7 @@ export default function BudgetEstimator({ pyeong, insightLabel }: BudgetEstimato
         )}
 
         <button 
-          onClick={() => alert("대출 상담사 연결 폼 연동 예정")}
+          onClick={() => window.alert("대출 상담사 연결 폼 연동 예정")}
           className="w-full py-4 bg-yellow-500 hover:bg-yellow-400 text-black font-black rounded shadow-lg transform active:scale-95 transition-all"
         >
           📞 내 조건 최저금리 & 한도 확인하기

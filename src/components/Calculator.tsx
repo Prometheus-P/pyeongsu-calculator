@@ -158,7 +158,7 @@ export default function Calculator() {
 
         {/* Vertical Integration: Next Step Button */}
         <button 
-          onClick={() => alert('Vertical Integration: 인테리어/이사 견적 파트너사 연결 예정')}
+          onClick={() => window.alert('Vertical Integration: 인테리어/이사 견적 파트너사 연결 예정')}
           className="w-full py-4 bg-white text-gray-900 font-black rounded text-sm hover:bg-gray-100 transition-transform active:scale-95 flex items-center justify-center gap-2"
         >
           <span>🔨 이 평수 인테리어 견적 미리보기</span>
