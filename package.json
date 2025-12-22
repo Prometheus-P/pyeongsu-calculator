@@ -64,6 +64,7 @@
     "react",
     "seo"
   ],
-  "author": "",
-  "license": "MIT"
+  "author": "David Park <parkdavid31@gmail.com>",
+  "license": "UNLICENSED",
+  "private": true
 }
