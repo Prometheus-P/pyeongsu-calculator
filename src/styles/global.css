@@ -39,6 +39,17 @@
   /* Outline */
   --md-sys-color-outline: #73777F;
   --md-sys-color-outline-variant: #C3C6CF;
+
+  /* Inverse (for Snackbar) */
+  --md-sys-color-inverse-surface: #2E3135;
+  --md-sys-color-inverse-on-surface: #F0F1F5;
+  --md-sys-color-inverse-primary: #90CAF9;
+
+  /* Scrim (for Dialog overlay) */
+  --md-sys-color-scrim: #000000;
+
+  /* Surface Container (for elevated surfaces) */
+  --md-sys-color-surface-container-high: #E6E8EE;
 }
 
 /* ============================================
@@ -78,6 +89,17 @@
   /* Outline */
   --md-sys-color-outline: #8C9199;
   --md-sys-color-outline-variant: #42474E;
+
+  /* Inverse (for Snackbar) */
+  --md-sys-color-inverse-surface: #E2E2E6;
+  --md-sys-color-inverse-on-surface: #2F3033;
+  --md-sys-color-inverse-primary: #0060A8;
+
+  /* Scrim (for Dialog overlay) */
+  --md-sys-color-scrim: #000000;
+
+  /* Surface Container (for elevated surfaces) */
+  --md-sys-color-surface-container-high: #252629;
 }
 
 /* ============================================
