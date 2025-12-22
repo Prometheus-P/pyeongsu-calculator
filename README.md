@@ -73,4 +73,6 @@ npm run build
 
 ## 라이선스
 
-MIT License
+Copyright (c) 2024-2025 David Park. All Rights Reserved.
+
+문의: parkdavid31@gmail.com

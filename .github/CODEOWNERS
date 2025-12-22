@@ -1,0 +1,18 @@
+# Code Owners
+# These owners will be requested for review on PRs
+
+# Default owner for everything
+* @haseongpark
+
+# Frontend
+/src/ @haseongpark
+
+# Tests
+/tests/ @haseongpark
+
+# Configuration
+/*.json @haseongpark
+/*.config.* @haseongpark
+
+# CI/CD
+/.github/ @haseongpark
