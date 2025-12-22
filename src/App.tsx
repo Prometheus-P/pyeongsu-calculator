@@ -1,11 +1,12 @@
 import Calculator from './components/Calculator';
 import ThemeToggle from './components/ThemeToggle';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { DynamicColorProvider } from './contexts/DynamicColorContext';
 
 function AppContent() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex flex-col items-center justify-center p-4 gap-6 transition-colors">
-      <div className="fixed top-4 right-4">
+    <div className="min-h-screen bg-m3-surface flex flex-col items-center justify-center p-m3-4 gap-m3-6 transition-colors duration-300">
+      <div className="fixed top-m3-4 right-m3-4">
         <ThemeToggle />
       </div>
       <Calculator />
@@ -16,7 +17,9 @@ function AppContent() {
 export default function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <DynamicColorProvider>
+        <AppContent />
+      </DynamicColorProvider>
     </ThemeProvider>
   );
 }

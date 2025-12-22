@@ -39,27 +39,27 @@ const ogImage = 'https://www.pyeongcalc.kr/images/og-image.png';
   <main class="max-w-3xl mx-auto px-4 py-10">
     <AdContainer position="top" className="hidden sm:flex" />
     <App client:load />
-    <section class="mt-6 bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm leading-relaxed">
+    <section class="mt-m3-6 bg-m3-surface-variant/30 border border-m3-outline-variant rounded-m3-lg p-m3-4 text-body-medium leading-relaxed">
       <p>
         이 도구는 단순한 <strong>평수 변환기</strong>가 아닙니다. ‘25평과 34평 중 어디가 나을까?’라는 고민처럼, 숫자에 가려진 <strong>‘공간적 불안감’</strong>을 해소하기 위해 만들어졌습니다. 평수 계산을 넘어, 공간감을 직접 시뮬레이션하며 내 가족에게 딱 맞는 집을 찾아보세요.
       </p>
     </section>
     <AdContainer position="bottom" />
 
-    <article class="max-w-4xl mx-auto px-4 py-12 prose prose-slate lg:prose-lg">
-      <h1 class="text-3xl font-bold text-slate-900">평수 계산을 넘어, 공간을 시뮬레이션 하세요</h1>
+    <article class="max-w-4xl mx-auto px-m3-4 py-m3-12 prose prose-m3 lg:prose-lg">
+      <h1 class="text-headline-medium font-bold text-m3-on-surface">평수 계산을 넘어, 공간을 시뮬레이션 하세요</h1>
       <p>
         ‘이 집에 우리 짐이 다 들어갈까?’, ‘아이가 태어나면 너무 좁지 않을까?’ 집을 알아볼 때 드는 당연한 고민입니다. 저희는 숫자를 넘어, <strong>킹사이즈 침대 하나가 들어갔을 때 남는 공간</strong>을 직접 보여드립니다. 이제 막연한 평수가 아닌, 체감 가능한 공간으로 비교하세요.
       </p>
 
-      <h2 class="text-2xl font-semibold text-slate-900">공간 시뮬레이터 사용법</h2>
+      <h2 class="text-title-large font-semibold text-m3-on-surface">공간 시뮬레이터 사용법</h2>
       <ul>
         <li>위 계산기에 평 또는 ㎡를 입력하면, 하단에 해당 크기의 공간과 가구가 시각적으로 표시됩니다.</li>
         <li><strong>‘대표 평형’</strong> 버튼으로 신혼부부(25평)와 4인 가족(34평)이 가장 많이 찾는 국민 평수를 바로 확인할 수 있습니다.</li>
         <li>각 평형에 대한 시장의 평가, 장단점 등 <strong>독점적인 인사이트</strong>를 함께 제공합니다.</li>
       </ul>
 
-      <h2 class="text-2xl font-semibold text-slate-900">왜 25평(59㎡)과 34평(84㎡)이 중요할까?</h2>
+      <h2 class="text-title-large font-semibold text-m3-on-surface">왜 25평(59㎡)과 34평(84㎡)이 중요할까?</h2>
       <p>
         대한민국 아파트 시장은 사실상 <strong>전용 59㎡(25평형)</strong>와 <strong>84㎡(34평형)</strong>, 두 가지 평형이 지배합니다. 59㎡는 신혼부부와 2-3인 가족의 ‘첫 집’으로, 84㎡는 4인 가족의 ‘표준’으로 자리 잡았습니다. 이 두 평형의 공간감 차이와 장단점을 이해하는 것이 합리적인 의사결정의 첫걸음입니다.
       </p>
@@ -71,24 +71,24 @@ const ogImage = 'https://www.pyeongcalc.kr/images/og-image.png';
         저희 시뮬레이터는 이 두 ‘국민 평수’를 중심으로, 당신의 라이프스타일에 어떤 집이 더 적합할지 판단할 수 있도록 돕습니다.
       </p>
       
-      <h2 class="text-2xl font-semibold text-slate-900">자주 묻는 질문 (FAQ)</h2>
-      <div class="space-y-4 not-prose">
+      <h2 class="text-title-large font-semibold text-m3-on-surface">자주 묻는 질문 (FAQ)</h2>
+      <div class="space-y-m3-4 not-prose">
         {faqItems.map((item) => (
           <details
-            class="group bg-white border border-gray-200 rounded-lg open:ring-2 open:ring-blue-100 open:border-blue-300 transition-all duration-200"
+            class="group bg-m3-surface border border-m3-outline-variant rounded-m3-md open:ring-2 open:ring-m3-primary/20 open:border-m3-primary transition-all duration-200"
           >
-            <summary class="flex items-center justify-between cursor-pointer p-4 font-medium text-gray-900 list-none">
-              <span class="flex items-center gap-3">
-                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-bold">
+            <summary class="flex items-center justify-between cursor-pointer p-m3-4 font-medium text-m3-on-surface list-none">
+              <span class="flex items-center gap-m3-3">
+                <span class="flex-shrink-0 w-m3-6 h-m3-6 flex items-center justify-center rounded-m3-full bg-m3-primary-container text-m3-on-primary-container text-label-medium font-bold">
                   Q
                 </span>
                 {item.question}
               </span>
-              <span class="transition group-open:rotate-180">
+              <span class="transition group-open:rotate-180 text-m3-on-surface-variant">
                 <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
               </span>
             </summary>
-            <div class="text-gray-600 px-4 pb-4 pl-[3.25rem] border-t border-gray-100 pt-3">
+            <div class="text-m3-on-surface-variant px-m3-4 pb-m3-4 pl-[3.25rem] border-t border-m3-outline-variant/50 pt-m3-3">
               {item.answer}
             </div>
           </details>

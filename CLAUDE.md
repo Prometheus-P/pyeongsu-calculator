@@ -45,6 +45,7 @@ TypeScript 5.5, Astro 4.16: Follow standard conventions
 ### Git 워크플로우
 - **main/dev 직접 push 금지** – 항상 feature 브랜치에서 작업 후 PR로 머지
 - 브랜치 네이밍: `XXX-feature-name` (예: `001-seo-improvements`)
+- **커밋 메시지에 AI 생성 문구 포함 금지** – "Generated with Claude Code", "Co-Authored-By: Claude" 등 AI 관련 attribution 제외
 
 ### Spec-First 개발
 - **스펙 문서가 Source of Truth** – 모든 기능은 스펙 문서 작성 후 구현
