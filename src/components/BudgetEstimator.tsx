@@ -8,6 +8,7 @@ import { INTERIOR_COSTS, LOAN_RATES } from '../constants/costs';
 import { formatNumber } from '../utils/converter';
 import { useLeadForm } from '../hooks/useLeadForm';
 import { BudgetEstimatorEvents } from '../utils/analytics';
+import { TextField } from './m3/TextField';
 
 interface BudgetEstimatorProps {
   pyeong: number;
@@ -70,21 +71,21 @@ export default function BudgetEstimator({ pyeong, insightLabel }: BudgetEstimato
       <div className="pt-m3-6 border-t border-m3-outline-variant">
         <h4 className="text-title-small text-m3-on-surface-variant font-bold uppercase mb-m3-3 px-m3-1">자금 조달 계획 (LTV {LOAN_RATES.MORTGAGE.ltv * 100}%)</h4>
         
-        <div className="flex gap-m3-2 items-center mb-m3-4">
-          <input 
-            type="number" 
-            placeholder="매매 목표가 (억 단위)" 
-            className="flex-1 bg-m3-surface text-m3-on-surface text-body-large p-m3-3 rounded-m3-sm border border-m3-outline focus:border-m3-tertiary focus:ring-2 focus:ring-m3-tertiary/30 outline-none"
-            onChange={(e) => {
-              const priceInManwon = Number(e.target.value) * 10000;
-              setHousePrice(priceInManwon);
-              if (priceInManwon > 0) {
-                BudgetEstimatorEvents.priceInput(priceInManwon, pyeong);
-              }
-            }}
-          />
-          <span className="text-m3-on-surface-variant font-bold text-body-large">만원</span>
-        </div>
+        <TextField
+          label="매매 목표가"
+          type="number"
+          suffix="억"
+          placeholder="5"
+          supportingText="예: 5억 = 5 입력"
+          containerClassName="mb-m3-4"
+          onChange={(e) => {
+            const priceInManwon = Number(e.target.value) * 10000;
+            setHousePrice(priceInManwon);
+            if (priceInManwon > 0) {
+              BudgetEstimatorEvents.priceInput(priceInManwon, pyeong);
+            }
+          }}
+        />
 
         {housePrice > 0 && (
           <div className="bg-m3-surface/50 p-m3-4 rounded-m3-md mb-m3-4 border border-m3-outline-variant/70">
