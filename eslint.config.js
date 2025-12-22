@@ -37,6 +37,8 @@ export default [
         performance: 'readonly',
         Response: 'readonly',
         alert: 'readonly',
+        URL: 'readonly',
+        fetch: 'readonly',
         // React globals
         React: 'readonly',
         JSX: 'readonly',
