@@ -3,6 +3,7 @@ import '../styles/global.css';
 import SEOHead from '../components/seo/SEOHead.astro';
 import GoogleAnalytics from '../components/analytics/GoogleAnalytics.astro';
 import GoogleAdSense from '../components/ads/GoogleAdSense.astro';
+import TallyScript from '../components/TallyScript.astro';
 import Footer from '../components/Footer.astro';
 
 interface Props {
@@ -29,6 +30,7 @@ const { title, description, canonical, ogImage, noindex, hideFooter = false } = 
 
     <GoogleAnalytics />
     <GoogleAdSense />
+    <TallyScript />
 
     <SEOHead
       title={title}

@@ -3,9 +3,11 @@
  * [Cash Generator]
  * 공간에 대한 호기심을 '구매 의사'로 전환하는 컴포넌트
  */
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { INTERIOR_COSTS, LOAN_RATES } from '../constants/costs';
 import { formatNumber } from '../utils/converter';
+import { useLeadForm } from '../hooks/useLeadForm';
+import { BudgetEstimatorEvents } from '../utils/analytics';
 
 interface BudgetEstimatorProps {
   pyeong: number;
@@ -14,6 +16,7 @@ interface BudgetEstimatorProps {
 
 export default function BudgetEstimator({ pyeong, insightLabel }: BudgetEstimatorProps) {
   const [housePrice, setHousePrice] = useState(0); // 사용자가 생각하는 매매가 입력
+  const { openForm } = useLeadForm();
 
   // 견적 계산 로직
   const basicInterior = Math.round(pyeong * INTERIOR_COSTS.BASIC.pricePerPyeong / 10000); // 만원 단위
@@ -50,8 +53,13 @@ export default function BudgetEstimator({ pyeong, insightLabel }: BudgetEstimato
             <p className="text-body-small text-m3-on-surface-variant mt-m3-2">{INTERIOR_COSTS.PREMIUM.description}</p>
           </div>
         </div>
-        <button 
-          onClick={() => alert("지인 시공사 연결 폼(Typeform/Tally) 연동 예정")}
+        <button
+          onClick={() => openForm('PARTNER_QUOTE', {
+            pyeong,
+            insightLabel,
+            basicInterior,
+            premiumInterior,
+          })}
           className="w-full mt-m3-3 py-m3-2 bg-m3-secondary-container text-m3-on-secondary-container text-label-large font-bold rounded-m3-full flex justify-center items-center gap-m3-2 m3-state-layer hover:shadow-m3-1 transition-shadow"
         >
           ✅ 검증된 파트너사에게 '정직한 견적' 받기
@@ -67,7 +75,13 @@ export default function BudgetEstimator({ pyeong, insightLabel }: BudgetEstimato
             type="number" 
             placeholder="매매 목표가 (억 단위)" 
             className="flex-1 bg-m3-surface text-m3-on-surface text-body-large p-m3-3 rounded-m3-sm border border-m3-outline focus:border-m3-tertiary focus:ring-2 focus:ring-m3-tertiary/30 outline-none"
-            onChange={(e) => setHousePrice(Number(e.target.value) * 10000)} // 억 단위 입력 가정
+            onChange={(e) => {
+              const priceInManwon = Number(e.target.value) * 10000;
+              setHousePrice(priceInManwon);
+              if (priceInManwon > 0) {
+                BudgetEstimatorEvents.priceInput(priceInManwon, pyeong);
+              }
+            }}
           />
           <span className="text-m3-on-surface-variant font-bold text-body-large">만원</span>
         </div>
@@ -86,8 +100,14 @@ export default function BudgetEstimator({ pyeong, insightLabel }: BudgetEstimato
           </div>
         )}
 
-        <button 
-          onClick={() => alert("대출 상담사 연결 폼 연동 예정")}
+        <button
+          onClick={() => openForm('LOAN_CONSULTATION', {
+            pyeong,
+            insightLabel,
+            housePrice,
+            maxLoan,
+            needCash: needCash + basicInterior,
+          })}
           className="w-full py-m3-3 bg-m3-tertiary text-m3-on-tertiary font-bold text-label-large rounded-m3-full shadow-m3-1 hover:shadow-m3-2 transform active:scale-95 transition-all m3-state-layer"
         >
           📈 1분 만에 알아보는 내 최적 대출 조건
