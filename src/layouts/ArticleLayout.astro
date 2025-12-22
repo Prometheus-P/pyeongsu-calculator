@@ -96,16 +96,16 @@ const siteUrl = 'https://pyeongsu-calculator.kr';
     <BreadcrumbSchema items={breadcrumbItems} />
   </Fragment>
 
-  <main class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
-      <AdSlot format="leaderboard" className="mb-8" />
+  <main class="min-h-screen bg-m3-surface">
+    <div class="container mx-auto px-m3-4 py-m3-8 max-w-4xl">
+      <AdSlot format="leaderboard" className="mb-m3-8" />
 
-      <article class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-10">
-        <header class="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
-          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+      <article class="bg-m3-surface-variant/30 rounded-m3-xl shadow-m3-2 p-m3-6 md:p-m3-10">
+        <header class="mb-m3-8 pb-m3-6 border-b border-m3-outline-variant">
+          <h1 class="text-headline-medium font-bold text-m3-on-surface mb-m3-4 leading-tight">
             {title}
           </h1>
-          <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
+          <div class="flex flex-wrap gap-m3-4 text-label-medium text-m3-on-surface-variant">
             <time datetime={publishDate} class="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -129,20 +129,20 @@ const siteUrl = 'https://pyeongsu-calculator.kr';
 
         <AdSlot format="rectangle" className="my-8" />
 
-        <footer class="mt-10 pt-6 border-t border-gray-200 dark:border-gray-700">
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <footer class="mt-m3-10 pt-m3-6 border-t border-m3-outline-variant">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-m3-4">
             <a
               href="/"
-              class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
+              class="inline-flex items-center text-m3-primary hover:underline"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-m3-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
               평수 계산기로 돌아가기
             </a>
             <a
               href="/guide"
-              class="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
+              class="inline-flex items-center text-m3-on-surface-variant hover:text-m3-primary"
             >
               다른 가이드 보기
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -160,20 +160,20 @@ const siteUrl = 'https://pyeongsu-calculator.kr';
 
 <style is:global>
   .article-content h2 {
-    @apply text-2xl font-semibold text-gray-800 dark:text-gray-100 mt-10 mb-4 pb-2 border-b border-gray-200 dark:border-gray-700;
+    @apply text-title-large font-semibold text-m3-on-surface mt-10 mb-4 pb-2 border-b border-m3-outline-variant;
   }
 
   .article-content h3 {
-    @apply text-xl font-medium text-gray-700 dark:text-gray-200 mt-8 mb-3;
+    @apply text-title-medium font-medium text-m3-on-surface mt-8 mb-3;
   }
 
   .article-content p {
-    @apply text-gray-600 dark:text-gray-300 mb-4 leading-relaxed;
+    @apply text-m3-on-surface-variant mb-4 leading-relaxed;
   }
 
   .article-content ul,
   .article-content ol {
-    @apply text-gray-600 dark:text-gray-300 mb-4 pl-6 space-y-2;
+    @apply text-m3-on-surface-variant mb-4 pl-6 space-y-2;
   }
 
   .article-content li {
@@ -181,19 +181,19 @@ const siteUrl = 'https://pyeongsu-calculator.kr';
   }
 
   .article-content strong {
-    @apply text-gray-800 dark:text-gray-100;
+    @apply text-m3-on-surface;
   }
 
   .article-content a {
-    @apply text-blue-600 dark:text-blue-400 hover:underline;
+    @apply text-m3-primary hover:underline;
   }
 
   .article-content blockquote {
-    @apply border-l-4 border-blue-500 pl-4 py-2 my-6 bg-blue-50 dark:bg-blue-900/30 rounded-r-lg;
+    @apply border-l-4 border-m3-primary pl-4 py-2 my-6 bg-m3-primary-container/30 rounded-r-m3-md;
   }
 
   .article-content blockquote p {
-    @apply text-blue-800 dark:text-blue-200 mb-0;
+    @apply text-m3-on-primary-container mb-0;
   }
 
   .article-content table {
@@ -202,26 +202,26 @@ const siteUrl = 'https://pyeongsu-calculator.kr';
 
   .article-content th,
   .article-content td {
-    @apply border border-gray-200 dark:border-gray-700 px-4 py-2 text-left;
+    @apply border border-m3-outline-variant px-4 py-2 text-left;
   }
 
   .article-content th {
-    @apply bg-gray-100 dark:bg-gray-700 font-semibold;
+    @apply bg-m3-surface-variant font-semibold text-m3-on-surface;
   }
 
   .article-content tr:nth-child(even) {
-    @apply bg-gray-50 dark:bg-gray-800/50;
+    @apply bg-m3-surface-variant/30;
   }
 
   .article-content .info-box {
-    @apply bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-6 my-6;
+    @apply bg-m3-primary-container/30 border border-m3-primary/30 rounded-m3-md p-6 my-6;
   }
 
   .article-content .warning-box {
-    @apply bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 rounded-lg p-6 my-6;
+    @apply bg-m3-tertiary-container/30 border border-m3-tertiary/30 rounded-m3-md p-6 my-6;
   }
 
   .article-content .tip-box {
-    @apply bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg p-6 my-6;
+    @apply bg-m3-secondary-container/30 border border-m3-secondary/30 rounded-m3-md p-6 my-6;
   }
 </style>

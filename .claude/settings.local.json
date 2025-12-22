@@ -63,7 +63,8 @@
       "Bash(git merge:*)",
       "Bash(gh issue close:*)",
       "Bash(npm test:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(xargs:*)"
     ],
     "deny": [],
     "ask": []

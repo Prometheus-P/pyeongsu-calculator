@@ -34,54 +34,54 @@ const categories = [...new Set(guides.map((g) => g.category))];
     <BreadcrumbSchema items={breadcrumbItems} />
   </Fragment>
 
-  <main class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-    <div class="container mx-auto px-4 py-8 max-w-6xl">
-      <AdSlot format="leaderboard" className="mb-8" />
+  <main class="min-h-screen bg-m3-surface">
+    <div class="container mx-auto px-m3-4 py-m3-8 max-w-6xl">
+      <AdSlot format="leaderboard" className="mb-m3-8" />
 
-      <header class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+      <header class="text-center mb-m3-12">
+        <h1 class="text-display-small font-bold text-m3-on-surface mb-m3-4">
           부동산 면적 가이드
         </h1>
-        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        <p class="text-title-medium text-m3-on-surface-variant max-w-2xl mx-auto">
           평수 변환부터 부동산 계약까지, 면적에 관한 모든 궁금증을 해결해 드립니다.
         </p>
       </header>
 
       <!-- Category Filter -->
-      <div class="flex flex-wrap justify-center gap-2 mb-8">
-        <span class="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium">
+      <div class="flex flex-wrap justify-center gap-m3-2 mb-m3-8">
+        <span class="px-m3-4 py-m3-2 bg-m3-primary text-m3-on-primary rounded-m3-full text-label-large font-medium">
           전체 ({guides.length})
         </span>
         {categories.map(category => (
-          <span class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm">
+          <span class="px-m3-4 py-m3-2 bg-m3-surface-variant text-m3-on-surface-variant rounded-m3-full text-label-medium">
             {category} ({guides.filter(g => g.category === category).length})
           </span>
         ))}
       </div>
 
       <!-- Guide Cards -->
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div class="grid gap-m3-6 md:grid-cols-2 lg:grid-cols-3">
         {guides.map((guide, index) => (
           <a
             href={`/guide/${guide.slug}`}
-            class="group bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+            class="group m3-state-layer bg-m3-surface-variant/30 rounded-m3-lg shadow-m3-1 hover:shadow-m3-2 transition-all duration-300 overflow-hidden"
           >
-            <div class="p-6">
-              <div class="flex items-center justify-between mb-3">
-                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-medium rounded-full">
+            <div class="p-m3-6">
+              <div class="flex items-center justify-between mb-m3-3">
+                <span class="px-m3-3 py-m3-1 bg-m3-primary-container text-m3-on-primary-container text-label-small font-medium rounded-m3-full">
                   {guide.category}
                 </span>
-                <span class="text-gray-400 text-sm">#{index + 1}</span>
+                <span class="text-m3-outline text-label-medium">#{index + 1}</span>
               </div>
-              <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <h2 class="text-title-medium font-semibold text-m3-on-surface mb-m3-3 group-hover:text-m3-primary transition-colors">
                 {guide.title}
               </h2>
-              <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+              <p class="text-m3-on-surface-variant text-body-small leading-relaxed">
                 {guide.description}
               </p>
-              <div class="mt-4 flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium">
+              <div class="mt-m3-4 flex items-center text-m3-primary text-label-large font-medium">
                 자세히 보기
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-m3-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
               </div>
@@ -91,10 +91,10 @@ const categories = [...new Set(guides.map((g) => g.category))];
       </div>
 
       <!-- Back to Calculator -->
-      <div class="mt-12 text-center">
+      <div class="mt-m3-12 text-center">
         <a
           href="/"
-          class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+          class="m3-state-layer inline-flex items-center px-m3-6 py-m3-3 bg-m3-primary hover:shadow-m3-2 text-m3-on-primary font-medium rounded-m3-full transition-all"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
