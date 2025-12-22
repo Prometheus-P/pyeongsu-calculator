@@ -12,6 +12,7 @@ import { CalculatorEvents } from '../utils/analytics';
 import { useLeadForm } from '../hooks/useLeadForm';
 import SpaceVisualizer from './SpaceVisualizer'; // Visual Moat Import
 import BudgetEstimator from './BudgetEstimator'; // Cashflow Protocol Import
+import RealPriceInfo from './RealPriceInfo'; // Plan 2: 실거래가 연동
 
 
 export default function Calculator() {
@@ -149,6 +150,11 @@ export default function Calculator() {
       {/* 💰 Cashflow Protocol: The Venom */}
       {insight && isValidInput(pyeong) && (
         <BudgetEstimator pyeong={parseFloat(pyeong)} insightLabel={insight.label} />
+      )}
+
+      {/* 📊 Plan 2: 실거래가 시세 정보 */}
+      {isValidInput(pyeong) && isValidInput(sqm) && (
+        <RealPriceInfo pyeong={parseFloat(pyeong)} sqm={parseFloat(sqm)} />
       )}
 
       {/* 5. M3 Quick Select & Reset */}
