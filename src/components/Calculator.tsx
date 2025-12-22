@@ -35,12 +35,6 @@ export default function Calculator() {
     }
   };
 
-  const updateFieldsFromSqm = (sqmValue: number) => {
-    setSqm(String(sqmValue));
-    setPyeong(formatNumber(convertSqmToPyeong(sqmValue)));
-    findInsight(sqmValue);
-  };
-
   const handleSqmChange = (value: string) => {
     setSqm(value);
     if (isValidInput(value)) {
@@ -67,14 +61,27 @@ export default function Calculator() {
   };
 
   // 빠른 선택 버튼 (주요 아파트 평형)
-  const quickSizes = [59, 74, 84, 110];
+  const quickSizes = [10, 15, 20, 25, 30, 35, 40];
+
+  const handleReset = () => {
+    setSqm('');
+    setPyeong('');
+    setInsight(null);
+  };
+
+  const updateFieldsFromPyeong = (pyeongValue: number) => {
+    setPyeong(String(pyeongValue));
+    const sqmValue = convertPyeongToSqm(pyeongValue);
+    setSqm(formatNumber(sqmValue));
+    findInsight(sqmValue);
+  };
 
   return (
     <div className="bg-m3-surface text-m3-on-surface rounded-m3-lg shadow-m3-1 p-m3-6 max-w-md w-full">
       {/* 1. M3 Title */}
       <div className="text-center mb-m3-6">
         <h1 className="text-headline-small text-m3-on-surface tracking-tight mb-m3-1">
-          아파트 공간 시뮬레이터
+          평수 계산기
         </h1>
         <p className="text-title-medium text-m3-primary">
           "평수 뒤에 숨은, 당신의 삶의 질을 계산합니다"
@@ -84,8 +91,9 @@ export default function Calculator() {
       {/* 2. M3 Input Fields */}
       <div className="grid grid-cols-2 gap-m3-4 mb-m3-6">
         <div className="space-y-m3-2">
-          <label className="text-label-large text-m3-on-surface-variant px-m3-1">전용면적 (㎡)</label>
+          <label htmlFor="sqm-input" className="text-label-large text-m3-on-surface-variant px-m3-1">제곱미터 (㎡)</label>
           <input
+            id="sqm-input"
             type="text"
             value={sqm}
             onChange={(e) => handleSqmChange(e.target.value)}
@@ -94,8 +102,9 @@ export default function Calculator() {
           />
         </div>
         <div className="space-y-m3-2">
-          <label className="text-label-large text-m3-on-surface-variant px-m3-1">평수 (평)</label>
+          <label htmlFor="pyeong-input" className="text-label-large text-m3-on-surface-variant px-m3-1">평</label>
           <input
+            id="pyeong-input"
             ref={pyeongInputRef}
             type="text"
             value={pyeong}
@@ -137,21 +146,29 @@ export default function Calculator() {
         <BudgetEstimator pyeong={parseFloat(pyeong)} insightLabel={insight.label} />
       )}
 
-      {/* 5. M3 Quick Select & Vertical Integration */}
+      {/* 5. M3 Quick Select & Reset */}
       <div className="mt-m3-8">
-        <p className="text-label-medium text-m3-on-surface-variant mb-m3-2 px-m3-1">주요 평형 바로보기</p>
+        <div className="flex justify-between items-center mb-m3-2 px-m3-1">
+          <p className="text-label-medium text-m3-on-surface-variant">주요 평형 바로보기</p>
+          <button
+            onClick={handleReset}
+            className="text-label-medium text-m3-error hover:text-m3-on-error-container m3-state-layer px-m3-2 py-m3-1 rounded-m3-sm transition-all"
+          >
+            초기화
+          </button>
+        </div>
         <div className="grid grid-cols-4 gap-m3-2 mb-m3-6">
           {quickSizes.map((size) => (
             <button
               key={size}
-              onClick={() => updateFieldsFromSqm(size)}
+              onClick={() => updateFieldsFromPyeong(size)}
               className={`py-m3-2 px-m3-1 text-label-large font-bold rounded-m3-full transition-all m3-state-layer ${
-                Math.abs(parseFloat(sqm) - size) < 1 
-                  ? 'bg-m3-primary text-m3-on-primary shadow-m3-2' 
+                Math.abs(parseFloat(pyeong) - size) < 1
+                  ? 'bg-m3-primary text-m3-on-primary shadow-m3-2'
                   : 'bg-m3-secondary-container text-m3-on-secondary-container hover:shadow-m3-1'
               }`}
             >
-              {size}㎡
+              {size}평
             </button>
           ))}
         </div>

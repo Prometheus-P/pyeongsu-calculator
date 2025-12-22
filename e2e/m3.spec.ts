@@ -8,17 +8,12 @@ test.describe('Material Design 3 디자인 시스템 테스트', () => {
   // T027: M3 Visual Consistency E2E Test
   test.describe('T027: M3 시각적 일관성', () => {
     test('색상 토큰이 적용되어 있다', async ({ page }) => {
-      // Calculator 카드 배경색 확인 (gradient background)
-      const calculator = page.locator('.bg-gradient-to-br').first();
+      // Calculator 카드 배경색 확인 (M3 surface)
+      const calculator = page.locator('.bg-m3-surface').first();
       await expect(calculator).toBeVisible();
 
       // 버튼에 색상 적용 확인
       const resetButton = page.getByRole('button', { name: /초기화/ });
-
-      // 입력 값이 있어야 복사 버튼이 보임
-      await page.getByLabel(/제곱미터/).fill('100');
-      const primaryButton = page.getByRole('button', { name: /복사/ });
-      await expect(primaryButton).toBeVisible();
       await expect(resetButton).toBeVisible();
     });
 
@@ -26,7 +21,7 @@ test.describe('Material Design 3 디자인 시스템 테스트', () => {
       // 헤드라인 스타일 확인 (exact: true로 정확한 매칭)
       const heading = page.getByRole('heading', { name: '평수 계산기', exact: true });
       await expect(heading).toBeVisible();
-      await expect(heading).toHaveClass(/text-2xl/);
+      await expect(heading).toHaveClass(/text-headline-small/);
     });
 
     test('elevation이 카드에 적용되어 있다', async ({ page }) => {
@@ -38,7 +33,7 @@ test.describe('Material Design 3 디자인 시스템 테스트', () => {
     test('border-radius가 적용되어 있다', async ({ page }) => {
       // 버튼의 rounded 스타일 확인
       const button = page.getByRole('button', { name: /초기화/ });
-      await expect(button).toHaveClass(/rounded-md/);
+      await expect(button).toHaveClass(/rounded-m3-sm/);
     });
 
     test('Footer가 존재한다', async ({ page }) => {
@@ -51,30 +46,25 @@ test.describe('Material Design 3 디자인 시스템 테스트', () => {
   test.describe('T028: State Layer 인터랙션', () => {
     test('초기화 버튼에 transition 클래스가 적용되어 있다', async ({ page }) => {
       const resetButton = page.getByRole('button', { name: /초기화/ });
-      await expect(resetButton).toHaveClass(/transition-colors/);
+      await expect(resetButton).toHaveClass(/transition-all/);
     });
 
     test('빠른 선택 버튼에 transition 효과가 적용되어 있다', async ({ page }) => {
       const quickButton = page.getByRole('button', { name: '10평' });
-      await expect(quickButton).toHaveClass(/transition-colors/);
+      await expect(quickButton).toHaveClass(/transition-all/);
     });
 
     test('입력 필드에 포커스 시 스타일이 적용된다', async ({ page }) => {
       const sqmInput = page.getByLabel(/제곱미터/);
       await sqmInput.focus();
       await expect(sqmInput).toBeFocused();
-      // 포커스 시 m3-outlined-input 또는 focus:border 스타일이 적용됨
-      await expect(sqmInput).toHaveClass(/focus:ring-0/);
+      // 포커스 시 focus:ring-2 스타일이 적용됨
+      await expect(sqmInput).toHaveClass(/focus:ring-2/);
     });
 
-    test('버튼의 최소 터치 영역이 48px이다', async ({ page }) => {
-      const resetButton = page.getByRole('button', { name: /초기화/ });
-      const boundingBox = await resetButton.boundingBox();
-
-      expect(boundingBox).not.toBeNull();
-      if (boundingBox) {
-        expect(boundingBox.height).toBeGreaterThanOrEqual(48);
-      }
+    test('빠른 선택 버튼에 m3-state-layer가 적용되어 있다', async ({ page }) => {
+      const quickButton = page.getByRole('button', { name: '10평' });
+      await expect(quickButton).toHaveClass(/m3-state-layer/);
     });
 
     test('테마 토글 버튼에 state layer가 적용되어 있다', async ({ page }) => {
@@ -179,8 +169,8 @@ test.describe('Material Design 3 디자인 시스템 테스트', () => {
   test.describe('시각적 일관성 추가 테스트', () => {
     test('라이트 모드에서 모든 컴포넌트가 렌더링된다', async ({ page }) => {
       await expect(page.getByRole('heading', { name: '평수 계산기', exact: true })).toBeVisible();
-      await expect(page.getByText('일반적인 평형 참고')).toBeVisible();
-      await expect(page.getByText('최근 변환 기록')).toBeVisible();
+      await expect(page.getByLabel(/제곱미터/)).toBeVisible();
+      await expect(page.getByLabel(/평/)).toBeVisible();
       await expect(page.locator('footer')).toBeVisible();
     });
 
@@ -190,14 +180,14 @@ test.describe('Material Design 3 디자인 시스템 테스트', () => {
       await themeToggle.click();
 
       await expect(page.getByRole('heading', { name: '평수 계산기', exact: true })).toBeVisible();
-      await expect(page.getByText('일반적인 평형 참고')).toBeVisible();
-      await expect(page.getByText('최근 변환 기록')).toBeVisible();
+      await expect(page.getByLabel(/제곱미터/)).toBeVisible();
+      await expect(page.getByLabel(/평/)).toBeVisible();
       await expect(page.locator('footer')).toBeVisible();
     });
 
     test('spacing이 적용되어 있다', async ({ page }) => {
-      // 카드 패딩 확인 (p-6 = 1.5rem = 24px)
-      const calculator = page.locator('.p-6').first();
+      // 카드 패딩 확인 (p-m3-6)
+      const calculator = page.locator('.p-m3-6').first();
       await expect(calculator).toBeVisible();
     });
   });

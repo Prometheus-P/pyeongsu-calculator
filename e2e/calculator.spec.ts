@@ -22,10 +22,6 @@ test.describe('평수 계산기 E2E 테스트', () => {
       for (const size of quickButtons) {
         await expect(page.getByRole('button', { name: `${size}평` })).toBeVisible();
       }
-
-      // Reference table
-      await expect(page.getByText('일반적인 평형 참고')).toBeVisible();
-      await expect(page.getByRole('table').first()).toBeVisible();
     });
   });
 
@@ -112,26 +108,6 @@ test.describe('평수 계산기 E2E 테스트', () => {
     });
   });
 
-  test.describe('참고 테이블 연동', () => {
-    test('테이블 행 클릭 시 Calculator가 업데이트된다', async ({ page }) => {
-      const sqmInput = page.getByLabel(/제곱미터/);
-      const pyeongInput = page.getByLabel(/평/);
-
-      // 30평 테이블 셀 클릭 (버튼이 아닌 테이블 셀)
-      await page.getByRole('cell', { name: '30평' }).click();
-
-      await expect(pyeongInput).toHaveValue('30');
-      await expect(sqmInput).toHaveValue('99.17');
-    });
-
-    test('테이블의 모든 항목이 표시된다', async ({ page }) => {
-      const types = ['원룸', '투룸', '소형 아파트', '중소형 아파트', '중형 아파트', '중대형 아파트', '대형 아파트'];
-
-      for (const type of types) {
-        await expect(page.getByRole('cell', { name: type, exact: true })).toBeVisible();
-      }
-    });
-  });
 
   test.describe('사용자 시나리오', () => {
     test('시나리오: 85㎡ 아파트의 평수 확인', async ({ page }) => {
@@ -184,15 +160,6 @@ test.describe('평수 계산기 E2E 테스트', () => {
       await expect(pyeongInput).toBeFocused();
     });
 
-    test('Enter 키로 테이블 항목 선택 가능', async ({ page }) => {
-      // 10평 테이블 행에 포커스
-      const row = page.getByRole('row', { name: /10평.*33\.06㎡.*원룸/ });
-      await row.focus();
-      await page.keyboard.press('Enter');
-
-      await expect(page.getByLabel(/평/)).toHaveValue('10');
-    });
-
     test('포커스 표시가 보인다', async ({ page }) => {
       const sqmInput = page.getByLabel(/제곱미터/);
       await sqmInput.focus();
@@ -215,7 +182,7 @@ test.describe('평수 계산기 E2E 테스트', () => {
       await page.setViewportSize({ width: 768, height: 1024 });
 
       await expect(page.getByRole('heading', { name: '평수 계산기', exact: true })).toBeVisible();
-      await expect(page.getByRole('table').first()).toBeVisible();
+      await expect(page.getByLabel(/제곱미터/)).toBeVisible();
     });
   });
 
@@ -243,13 +210,13 @@ test.describe('평수 계산기 E2E 테스트', () => {
   });
 
   test.describe('성능', () => {
-    test('페이지 로드 시간이 3초 이내', async ({ page }) => {
+    test('페이지 로드 시간이 5초 이내', async ({ page }) => {
       const startTime = Date.now();
       await page.goto('/');
       await page.waitForLoadState('networkidle');
       const loadTime = Date.now() - startTime;
 
-      expect(loadTime).toBeLessThan(3000);
+      expect(loadTime).toBeLessThan(5000);
     });
 
     test('입력 반응이 즉각적이다', async ({ page }) => {

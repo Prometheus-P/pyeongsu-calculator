@@ -5,18 +5,21 @@ import Calculator from './Calculator';
 
 describe('Space Simulator (Calculator)', () => {
   describe('Monopoly Features', () => {
-    it('"아파트 공간 시뮬레이터" 라는 독점적 제목을 렌더링한다', () => {
+    it('"평수 계산기" 제목과 서브타이틀을 렌더링한다', () => {
       render(<Calculator />);
-      expect(screen.getByRole('heading', { name: '아파트 공간 시뮬레이터' })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: '평수 계산기' })).toBeInTheDocument();
       expect(screen.getByText('"평수 뒤에 숨은, 당신의 삶의 질을 계산합니다"')).toBeInTheDocument();
     });
 
-    it('주요 평형(59, 74, 84, 110㎡) 버튼을 렌더링한다', () => {
+    it('주요 평형(10, 15, 20, 25, 30, 35, 40평) 버튼을 렌더링한다', () => {
       render(<Calculator />);
-      expect(screen.getByRole('button', { name: /59/ })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /74/ })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /84/ })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /110/ })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /10평/ })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /15평/ })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /20평/ })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /25평/ })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /30평/ })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /35평/ })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /40평/ })).toBeInTheDocument();
     });
 
     it('"이 공간, 어떻게 변신할 수 있을까요? (견적)" 라는 수직 통합 버튼을 렌더링한다', () => {
