@@ -70,58 +70,58 @@ export default function Calculator() {
   const quickSizes = [59, 74, 84, 110];
 
   return (
-    <div className="dark bg-gray-900 rounded-xl shadow-2xl p-6 max-w-md w-full border border-gray-800">
-      {/* 1. Monopoly Title: 타겟 명확화 */}
-      <div className="text-center mb-8">
-        <h1 className="text-2xl font-black text-white tracking-tight mb-1">
+    <div className="bg-m3-surface text-m3-on-surface rounded-m3-lg shadow-m3-1 p-m3-6 max-w-md w-full">
+      {/* 1. M3 Title */}
+      <div className="text-center mb-m3-6">
+        <h1 className="text-headline-small text-m3-on-surface tracking-tight mb-m3-1">
           아파트 공간 시뮬레이터
         </h1>
-        <p className="text-sm text-cyan-400 font-medium">
-          "숫자가 아닌, 당신의 라이프스타일을 계산합니다"
+        <p className="text-title-medium text-m3-primary">
+          "평수 뒤에 숨은, 당신의 삶의 질을 계산합니다"
         </p>
       </div>
 
-      {/* 2. Input Fields */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
-        <div className="space-y-1">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">전용면적 (㎡)</label>
+      {/* 2. M3 Input Fields */}
+      <div className="grid grid-cols-2 gap-m3-4 mb-m3-6">
+        <div className="space-y-m3-2">
+          <label className="text-label-large text-m3-on-surface-variant px-m3-1">전용면적 (㎡)</label>
           <input
             type="text"
             value={sqm}
             onChange={(e) => handleSqmChange(e.target.value)}
-            className="w-full bg-gray-800 text-white text-xl font-bold p-3 rounded border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all text-center"
+            className="w-full bg-m3-surface text-m3-on-surface text-title-large font-bold p-m3-4 rounded-m3-sm border border-m3-outline focus:border-m3-primary focus:ring-2 focus:ring-m3-primary/30 outline-none transition-all text-center"
             placeholder="84"
           />
         </div>
-        <div className="space-y-1">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">평수 (평)</label>
+        <div className="space-y-m3-2">
+          <label className="text-label-large text-m3-on-surface-variant px-m3-1">평수 (평)</label>
           <input
             ref={pyeongInputRef}
             type="text"
             value={pyeong}
             onChange={(e) => handlePyeongChange(e.target.value)}
-            className="w-full bg-gray-800 text-white text-xl font-bold p-3 rounded border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all text-center"
+            className="w-full bg-m3-surface text-m3-on-surface text-title-large font-bold p-m3-4 rounded-m3-sm border border-m3-outline focus:border-m3-primary focus:ring-2 focus:ring-m3-primary/30 outline-none transition-all text-center"
             placeholder="25.4"
           />
         </div>
       </div>
 
-      {/* 3. Proprietary Insight Card: 독점 콘텐츠 표시 */}
+      {/* 3. M3 Insight Card */}
       {insight && (
-        <div className="mb-6 bg-gradient-to-r from-gray-800 to-gray-800 border-l-4 border-cyan-500 p-4 rounded-r shadow-lg animate-fade-in">
-          <h3 className="text-lg font-bold text-white mb-1">{insight.label}</h3>
-          <p className="text-cyan-400 font-bold text-sm mb-3">"{insight.verdict}"</p>
+        <div className="mb-m3-6 bg-m3-secondary-container text-m3-on-secondary-container border-l-4 border-m3-secondary p-m3-4 rounded-m3-md shadow-m3-1 animate-fade-in">
+          <h3 className="text-title-large mb-m3-1">{insight.label}</h3>
+          <p className="text-m3-secondary font-bold text-body-large mb-m3-3">"{insight.verdict}"</p>
           
-          <div className="space-y-2 text-sm">
-            <div className="flex gap-2">
-              <span className="text-green-400 font-bold min-w-[30px]">장점</span>
-              <span className="text-gray-300">{insight.pros}</span>
+          <div className="space-y-m3-2 text-body-medium">
+            <div className="flex gap-m3-2">
+              <span className="text-green-400 dark:text-green-300 font-bold min-w-[30px]">장점</span>
+              <span className="text-m3-on-secondary-container/90">{insight.pros}</span>
             </div>
-            <div className="flex gap-2">
-              <span className="text-red-400 font-bold min-w-[30px]">주의</span>
-              <span className="text-gray-300">{insight.cons}</span>
+            <div className="flex gap-m3-2">
+              <span className="text-red-400 dark:text-red-300 font-bold min-w-[30px]">주의</span>
+              <span className="text-m3-on-secondary-container/90">{insight.cons}</span>
             </div>
-            <div className="mt-2 pt-2 border-t border-gray-700 text-xs text-gray-500 flex justify-between">
+            <div className="mt-m3-2 pt-m3-2 border-t border-m3-outline-variant/50 text-label-medium text-m3-on-secondary-container/70 flex justify-between">
               <span>시장 기준</span>
               <span>{insight.benchmark}</span>
             </div>
@@ -137,18 +137,18 @@ export default function Calculator() {
         <BudgetEstimator pyeong={parseFloat(pyeong)} insightLabel={insight.label} />
       )}
 
-      {/* 5. Quick Select & Vertical Integration */}
-      <div className="mt-8">
-        <p className="text-xs text-gray-500 mb-2 font-bold uppercase">주요 평형 바로보기</p>
-        <div className="grid grid-cols-4 gap-2 mb-6">
+      {/* 5. M3 Quick Select & Vertical Integration */}
+      <div className="mt-m3-8">
+        <p className="text-label-medium text-m3-on-surface-variant mb-m3-2 px-m3-1">주요 평형 바로보기</p>
+        <div className="grid grid-cols-4 gap-m3-2 mb-m3-6">
           {quickSizes.map((size) => (
             <button
               key={size}
               onClick={() => updateFieldsFromSqm(size)}
-              className={`py-2 px-1 text-sm font-bold rounded transition-colors ${
+              className={`py-m3-2 px-m3-1 text-label-large font-bold rounded-m3-full transition-all m3-state-layer ${
                 Math.abs(parseFloat(sqm) - size) < 1 
-                  ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-500/30' 
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  ? 'bg-m3-primary text-m3-on-primary shadow-m3-2' 
+                  : 'bg-m3-secondary-container text-m3-on-secondary-container hover:shadow-m3-1'
               }`}
             >
               {size}㎡
@@ -156,13 +156,13 @@ export default function Calculator() {
           ))}
         </div>
 
-        {/* Vertical Integration: Next Step Button */}
+        {/* M3 Vertical Integration Button */}
         <button 
           onClick={() => window.alert('Vertical Integration: 인테리어/이사 견적 파트너사 연결 예정')}
-          className="w-full py-4 bg-white text-gray-900 font-black rounded text-sm hover:bg-gray-100 transition-transform active:scale-95 flex items-center justify-center gap-2"
+          className="w-full py-m3-3 bg-m3-tertiary-container text-m3-on-tertiary-container font-bold rounded-m3-full text-label-large m3-state-layer hover:shadow-m3-1 transition-all active:scale-95 flex items-center justify-center gap-m3-2"
         >
-          <span>🔨 이 평수 인테리어 견적 미리보기</span>
-          <span className="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded-full animate-pulse">HOT</span>
+          <span>✨ 이 공간, 어떻게 변신할 수 있을까요? (견적)</span>
+          <span className="text-label-small bg-m3-error text-m3-on-error px-m3-2 py-m3-1 rounded-m3-full animate-pulse">HOT</span>
         </button>
       </div>
     </div>

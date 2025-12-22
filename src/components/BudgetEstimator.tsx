@@ -3,7 +3,7 @@
  * [Cash Generator]
  * 공간에 대한 호기심을 '구매 의사'로 전환하는 컴포넌트
  */
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { INTERIOR_COSTS, LOAN_RATES } from '../constants/costs';
 import { formatNumber } from '../utils/converter';
 
@@ -24,71 +24,73 @@ export default function BudgetEstimator({ pyeong, insightLabel }: BudgetEstimato
   const needCash = housePrice > 0 ? housePrice - maxLoan : 0;
 
   return (
-    <div className="mt-8 bg-gray-900 border border-gray-700 rounded-xl p-6 shadow-2xl">
-      <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-        💰 <span className="text-yellow-400">{insightLabel}</span> 현실 견적서
+    <div className="mt-m3-8 bg-m3-surface-variant/60 rounded-m3-lg p-m3-4">
+      <h3 className="text-title-large text-m3-on-surface-variant mb-m3-4 flex items-center gap-m3-2">
+        💰 <span className="text-m3-primary">{insightLabel}</span> 내 집 마련 예산 플래너
       </h3>
 
       {/* 1. 인테리어 섹션 (Proptech Hook) */}
-      <div className="mb-8">
-        <h4 className="text-sm text-gray-400 font-bold uppercase mb-3">인테리어 예산 (시공사 직연결 기준)</h4>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 hover:border-cyan-500 cursor-pointer transition-all group">
-            <div className="text-gray-300 text-sm mb-1">{INTERIOR_COSTS.BASIC.label}</div>
-            <div className="text-2xl font-bold text-white group-hover:text-cyan-400">
-              {formatNumber(basicInterior, 0)} <span className="text-sm font-normal">만원~</span>
+      <div className="mb-m3-6">
+        <h4 className="text-title-small text-m3-on-surface-variant font-bold uppercase mb-m3-3 px-m3-1">인테리어 예산 (시공사 직연결 기준)</h4>
+        <div className="grid grid-cols-2 gap-m3-3">
+          {/* Basic Interior Card */}
+          <div className="bg-m3-surface p-m3-4 rounded-m3-md border border-m3-outline-variant hover:border-m3-primary cursor-pointer transition-all group m3-state-layer">
+            <div className="text-label-large text-m3-on-surface-variant mb-m3-1">{INTERIOR_COSTS.BASIC.label}</div>
+            <div className="text-headline-small font-bold text-m3-on-surface group-hover:text-m3-primary">
+              {formatNumber(basicInterior, 0)} <span className="text-title-medium font-normal">만원~</span>
             </div>
-            <p className="text-xs text-gray-500 mt-2">{INTERIOR_COSTS.BASIC.description}</p>
+            <p className="text-body-small text-m3-on-surface-variant mt-m3-2">{INTERIOR_COSTS.BASIC.description}</p>
           </div>
-          <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 hover:border-purple-500 cursor-pointer transition-all group">
-            <div className="text-gray-300 text-sm mb-1">{INTERIOR_COSTS.PREMIUM.label}</div>
-            <div className="text-2xl font-bold text-white group-hover:text-purple-400">
-              {formatNumber(premiumInterior, 0)} <span className="text-sm font-normal">만원~</span>
+          {/* Premium Interior Card */}
+          <div className="bg-m3-surface p-m3-4 rounded-m3-md border border-m3-outline-variant hover:border-m3-primary cursor-pointer transition-all group m3-state-layer">
+            <div className="text-label-large text-m3-on-surface-variant mb-m3-1">{INTERIOR_COSTS.PREMIUM.label}</div>
+            <div className="text-headline-small font-bold text-m3-on-surface group-hover:text-m3-primary">
+              {formatNumber(premiumInterior, 0)} <span className="text-title-medium font-normal">만원~</span>
             </div>
-            <p className="text-xs text-gray-500 mt-2">{INTERIOR_COSTS.PREMIUM.description}</p>
+            <p className="text-body-small text-m3-on-surface-variant mt-m3-2">{INTERIOR_COSTS.PREMIUM.description}</p>
           </div>
         </div>
         <button 
-          onClick={() => window.alert("지인 시공사 연결 폼(Typeform/Tally) 연동 예정")}
-          className="w-full mt-3 py-3 bg-gray-700 hover:bg-gray-600 text-gray-200 text-sm font-bold rounded flex justify-center items-center gap-2"
+          onClick={() => alert("지인 시공사 연결 폼(Typeform/Tally) 연동 예정")}
+          className="w-full mt-m3-3 py-m3-2 bg-m3-secondary-container text-m3-on-secondary-container text-label-large font-bold rounded-m3-full flex justify-center items-center gap-m3-2 m3-state-layer hover:shadow-m3-1 transition-shadow"
         >
-          👷 호구 당하지 않는 '실적 견적' 받기
+          ✅ 검증된 파트너사에게 '정직한 견적' 받기
         </button>
       </div>
 
       {/* 2. 대출 섹션 (Fintech Hook) */}
-      <div className="pt-6 border-t border-gray-700">
-        <h4 className="text-sm text-gray-400 font-bold uppercase mb-3">자금 조달 계획 (LTV {LOAN_RATES.MORTGAGE.ltv * 100}%)</h4>
+      <div className="pt-m3-6 border-t border-m3-outline-variant">
+        <h4 className="text-title-small text-m3-on-surface-variant font-bold uppercase mb-m3-3 px-m3-1">자금 조달 계획 (LTV {LOAN_RATES.MORTGAGE.ltv * 100}%)</h4>
         
-        <div className="flex gap-4 items-center mb-4">
+        <div className="flex gap-m3-2 items-center mb-m3-4">
           <input 
             type="number" 
             placeholder="매매 목표가 (억 단위)" 
-            className="flex-1 bg-gray-800 text-white p-3 rounded border border-gray-600 focus:border-yellow-400 outline-none"
+            className="flex-1 bg-m3-surface text-m3-on-surface text-body-large p-m3-3 rounded-m3-sm border border-m3-outline focus:border-m3-tertiary focus:ring-2 focus:ring-m3-tertiary/30 outline-none"
             onChange={(e) => setHousePrice(Number(e.target.value) * 10000)} // 억 단위 입력 가정
           />
-          <span className="text-white font-bold">만원</span>
+          <span className="text-m3-on-surface-variant font-bold text-body-large">만원</span>
         </div>
 
         {housePrice > 0 && (
-          <div className="bg-gray-800/50 p-4 rounded mb-4">
-            <div className="flex justify-between text-sm mb-2">
-              <span className="text-gray-400">대출 가능액 (예상)</span>
-              <span className="text-yellow-400 font-bold">{formatNumber(maxLoan, 0)} 만원</span>
+          <div className="bg-m3-surface/50 p-m3-4 rounded-m3-md mb-m3-4 border border-m3-outline-variant/70">
+            <div className="flex justify-between text-body-medium mb-m3-2">
+              <span className="text-m3-on-surface-variant">대출 가능액 (예상)</span>
+              <span className="text-m3-tertiary font-bold">{formatNumber(maxLoan, 0)} 만원</span>
             </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-400">필요 현금</span>
-              <span className="text-white font-bold">{formatNumber(needCash + basicInterior, 0)} 만원</span>
+            <div className="flex justify-between text-body-medium">
+              <span className="text-m3-on-surface-variant">필요 현금</span>
+              <span className="text-m3-on-surface font-bold">{formatNumber(needCash + basicInterior, 0)} 만원</span>
             </div>
-            <div className="text-xs text-right text-gray-500 mt-1">(인테리어 기본 비용 포함)</div>
+            <div className="text-label-small text-right text-m3-on-surface-variant/70 mt-m3-1">(인테리어 기본 비용 포함)</div>
           </div>
         )}
 
         <button 
-          onClick={() => window.alert("대출 상담사 연결 폼 연동 예정")}
-          className="w-full py-4 bg-yellow-500 hover:bg-yellow-400 text-black font-black rounded shadow-lg transform active:scale-95 transition-all"
+          onClick={() => alert("대출 상담사 연결 폼 연동 예정")}
+          className="w-full py-m3-3 bg-m3-tertiary text-m3-on-tertiary font-bold text-label-large rounded-m3-full shadow-m3-1 hover:shadow-m3-2 transform active:scale-95 transition-all m3-state-layer"
         >
-          📞 내 조건 최저금리 & 한도 확인하기
+          📈 1분 만에 알아보는 내 최적 대출 조건
         </button>
       </div>
     </div>
