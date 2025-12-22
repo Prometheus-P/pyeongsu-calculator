@@ -13,6 +13,7 @@ import { useLeadForm } from '../hooks/useLeadForm';
 import SpaceVisualizer from './SpaceVisualizer'; // Visual Moat Import
 import BudgetEstimator from './BudgetEstimator'; // Cashflow Protocol Import
 import RealPriceInfo from './RealPriceInfo'; // Plan 2: 실거래가 연동
+import { TextField, Chip, Card } from './m3'; // M3 컴포넌트
 
 
 export default function Calculator() {
@@ -96,37 +97,38 @@ export default function Calculator() {
 
       {/* 2. M3 Input Fields */}
       <div className="grid grid-cols-2 gap-m3-4 mb-m3-6">
-        <div className="space-y-m3-2">
-          <label htmlFor="sqm-input" className="text-label-large text-m3-on-surface-variant px-m3-1">제곱미터 (㎡)</label>
-          <input
-            id="sqm-input"
-            type="text"
-            value={sqm}
-            onChange={(e) => handleSqmChange(e.target.value)}
-            className="w-full bg-m3-surface text-m3-on-surface text-title-large font-bold p-m3-4 rounded-m3-sm border border-m3-outline focus:border-m3-primary focus:ring-2 focus:ring-m3-primary/30 outline-none transition-all text-center"
-            placeholder="84"
-          />
-        </div>
-        <div className="space-y-m3-2">
-          <label htmlFor="pyeong-input" className="text-label-large text-m3-on-surface-variant px-m3-1">평</label>
-          <input
-            id="pyeong-input"
-            ref={pyeongInputRef}
-            type="text"
-            value={pyeong}
-            onChange={(e) => handlePyeongChange(e.target.value)}
-            className="w-full bg-m3-surface text-m3-on-surface text-title-large font-bold p-m3-4 rounded-m3-sm border border-m3-outline focus:border-m3-primary focus:ring-2 focus:ring-m3-primary/30 outline-none transition-all text-center"
-            placeholder="25.4"
-          />
-        </div>
+        <TextField
+          id="sqm-input"
+          label="제곱미터 (㎡)"
+          type="text"
+          inputMode="decimal"
+          value={sqm}
+          onChange={(e) => handleSqmChange(e.target.value)}
+          placeholder="84"
+          className="text-center text-title-large font-bold"
+        />
+        <TextField
+          id="pyeong-input"
+          ref={pyeongInputRef}
+          label="평"
+          type="text"
+          inputMode="decimal"
+          value={pyeong}
+          onChange={(e) => handlePyeongChange(e.target.value)}
+          placeholder="25.4"
+          className="text-center text-title-large font-bold"
+        />
       </div>
 
       {/* 3. M3 Insight Card */}
       {insight && (
-        <div className="mb-m3-6 bg-m3-secondary-container text-m3-on-secondary-container border-l-4 border-m3-secondary p-m3-4 rounded-m3-md shadow-m3-1 animate-fade-in">
+        <Card
+          variant="filled"
+          className="mb-m3-6 bg-m3-secondary-container text-m3-on-secondary-container border-l-4 border-m3-secondary animate-fade-in"
+        >
           <h3 className="text-title-large mb-m3-1">{insight.label}</h3>
           <p className="text-m3-secondary font-bold text-body-large mb-m3-3">"{insight.verdict}"</p>
-          
+
           <div className="space-y-m3-2 text-body-medium">
             <div className="flex gap-m3-2">
               <span className="text-green-400 dark:text-green-300 font-bold min-w-[30px]">장점</span>
@@ -141,7 +143,7 @@ export default function Calculator() {
               <span>{insight.benchmark}</span>
             </div>
           </div>
-        </div>
+        </Card>
       )}
 
       {/* 4. Visual Moat: 공간 시뮬레이터 */}
@@ -170,17 +172,14 @@ export default function Calculator() {
         </div>
         <div className="grid grid-cols-4 gap-m3-2 mb-m3-6">
           {quickSizes.map((size) => (
-            <button
+            <Chip
               key={size}
+              variant="filter"
+              selected={Math.abs(parseFloat(pyeong) - size) < 1}
               onClick={() => updateFieldsFromPyeong(size)}
-              className={`py-m3-2 px-m3-1 text-label-large font-bold rounded-m3-full transition-all m3-state-layer ${
-                Math.abs(parseFloat(pyeong) - size) < 1
-                  ? 'bg-m3-primary text-m3-on-primary shadow-m3-2'
-                  : 'bg-m3-secondary-container text-m3-on-secondary-container hover:shadow-m3-1'
-              }`}
             >
               {size}평
-            </button>
+            </Chip>
           ))}
         </div>
 
