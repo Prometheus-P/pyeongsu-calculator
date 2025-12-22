@@ -71,12 +71,29 @@ export const TALLY_FORMS = {
 
 export type TallyFormType = keyof typeof TALLY_FORMS;
 
+/** 플레이스홀더 ID 패턴 (실제 폼 ID로 교체 전까지 사용) */
+const PLACEHOLDER_PATTERN = /_FORM_ID$/;
+
+/**
+ * 폼 ID가 플레이스홀더인지 확인
+ */
+export function isPlaceholderFormId(formType: TallyFormType): boolean {
+  return PLACEHOLDER_PATTERN.test(TALLY_FORMS[formType]);
+}
+
 /**
  * Tally 위젯 로드 여부 확인
  */
 export function isTallyLoaded(): boolean {
   return typeof window !== 'undefined' && !!window.Tally;
 }
+
+/** 폼 타입별 준비 중 메시지 */
+const COMING_SOON_MESSAGES: Record<TallyFormType, string> = {
+  INTERIOR_QUOTE: '인테리어 견적 서비스가 곧 오픈됩니다! 🏠\n\n관심을 가져주셔서 감사합니다.',
+  PARTNER_QUOTE: '파트너사 연결 서비스가 곧 오픈됩니다! ✨\n\n빠른 시일 내에 준비하겠습니다.',
+  LOAN_CONSULTATION: '대출 상담 서비스가 곧 오픈됩니다! 💰\n\n조금만 기다려주세요.',
+};
 
 /**
  * Tally 팝업 폼 열기
@@ -90,6 +107,12 @@ export function openTallyForm(
   hiddenFields: Record<string, string | number>,
   options?: Partial<TallyPopupOptions>
 ): void {
+  // 플레이스홀더 ID 감지 시 "준비 중" 메시지 표시
+  if (isPlaceholderFormId(formType)) {
+    window.alert(COMING_SOON_MESSAGES[formType]);
+    return;
+  }
+
   if (!isTallyLoaded()) {
     console.warn('[Tally] Tally widget not loaded. Make sure TallyScript is included.');
     // 폴백: 직접 Tally 페이지로 이동
