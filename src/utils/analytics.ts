@@ -66,3 +66,43 @@ export const ThemeEvents = {
       theme,
     }),
 };
+
+// 리드 폼 이벤트 (Tally 연동)
+export const LeadFormEvents = {
+  /** 리드 폼 열림 */
+  open: (formType: string, pyeong?: number) =>
+    trackEvent('lead_form_open', {
+      form_type: formType,
+      ...(pyeong !== undefined && { pyeong_size: pyeong }),
+    }),
+
+  /** 리드 폼 제출 완료 */
+  submit: (formType: string, submissionId: string) =>
+    trackEvent('lead_form_submit', {
+      form_type: formType,
+      submission_id: submissionId,
+    }),
+
+  /** 리드 폼 닫힘 (제출 없이) */
+  close: (formType: string) =>
+    trackEvent('lead_form_close', {
+      form_type: formType,
+    }),
+};
+
+// 예산 추정기 이벤트
+export const BudgetEstimatorEvents = {
+  /** 매매가 입력 */
+  priceInput: (price: number, pyeong: number) =>
+    trackEvent('budget_price_input', {
+      house_price: price,
+      pyeong_size: pyeong,
+    }),
+
+  /** 인테리어 옵션 조회 */
+  interiorView: (tier: 'basic' | 'premium', cost: number) =>
+    trackEvent('budget_interior_view', {
+      tier,
+      estimated_cost: cost,
+    }),
+};

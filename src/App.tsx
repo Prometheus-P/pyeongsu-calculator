@@ -2,6 +2,7 @@ import Calculator from './components/Calculator';
 import ThemeToggle from './components/ThemeToggle';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { DynamicColorProvider } from './contexts/DynamicColorContext';
+import { ReferralProvider } from './contexts/ReferralContext';
 
 function AppContent() {
   return (
@@ -18,7 +19,9 @@ export default function App() {
   return (
     <ThemeProvider>
       <DynamicColorProvider>
-        <AppContent />
+        <ReferralProvider>
+          <AppContent />
+        </ReferralProvider>
       </DynamicColorProvider>
     </ThemeProvider>
   );

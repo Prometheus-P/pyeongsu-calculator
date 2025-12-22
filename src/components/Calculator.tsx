@@ -8,6 +8,8 @@ import {
   PROPRIETARY_INSIGHTS,
   type InsightKey
 } from '../utils/converter';
+import { CalculatorEvents } from '../utils/analytics';
+import { useLeadForm } from '../hooks/useLeadForm';
 import SpaceVisualizer from './SpaceVisualizer'; // Visual Moat Import
 import BudgetEstimator from './BudgetEstimator'; // Cashflow Protocol Import
 
@@ -18,6 +20,7 @@ export default function Calculator() {
   const [insight, setInsight] = useState<typeof PROPRIETARY_INSIGHTS[InsightKey] | null>(null);
   
   const pyeongInputRef = useRef<HTMLInputElement>(null);
+  const { openForm } = useLeadForm();
 
   // Insight Finder: 입력값과 가장 가까운 독점 데이터 매칭 (오차 범위 ±5%)
   const findInsight = (sqmValue: number) => {
@@ -67,6 +70,7 @@ export default function Calculator() {
     setSqm('');
     setPyeong('');
     setInsight(null);
+    CalculatorEvents.clear();
   };
 
   const updateFieldsFromPyeong = (pyeongValue: number) => {
@@ -74,6 +78,7 @@ export default function Calculator() {
     const sqmValue = convertPyeongToSqm(pyeongValue);
     setSqm(formatNumber(sqmValue));
     findInsight(sqmValue);
+    CalculatorEvents.quickSelect(pyeongValue);
   };
 
   return (
@@ -174,8 +179,12 @@ export default function Calculator() {
         </div>
 
         {/* M3 Vertical Integration Button */}
-        <button 
-          onClick={() => window.alert('Vertical Integration: 인테리어/이사 견적 파트너사 연결 예정')}
+        <button
+          onClick={() => openForm('INTERIOR_QUOTE', {
+            pyeong: parseFloat(pyeong) || undefined,
+            sqm: parseFloat(sqm) || undefined,
+            insightLabel: insight?.label,
+          })}
           className="w-full py-m3-3 bg-m3-tertiary-container text-m3-on-tertiary-container font-bold rounded-m3-full text-label-large m3-state-layer hover:shadow-m3-1 transition-all active:scale-95 flex items-center justify-center gap-m3-2"
         >
           <span>✨ 이 공간, 어떻게 변신할 수 있을까요? (견적)</span>
