@@ -4,10 +4,14 @@
 
 ## 주요 기능
 
-- 제곱미터 → 평 실시간 변환
-- 평 → 제곱미터 실시간 변환
+- 제곱미터 ↔ 평 실시간 양방향 변환
 - 빠른 평형 버튼 (10평 ~ 40평)
-- 일반적인 평형 참고표
+- 공간 시각화 (SpaceVisualizer)
+- 예산 추정 (BudgetEstimator)
+- 실거래가 정보 연동
+- Material 3 디자인 시스템
+- 다크모드 지원
+- SEO 최적화 (JSON-LD, 사이트맵)
 - 반응형 디자인 (모바일 지원)
 
 ## 기술 스택
@@ -15,10 +19,11 @@
 | 구분 | 기술 |
 |------|------|
 | 프레임워크 | Astro 4 + React 18 |
-| 스타일링 | Tailwind CSS |
+| 스타일링 | Tailwind CSS + Material 3 |
 | 테스트 | Vitest + Playwright |
 | 배포 | Cloudflare Pages |
-| 언어 | TypeScript |
+| 언어 | TypeScript 5.5 |
+| CI/CD | GitHub Actions |
 
 ## 빠른 시작
 
@@ -30,7 +35,7 @@ npm install
 npm run dev
 
 # 테스트 실행
-npm run test
+npm test
 
 # 프로덕션 빌드
 npm run build
@@ -46,30 +51,38 @@ npm run build
 ## 프로젝트 구조
 
 ```
-📦 pyeongsu-calculator/
-├── src/
-│   ├── components/       # React 컴포넌트
-│   ├── utils/           # 유틸리티 함수
-│   └── __tests__/       # 테스트 파일
-├── README.md            # 프로젝트 개요
-├── plan.md              # TDD 태스크 목록
-├── CONTRIBUTING.md      # 기여 가이드
-└── package.json         # 의존성 관리
+src/
+├── components/           # 컴포넌트
+│   ├── ads/             # 광고 컴포넌트
+│   ├── analytics/       # 분석 컴포넌트
+│   ├── m3/              # Material 3 UI
+│   ├── seo/             # SEO 컴포넌트
+│   ├── Calculator.tsx   # 메인 계산기
+│   ├── BudgetEstimator.tsx
+│   ├── SpaceVisualizer.tsx
+│   └── ThemeToggle.tsx
+├── constants/           # 상수 정의
+├── content/             # Astro Content Collections
+├── contexts/            # React Context
+├── hooks/               # 커스텀 훅
+├── layouts/             # Astro 레이아웃
+├── pages/               # Astro 페이지
+├── services/            # API 서비스
+├── styles/              # CSS 스타일
+├── types/               # TypeScript 타입
+└── utils/               # 유틸리티 함수
 ```
 
 ## 문서
 
-### 개발 문서
-- [plan.md](./plan.md) - TDD 태스크 목록 및 진행 상황
 - [CONTRIBUTING.md](./CONTRIBUTING.md) - 기여 가이드라인
+- [CHANGELOG.md](./CHANGELOG.md) - 변경 이력
 
 ### 배포 가이드
-- [🚀 배포 빠른 시작](./docs/DEPLOYMENT-QUICKSTART.md) - **여기서 시작하세요!**
-- [Cloudflare Pages 설정](./docs/cloudflare-pages-setup.md) - Cloudflare 배포 가이드
-- [Google Analytics 설정](./docs/google-analytics-setup.md) - GA4 설정 가이드
-- [검색엔진 등록](./docs/search-console-setup.md) - Google/Naver 등록 가이드
-- [전체 배포 체크리스트](./docs/deployment-checklist.md) - 상세 체크리스트
-- [CI/CD 분석](./docs/ci-cd-analysis.md) - CI/CD 상태 및 보안 분석
+- [배포 빠른 시작](./docs/DEPLOYMENT-QUICKSTART.md)
+- [Cloudflare Pages 설정](./docs/cloudflare-pages-setup.md)
+- [Google Analytics 설정](./docs/google-analytics-setup.md)
+- [검색엔진 등록](./docs/search-console-setup.md)
 
 ## 라이선스
 

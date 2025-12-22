@@ -137,11 +137,24 @@ lighthouse-report*.html
 lighthouse-report*.json
 
 # ============================================
-# Claude Code
+# AI Development Tools (local settings)
 # ============================================
 .claude/settings.local.json
+.gemini/
+.cursor/
+.copilot/
 
 # ============================================
-# Gemini AI
+# Terraform / Infrastructure
 # ============================================
-.gemini/
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# ============================================
+# Misc generated files
+# ============================================
+*.min.js
+*.min.css
+.vercel/
+.netlify/
