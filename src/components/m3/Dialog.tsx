@@ -100,6 +100,7 @@ function DialogComponent({
       role="dialog"
       aria-modal="true"
       aria-labelledby="dialog-title"
+      tabIndex={-1}
       onKeyDown={handleKeyDown}
     >
       {/* Scrim */}
