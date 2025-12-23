@@ -10,19 +10,32 @@ import {
 } from '../utils/converter';
 import { CalculatorEvents } from '../utils/analytics';
 import { useLeadForm } from '../hooks/useLeadForm';
+import { getProvocativeMessage, getShareableText, type FamilyType } from '../utils/insightGenerator';
 import SpaceVisualizer from './SpaceVisualizer'; // Visual Moat Import
 import BudgetEstimator from './BudgetEstimator'; // Cashflow Protocol Import
 import RealPriceInfo from './RealPriceInfo'; // Plan 2: 실거래가 연동
 import { TextField, Chip, Card } from './m3'; // M3 컴포넌트
 
+const FAMILY_OPTIONS: { type: FamilyType; label: string }[] = [
+  { type: 'single', label: '1인' },
+  { type: 'couple', label: '2인' },
+  { type: 'family_3', label: '3인' },
+  { type: 'family_4', label: '4인+' },
+];
 
 export default function Calculator() {
   const [sqm, setSqm] = useState('');
   const [pyeong, setPyeong] = useState('');
   const [insight, setInsight] = useState<typeof PROPRIETARY_INSIGHTS[InsightKey] | null>(null);
-  
+  const [familyType, setFamilyType] = useState<FamilyType>('couple');
+
   const pyeongInputRef = useRef<HTMLInputElement>(null);
   const { openForm } = useLeadForm();
+
+  // 트리거 메시지 계산
+  const triggerResult = isValidInput(pyeong)
+    ? getProvocativeMessage(parseFloat(pyeong), familyType)
+    : null;
 
   // Insight Finder: 입력값과 가장 가까운 독점 데이터 매칭 (오차 범위 ±5%)
   const findInsight = (sqmValue: number) => {
@@ -120,7 +133,60 @@ export default function Calculator() {
         />
       </div>
 
-      {/* 3. 빠른 선택 */}
+      {/* 3. 가구원 수 선택 */}
+      <section className="mb-m3-4">
+        <p className="text-body-medium text-m3-on-surface-variant mb-m3-2">
+          몇 명이 사시나요?
+        </p>
+        <div className="grid grid-cols-4 gap-m3-2">
+          {FAMILY_OPTIONS.map(({ type, label }) => (
+            <Chip
+              key={type}
+              variant="filter"
+              selected={familyType === type}
+              onClick={() => setFamilyType(type)}
+            >
+              {label}
+            </Chip>
+          ))}
+        </div>
+      </section>
+
+      {/* 4. 트리거 메시지 - 도발적 진단 */}
+      {triggerResult && (
+        <div
+          className={`mb-m3-6 p-m3-4 rounded-m3-md border-l-4 animate-fade-in ${
+            triggerResult.level === 'danger'
+              ? 'bg-red-50 dark:bg-red-950/30 border-red-500 text-red-800 dark:text-red-200'
+              : triggerResult.level === 'warning'
+              ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-500 text-amber-800 dark:text-amber-200'
+              : triggerResult.level === 'success'
+              ? 'bg-green-50 dark:bg-green-950/30 border-green-500 text-green-800 dark:text-green-200'
+              : 'bg-purple-50 dark:bg-purple-950/30 border-purple-500 text-purple-800 dark:text-purple-200'
+          }`}
+        >
+          <p className="text-body-large font-medium">
+            {triggerResult.icon} {triggerResult.message}
+          </p>
+          <button
+            onClick={() => {
+              const shareText = getShareableText(parseFloat(pyeong), familyType);
+              const shareUrl = window.location.href;
+              if (navigator.share) {
+                navigator.share({ text: shareText, url: shareUrl });
+              } else {
+                navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
+                alert('링크가 복사되었습니다!');
+              }
+            }}
+            className="mt-m3-3 text-label-medium underline opacity-70 hover:opacity-100 transition-opacity"
+          >
+            친구에게 공유하기 →
+          </button>
+        </div>
+      )}
+
+      {/* 5. 빠른 선택 */}
       <section className="mb-m3-6">
         <div className="flex justify-between items-center mb-m3-3">
           <p className="text-body-medium text-m3-on-surface-variant">
