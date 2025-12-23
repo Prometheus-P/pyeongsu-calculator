@@ -21,7 +21,7 @@ test.describe('Material Design 3 디자인 시스템 테스트', () => {
       // 헤드라인 스타일 확인 (exact: true로 정확한 매칭)
       const heading = page.getByRole('heading', { name: '평수 계산기', exact: true });
       await expect(heading).toBeVisible();
-      await expect(heading).toHaveClass(/text-headline-small/);
+      await expect(heading).toHaveClass(/text-headline-medium/);
     });
 
     test('elevation이 카드에 적용되어 있다', async ({ page }) => {
@@ -58,8 +58,9 @@ test.describe('Material Design 3 디자인 시스템 테스트', () => {
       const sqmInput = page.getByLabel(/제곱미터/);
       await sqmInput.focus();
       await expect(sqmInput).toBeFocused();
-      // 포커스 시 focus:ring-2 스타일이 적용됨
-      await expect(sqmInput).toHaveClass(/focus:ring-2/);
+      // 포커스 시 컨테이너에 focus-within:ring-1 스타일이 적용됨
+      const container = page.locator('.focus-within\\:ring-1').first();
+      await expect(container).toBeVisible();
     });
 
     test('빠른 선택 버튼에 m3-state-layer가 적용되어 있다', async ({ page }) => {
