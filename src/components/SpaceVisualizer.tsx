@@ -5,6 +5,8 @@
  * 사용자가 숫자가 아닌 '공간감'을 느끼게 함.
  */
 
+import { useState } from 'react';
+
 interface SpaceVisualizerProps {
   sqm: number;
 }
@@ -68,12 +70,27 @@ const PersonIcon = ({ className }: { className?: string }) => (
 );
 
 export default function SpaceVisualizer({ sqm }: SpaceVisualizerProps) {
+  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
   const sideLength = Math.sqrt(sqm);
 
   // 방 크기에 따른 스케일 계산 (더 큰 방 = 가구가 상대적으로 작게 보임)
   const roomScale = Math.min(sideLength * 7, 100);
   // 가구 크기는 방이 커질수록 상대적으로 작아짐
   const furnitureScale = Math.max(100 / roomScale, 0.4);
+
+  const handleSaveLayout = () => {
+    setShowEmailForm(true);
+  };
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Fake Door: 실제 저장은 하지 않고 이메일만 수집
+    console.log('[Data Dam] Layout save request:', { sqm, email });
+    setSubmitted(true);
+  };
 
   return (
     <div className="mt-m3-6 p-m3-4 bg-m3-surface-variant rounded-m3-lg border border-m3-outline-variant shadow-m3-1">
@@ -171,6 +188,51 @@ export default function SpaceVisualizer({ sqm }: SpaceVisualizerProps) {
       <p className="text-label-small text-center text-m3-on-surface-variant mt-m3-3">
         * 가구 위에 마우스를 올리면 크기를 확인할 수 있습니다
       </p>
+
+      {/* Fake Door: 데이터 수집 훅 */}
+      {!showEmailForm && !submitted && (
+        <button
+          onClick={handleSaveLayout}
+          className="w-full mt-m3-4 py-m3-3 bg-m3-tertiary-container text-m3-on-tertiary-container rounded-m3-md text-label-large font-medium m3-state-layer hover:shadow-m3-1 transition-all"
+        >
+          💾 내 배치 저장하고 비교하기
+        </button>
+      )}
+
+      {showEmailForm && !submitted && (
+        <form onSubmit={handleEmailSubmit} className="mt-m3-4 p-m3-3 bg-m3-surface rounded-m3-md border border-m3-outline-variant animate-fade-in">
+          <p className="text-body-medium text-m3-on-surface mb-m3-2">
+            🚧 이 기능은 곧 출시됩니다!
+          </p>
+          <p className="text-label-small text-m3-on-surface-variant mb-m3-3">
+            비슷한 평형대 사람들의 배치와 비교할 수 있는 기능을 준비 중입니다. 알림을 받으시겠습니까?
+          </p>
+          <div className="flex gap-m3-2">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="이메일 주소"
+              required
+              className="flex-1 px-m3-3 py-m3-2 text-body-medium bg-m3-surface-variant text-m3-on-surface rounded-m3-sm border border-m3-outline focus:border-m3-primary focus:ring-1 focus:ring-m3-primary outline-none"
+            />
+            <button
+              type="submit"
+              className="px-m3-4 py-m3-2 bg-m3-primary text-m3-on-primary rounded-m3-sm text-label-medium font-medium m3-state-layer"
+            >
+              알림받기
+            </button>
+          </div>
+        </form>
+      )}
+
+      {submitted && (
+        <div className="mt-m3-4 p-m3-3 bg-green-50 dark:bg-green-950/30 rounded-m3-md text-center animate-fade-in">
+          <p className="text-body-medium text-green-800 dark:text-green-200">
+            ✅ 등록되었습니다! 기능이 출시되면 알려드릴게요.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

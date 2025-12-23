@@ -64,7 +64,9 @@
       "Bash(gh issue close:*)",
       "Bash(npm test:*)",
       "Bash(ls:*)",
-      "Bash(xargs:*)"
+      "Bash(xargs:*)",
+      "Bash(chmod:*)",
+      "Bash(git restore:*)"
     ],
     "deny": [],
     "ask": []
