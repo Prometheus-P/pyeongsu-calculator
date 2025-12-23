@@ -1,6 +1,6 @@
 {
   "name": "pyeongsu-calculator",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "SEO 최적화 평수 계산기 - Astro + React Islands",
   "type": "module",
   "scripts": {
