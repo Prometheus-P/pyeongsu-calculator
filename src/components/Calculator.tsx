@@ -120,7 +120,34 @@ export default function Calculator() {
         />
       </div>
 
-      {/* 3. 평형 인사이트 */}
+      {/* 3. 빠른 선택 */}
+      <section className="mb-m3-6">
+        <div className="flex justify-between items-center mb-m3-3">
+          <p className="text-body-medium text-m3-on-surface-variant">
+            자주 찾는 평형
+          </p>
+          <button
+            onClick={handleReset}
+            className="text-label-medium text-m3-error hover:text-m3-on-error-container m3-state-layer px-m3-2 py-m3-1 rounded-m3-sm transition-all"
+          >
+            초기화
+          </button>
+        </div>
+        <div className="grid grid-cols-4 gap-m3-2">
+          {quickSizes.map((size) => (
+            <Chip
+              key={size}
+              variant="filter"
+              selected={Math.abs(parseFloat(pyeong) - size) < 1}
+              onClick={() => updateFieldsFromPyeong(size)}
+            >
+              {size}평
+            </Chip>
+          ))}
+        </div>
+      </section>
+
+      {/* 4. 평형 인사이트 */}
       {insight && (
         <Card
           variant="filled"
@@ -175,33 +202,8 @@ export default function Calculator() {
         <RealPriceInfo pyeong={parseFloat(pyeong)} sqm={parseFloat(sqm)} />
       )}
 
-      {/* 5. 빠른 선택 */}
+      {/* CTA 버튼 */}
       <section className="mt-m3-8">
-        <div className="flex justify-between items-center mb-m3-3">
-          <p className="text-body-medium text-m3-on-surface-variant">
-            자주 찾는 평형
-          </p>
-          <button
-            onClick={handleReset}
-            className="text-label-medium text-m3-error hover:text-m3-on-error-container m3-state-layer px-m3-2 py-m3-1 rounded-m3-sm transition-all"
-          >
-            초기화
-          </button>
-        </div>
-        <div className="grid grid-cols-4 gap-m3-2 mb-m3-8">
-          {quickSizes.map((size) => (
-            <Chip
-              key={size}
-              variant="filter"
-              selected={Math.abs(parseFloat(pyeong) - size) < 1}
-              onClick={() => updateFieldsFromPyeong(size)}
-            >
-              {size}평
-            </Chip>
-          ))}
-        </div>
-
-        {/* CTA 버튼 */}
         <button
           onClick={() => openForm('INTERIOR_QUOTE', {
             pyeong: parseFloat(pyeong) || undefined,
