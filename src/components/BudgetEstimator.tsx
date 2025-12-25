@@ -86,9 +86,9 @@ export default function BudgetEstimator({ pyeong, insightLabel }: BudgetEstimato
         <TextField
           label="희망 매매가"
           type="number"
-          suffix="억"
+          suffix="억원"
           placeholder="5"
-          supportingText="억 단위로 입력하세요 (예: 5억 → 5)"
+          supportingText="억원 단위로 입력 (예: 5억 → 5, 7억5천 → 7.5)"
           containerClassName="mb-m3-4"
           onChange={(e) => {
             const priceInManwon = Number(e.target.value) * 10000;
@@ -127,6 +127,10 @@ export default function BudgetEstimator({ pyeong, insightLabel }: BudgetEstimato
         >
           대출 상담 신청하기
         </button>
+
+        <p className="text-label-small text-m3-error mt-m3-3 text-center">
+          2025년 기준금리 변동 예고 - 지금 한도를 확인하세요
+        </p>
       </div>
     </section>
   );
