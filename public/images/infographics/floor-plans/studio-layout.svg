@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="원룸/스튜디오 평면도">
+  <style>
+    .bg { fill: #FAFAFA; }
+    .wall { fill: #E0E0E0; stroke: #9E9E9E; stroke-width: 2; }
+    .room { fill: #E3F2FD; stroke: #1976D2; stroke-width: 1.5; }
+    .bath { fill: #E8F5E9; stroke: #4CAF50; stroke-width: 1.5; }
+    .kitchen { fill: #FFF3E0; stroke: #FF9800; stroke-width: 1.5; }
+    .text { fill: #424242; font-family: -apple-system, sans-serif; font-size: 11px; }
+    .label { fill: #1976D2; font-family: -apple-system, sans-serif; font-size: 14px; font-weight: 600; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #2D2D2D; }
+      .wall { fill: #424242; stroke: #616161; }
+      .room { fill: #1E3A5F; stroke: #42A5F5; }
+      .bath { fill: #1B5E20; stroke: #66BB6A; }
+      .kitchen { fill: #4E3524; stroke: #FFB74D; }
+      .text { fill: #E0E0E0; }
+      .label { fill: #64B5F6; }
+    }
+  </style>
+
+  <rect class="bg" width="200" height="200" rx="12"/>
+
+  <!-- Outer Wall -->
+  <rect class="wall" x="20" y="30" width="160" height="140" rx="4"/>
+
+  <!-- Main Living/Bedroom Area -->
+  <rect class="room" x="30" y="40" width="100" height="90" rx="2"/>
+  <text class="text" x="80" y="90" text-anchor="middle">거실+침실</text>
+
+  <!-- Kitchen Area -->
+  <rect class="kitchen" x="135" y="40" width="35" height="50" rx="2"/>
+  <text class="text" x="152" y="70" text-anchor="middle" font-size="9">주방</text>
+
+  <!-- Bathroom -->
+  <rect class="bath" x="135" y="95" width="35" height="35" rx="2"/>
+  <text class="text" x="152" y="117" text-anchor="middle" font-size="9">욕실</text>
+
+  <!-- Entrance -->
+  <rect fill="#BDBDBD" x="30" y="135" width="30" height="25" rx="2"/>
+  <text class="text" x="45" y="152" text-anchor="middle" font-size="9">현관</text>
+
+  <!-- Label -->
+  <text class="label" x="100" y="188" text-anchor="middle">원룸 (10-15평)</text>
+</svg>

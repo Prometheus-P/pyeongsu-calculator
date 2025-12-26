@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" role="img" aria-labelledby="title desc">
+  <title id="title">아파트 면적 유형 비교</title>
+  <desc id="desc">전용면적, 공급면적, 계약면적의 차이를 중첩 다이어그램으로 설명합니다</desc>
+
+  <style>
+    .bg { fill: #F8F9FF; }
+    .exclusive { fill: #E8F5E9; stroke: #4CAF50; stroke-width: 3; }
+    .supply { fill: none; stroke: #2196F3; stroke-width: 3; stroke-dasharray: 8,4; }
+    .contract { fill: none; stroke: #9E9E9E; stroke-width: 2; stroke-dasharray: 4,4; }
+    .text-dark { fill: #191C20; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .text-muted { fill: #73777F; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .label-green { fill: #2E7D32; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .label-blue { fill: #1565C0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .label-gray { fill: #616161; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #1C1B1F; }
+      .text-dark { fill: #E6E1E5; }
+      .text-muted { fill: #938F99; }
+      .exclusive { fill: #1B5E20; stroke: #66BB6A; }
+      .label-green { fill: #81C784; }
+      .label-blue { fill: #64B5F6; }
+      .label-gray { fill: #BDBDBD; }
+    }
+  </style>
+
+  <!-- Background -->
+  <rect class="bg" width="700" height="400" rx="12"/>
+
+  <!-- Header -->
+  <text class="text-dark" x="350" y="35" text-anchor="middle" font-size="20" font-weight="600">아파트 면적의 종류 이해하기</text>
+  <text class="text-muted" x="350" y="55" text-anchor="middle" font-size="13">같은 34평이라도 실제 크기가 다를 수 있습니다</text>
+
+  <!-- Nested Diagram -->
+  <g transform="translate(100, 80)">
+    <!-- Contract Area (Outermost) -->
+    <rect class="contract" x="0" y="0" width="320" height="220" rx="16"/>
+    <text class="label-gray" x="160" y="-8" text-anchor="middle" font-size="13" font-weight="500">계약면적</text>
+
+    <!-- Supply Area -->
+    <rect class="supply" x="20" y="20" width="280" height="180" rx="12"/>
+    <text class="label-blue" x="160" y="36" text-anchor="middle" font-size="13" font-weight="500">공급면적 (분양면적)</text>
+
+    <!-- Exclusive Area (Innermost) -->
+    <rect class="exclusive" x="50" y="55" width="220" height="130" rx="8"/>
+    <text class="label-green" x="160" y="125" text-anchor="middle" font-size="15" font-weight="600">전용면적</text>
+    <text class="label-green" x="160" y="145" text-anchor="middle" font-size="12">(실제 거주 공간)</text>
+
+    <!-- Components Labels -->
+    <!-- Balcony area (between supply and exclusive) -->
+    <text class="text-muted" x="160" y="195" text-anchor="middle" font-size="10">+ 주거공용 (계단, 복도, 엘리베이터)</text>
+
+    <!-- Other common area -->
+    <text class="text-muted" x="160" y="215" text-anchor="middle" font-size="10">+ 기타공용 (관리사무소, 경로당 등)</text>
+  </g>
+
+  <!-- Example Box -->
+  <g transform="translate(450, 80)">
+    <rect fill="#FFF3E0" x="0" y="0" width="220" height="220" rx="12"/>
+    <text class="text-dark" x="110" y="25" text-anchor="middle" font-size="14" font-weight="600">34평형 예시</text>
+
+    <!-- Breakdown -->
+    <g transform="translate(20, 45)">
+      <rect fill="#4CAF50" x="0" y="0" width="16" height="16" rx="3"/>
+      <text class="text-dark" x="25" y="13" font-size="12">전용면적: 84.9㎡</text>
+      <text class="text-muted" x="25" y="28" font-size="10">(실제 생활 공간)</text>
+
+      <rect fill="none" stroke="#2196F3" stroke-width="2" x="0" y="45" width="16" height="16" rx="3"/>
+      <text class="text-dark" x="25" y="58" font-size="12">공급면적: 112.5㎡</text>
+      <text class="text-muted" x="25" y="73" font-size="10">(전용 + 주거공용)</text>
+
+      <rect fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="3,2" x="0" y="90" width="16" height="16" rx="3"/>
+      <text class="text-dark" x="25" y="103" font-size="12">계약면적: 148.2㎡</text>
+      <text class="text-muted" x="25" y="118" font-size="10">(공급 + 기타공용)</text>
+    </g>
+
+    <!-- Key Insight -->
+    <rect fill="#FFCC80" x="10" y="160" width="200" height="50" rx="8"/>
+    <text class="text-dark" x="110" y="182" text-anchor="middle" font-size="11" font-weight="500">실제 거주 공간은</text>
+    <text class="text-dark" x="110" y="198" text-anchor="middle" font-size="11" font-weight="500">전용면적(84.9㎡)만 해당!</text>
+  </g>
+
+  <!-- Tips Section -->
+  <g transform="translate(50, 320)">
+    <rect fill="#E3F2FD" x="0" y="0" width="600" height="60" rx="10"/>
+
+    <text class="text-dark" x="20" y="22" font-size="12" font-weight="600">꿀팁</text>
+
+    <text class="text-muted" x="20" y="42" font-size="11">1. 분양광고의 "34평"은 보통 공급면적 기준입니다</text>
+    <text class="text-muted" x="320" y="42" font-size="11">2. 실제 집 크기는 전용면적으로 비교하세요</text>
+  </g>
+
+  <!-- Footer -->
+  <text class="text-muted" x="350" y="392" text-anchor="middle" font-size="10">pyeongcalc.kr</text>
+</svg>

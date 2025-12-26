@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="title desc">
+  <title id="title">25평 vs 34평 아파트 비교</title>
+  <desc id="desc">25평(59제곱미터) 아파트와 34평(84제곱미터) 아파트의 크기, 방 배치, 적합 가구를 비교하는 인포그래픽</desc>
+
+  <style>
+    .bg { fill: #F8F9FF; }
+    .primary { fill: #1976D2; }
+    .primary-light { fill: #BBDEFB; }
+    .secondary { fill: #7C4DFF; }
+    .secondary-light { fill: #E8DEF8; }
+    .text-dark { fill: #191C20; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .text-muted { fill: #73777F; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .outline { stroke: #73777F; stroke-width: 1; fill: none; }
+    .outline-primary { stroke: #1976D2; stroke-width: 2; fill: none; }
+    .outline-secondary { stroke: #7C4DFF; stroke-width: 2; fill: none; }
+    .floor-25 { fill: #E3F2FD; stroke: #1976D2; stroke-width: 2; }
+    .floor-34 { fill: #EDE7F6; stroke: #7C4DFF; stroke-width: 2; }
+    .room { fill: #FFFFFF; stroke: #90A4AE; stroke-width: 1; }
+    .furniture { fill: #CFD8DC; stroke: #78909C; stroke-width: 1; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #1C1B1F; }
+      .text-dark { fill: #E6E1E5; }
+      .text-muted { fill: #938F99; }
+      .floor-25 { fill: #1E3A5F; stroke: #42A5F5; }
+      .floor-34 { fill: #2E1A47; stroke: #B388FF; }
+      .room { fill: #2D2D2D; stroke: #616161; }
+      .furniture { fill: #424242; stroke: #757575; }
+    }
+  </style>
+
+  <!-- Background -->
+  <rect class="bg" width="800" height="450" rx="16"/>
+
+  <!-- Header -->
+  <text class="text-dark" x="400" y="40" text-anchor="middle" font-size="24" font-weight="600">국민 평형 비교: 어떤 집이 나에게 맞을까?</text>
+
+  <!-- Divider -->
+  <line x1="400" y1="70" x2="400" y2="420" stroke="#E0E0E0" stroke-width="2" stroke-dasharray="8,4"/>
+  <text class="text-muted" x="400" y="240" text-anchor="middle" font-size="16" font-weight="500">VS</text>
+
+  <!-- Left: 25평 Section -->
+  <g transform="translate(40, 80)">
+    <!-- Title -->
+    <rect class="primary" x="60" y="0" width="200" height="36" rx="18"/>
+    <text fill="#FFFFFF" x="160" y="24" text-anchor="middle" font-size="16" font-weight="600">25평 (전용 59㎡)</text>
+
+    <!-- Floor Plan -->
+    <rect class="floor-25" x="30" y="50" width="260" height="180" rx="8"/>
+
+    <!-- Rooms -->
+    <!-- Living Room -->
+    <rect class="room" x="40" y="60" width="120" height="80" rx="4"/>
+    <text class="text-muted" x="100" y="105" text-anchor="middle" font-size="11">거실</text>
+
+    <!-- Kitchen -->
+    <rect class="room" x="170" y="60" width="110" height="50" rx="4"/>
+    <text class="text-muted" x="225" y="90" text-anchor="middle" font-size="11">주방</text>
+
+    <!-- Room 1 -->
+    <rect class="room" x="40" y="150" width="80" height="70" rx="4"/>
+    <text class="text-muted" x="80" y="190" text-anchor="middle" font-size="11">안방</text>
+
+    <!-- Room 2 -->
+    <rect class="room" x="130" y="150" width="70" height="70" rx="4"/>
+    <text class="text-muted" x="165" y="190" text-anchor="middle" font-size="11">방2</text>
+
+    <!-- Bathroom -->
+    <rect class="room" x="210" y="120" width="70" height="50" rx="4"/>
+    <text class="text-muted" x="245" y="150" text-anchor="middle" font-size="10">욕실</text>
+
+    <!-- Balcony -->
+    <rect x="210" y="180" width="70" height="40" rx="4" fill="none" stroke="#90A4AE" stroke-dasharray="4,2"/>
+    <text class="text-muted" x="245" y="205" text-anchor="middle" font-size="9">발코니</text>
+
+    <!-- Specs -->
+    <g transform="translate(0, 250)">
+      <rect fill="#E3F2FD" x="0" y="0" width="320" height="90" rx="8"/>
+
+      <text class="text-dark" x="20" y="25" font-size="13" font-weight="500">구조</text>
+      <text class="text-muted" x="80" y="25" font-size="13">2~3개 방 / 욕실 1개</text>
+
+      <text class="text-dark" x="20" y="50" font-size="13" font-weight="500">추천</text>
+      <text class="text-muted" x="80" y="50" font-size="13">신혼부부, 2~3인 가구</text>
+
+      <text class="text-dark" x="20" y="75" font-size="13" font-weight="500">장점</text>
+      <text class="text-muted" x="80" y="75" font-size="13">관리비 저렴, 초기비용 부담 적음</text>
+    </g>
+  </g>
+
+  <!-- Right: 34평 Section -->
+  <g transform="translate(420, 80)">
+    <!-- Title -->
+    <rect class="secondary" x="60" y="0" width="200" height="36" rx="18"/>
+    <text fill="#FFFFFF" x="160" y="24" text-anchor="middle" font-size="16" font-weight="600">34평 (전용 84㎡)</text>
+
+    <!-- Floor Plan -->
+    <rect class="floor-34" x="10" y="50" width="300" height="180" rx="8"/>
+
+    <!-- Rooms -->
+    <!-- Living Room -->
+    <rect class="room" x="20" y="60" width="140" height="90" rx="4"/>
+    <text class="text-muted" x="90" y="110" text-anchor="middle" font-size="11">거실</text>
+
+    <!-- Kitchen -->
+    <rect class="room" x="170" y="60" width="130" height="55" rx="4"/>
+    <text class="text-muted" x="235" y="92" text-anchor="middle" font-size="11">주방/식당</text>
+
+    <!-- Room 1 (Master) -->
+    <rect class="room" x="20" y="160" width="85" height="60" rx="4"/>
+    <text class="text-muted" x="62" y="195" text-anchor="middle" font-size="11">안방</text>
+
+    <!-- Room 2 -->
+    <rect class="room" x="115" y="160" width="65" height="60" rx="4"/>
+    <text class="text-muted" x="147" y="195" text-anchor="middle" font-size="11">방2</text>
+
+    <!-- Room 3 -->
+    <rect class="room" x="190" y="125" width="60" height="50" rx="4"/>
+    <text class="text-muted" x="220" y="155" text-anchor="middle" font-size="11">방3</text>
+
+    <!-- Bathroom 1 -->
+    <rect class="room" x="260" y="125" width="40" height="50" rx="4"/>
+    <text class="text-muted" x="280" y="155" text-anchor="middle" font-size="9">욕실1</text>
+
+    <!-- Bathroom 2 -->
+    <rect class="room" x="190" y="185" width="55" height="35" rx="4"/>
+    <text class="text-muted" x="217" y="207" text-anchor="middle" font-size="9">욕실2</text>
+
+    <!-- Balcony -->
+    <rect x="255" y="185" width="45" height="35" rx="4" fill="none" stroke="#90A4AE" stroke-dasharray="4,2"/>
+    <text class="text-muted" x="277" y="207" text-anchor="middle" font-size="8">발코니</text>
+
+    <!-- Specs -->
+    <g transform="translate(0, 250)">
+      <rect fill="#EDE7F6" x="0" y="0" width="320" height="90" rx="8"/>
+
+      <text class="text-dark" x="20" y="25" font-size="13" font-weight="500">구조</text>
+      <text class="text-muted" x="80" y="25" font-size="13">3~4개 방 / 욕실 2개</text>
+
+      <text class="text-dark" x="20" y="50" font-size="13" font-weight="500">추천</text>
+      <text class="text-muted" x="80" y="50" font-size="13">4인 가족, 재택근무자</text>
+
+      <text class="text-dark" x="20" y="75" font-size="13" font-weight="500">장점</text>
+      <text class="text-muted" x="80" y="75" font-size="13">쾌적한 공간, 높은 환금성</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text class="text-muted" x="400" y="438" text-anchor="middle" font-size="11">pyeongcalc.kr - 평수 계산기 &amp; 공간 시뮬레이터</text>
+</svg>
