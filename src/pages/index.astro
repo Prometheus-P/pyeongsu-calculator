@@ -8,7 +8,7 @@ const faqItems = [
   {
     question: '신혼부부인데, 25평(59㎡) 괜찮을까요?',
     answer:
-      '25평(전용 59㎡)은 신혼부부가 시작하기에 가장 현실적인 선택지입니다. 아이 한 명까지는 충분히 생활하지만, 짐이 많아지면 수납 공간 부족으로 거실이 좁아 보일 수 있습니다. 저희 ‘공간 시뮬레이터’로 가구 배치를 미리 해보며 공간감을 직접 확인해보세요.',
+      "25평(전용 59㎡)은 신혼부부가 시작하기에 가장 현실적인 선택지입니다. 아이 한 명까지는 충분히 생활하지만, 짐이 많아지면 수납 공간 부족으로 거실이 좁아 보일 수 있습니다. 저희 '공간 시뮬레이터'로 가구 배치를 미리 해보며 공간감을 직접 확인해보세요.",
   },
   {
     question: '25평(59㎡)과 34평(84㎡) 중 고민이에요. 어떤 차이가 있나요?',
@@ -22,7 +22,12 @@ const faqItems = [
   {
     question: '실평수는 어떻게 다른가요?',
     answer:
-      '실평수는 등기부상 전용면적에 발코니 확장 등 ‘서비스 면적’을 더한 값입니다. 같은 25평이라도 서비스 면적이 넓으면 실평수는 2-3평 더 크게 느껴질 수 있습니다.',
+      "실평수는 등기부상 전용면적에 발코니 확장 등 '서비스 면적'을 더한 값입니다. 같은 25평이라도 서비스 면적이 넓으면 실평수는 2-3평 더 크게 느껴질 수 있습니다.",
+  },
+  {
+    question: '재택근무를 한다면 몇 평이 적당할까요?',
+    answer:
+      '재택근무를 위한 별도 공간이 필요하다면 34평(84㎡) 이상을 권장합니다. 25평에서는 거실 한쪽에 책상을 두거나 침실을 겸용해야 하는데, 업무와 휴식 공간이 분리되지 않아 집중력이 떨어질 수 있습니다. 34평은 방 3개 구조로 독립된 서재 공간 확보가 가능합니다.',
   },
 ];
 
@@ -41,7 +46,10 @@ const ogImage = 'https://www.pyeongcalc.kr/images/og-image.png';
     <App client:load />
     <section class="mt-m3-6 bg-m3-surface-variant/30 border border-m3-outline-variant rounded-m3-lg p-m3-4 text-body-medium leading-relaxed">
       <p>
-        이 도구는 단순한 <strong>평수 변환기</strong>가 아닙니다. ‘25평과 34평 중 어디가 나을까?’라는 고민처럼, 숫자에 가려진 <strong>‘공간적 불안감’</strong>을 해소하기 위해 만들어졌습니다. 평수 계산을 넘어, 공간감을 직접 시뮬레이션하며 내 가족에게 딱 맞는 집을 찾아보세요.
+        이 도구는 단순한 <strong>평수 변환기</strong>가 아닙니다. '25평과 34평 중 어디가 나을까?'라는 고민처럼, 숫자에 가려진 <strong>'공간적 불안감'</strong>을 해소하기 위해 만들어졌습니다. 평수 계산을 넘어, 공간감을 직접 시뮬레이션하며 내 가족에게 딱 맞는 집을 찾아보세요.
+      </p>
+      <p class="mt-m3-2 text-m3-on-surface-variant">
+        다른 평수 계산기와 달리, 저희는 <strong>실제 가구 배치</strong>와 <strong>공간 비율</strong>을 시각적으로 보여드립니다. 킹사이즈 침대가 들어갔을 때 남는 공간, 소파와 TV 사이 거리까지 직관적으로 파악할 수 있어 막연한 숫자가 체감 가능한 공간으로 바뀝니다.
       </p>
     </section>
     <AdContainer position="bottom" />
@@ -52,24 +60,129 @@ const ogImage = 'https://www.pyeongcalc.kr/images/og-image.png';
         ‘이 집에 우리 짐이 다 들어갈까?’, ‘아이가 태어나면 너무 좁지 않을까?’ 집을 알아볼 때 드는 당연한 고민입니다. 저희는 숫자를 넘어, <strong>킹사이즈 침대 하나가 들어갔을 때 남는 공간</strong>을 직접 보여드립니다. 이제 막연한 평수가 아닌, 체감 가능한 공간으로 비교하세요.
       </p>
 
+      <!-- 평수 변환 다이어그램 -->
+      <figure class="my-m3-6">
+        <img
+          src="/images/infographics/pyeong-sqm-conversion.svg"
+          alt="1평과 제곱미터(㎡) 변환 공식을 시각화한 다이어그램"
+          width="600"
+          height="300"
+          loading="lazy"
+          decoding="async"
+          class="w-full max-w-md mx-auto rounded-m3-lg border border-m3-outline-variant"
+        />
+        <figcaption class="text-center text-body-small text-m3-on-surface-variant mt-m3-2">
+          평수와 제곱미터 변환 공식 (1평 = 3.3058㎡)
+        </figcaption>
+      </figure>
+
       <h2 class="text-title-large font-semibold text-m3-on-surface">공간 시뮬레이터 사용법</h2>
       <ul>
         <li>위 계산기에 평 또는 ㎡를 입력하면, 하단에 해당 크기의 공간과 가구가 시각적으로 표시됩니다.</li>
-        <li><strong>‘대표 평형’</strong> 버튼으로 신혼부부(25평)와 4인 가족(34평)이 가장 많이 찾는 국민 평수를 바로 확인할 수 있습니다.</li>
+        <li><strong>'대표 평형'</strong> 버튼으로 신혼부부(25평)와 4인 가족(34평)이 가장 많이 찾는 국민 평수를 바로 확인할 수 있습니다.</li>
         <li>각 평형에 대한 시장의 평가, 장단점 등 <strong>독점적인 인사이트</strong>를 함께 제공합니다.</li>
+        <li>모바일과 데스크톱 모두 최적화되어 있어, <strong>임장(현장 방문) 중에도</strong> 스마트폰으로 빠르게 확인할 수 있습니다.</li>
       </ul>
+      <p class="text-m3-on-surface-variant">
+        예를 들어, 25평 아파트를 보러 갔을 때 "우리 침대가 들어가면 옷장은 어디에 둬야 하지?"라는 고민이 생긴다면, 현장에서 바로 시뮬레이터로 확인해보세요.
+      </p>
 
       <h2 class="text-title-large font-semibold text-m3-on-surface">왜 25평(59㎡)과 34평(84㎡)이 중요할까?</h2>
       <p>
-        대한민국 아파트 시장은 사실상 <strong>전용 59㎡(25평형)</strong>와 <strong>84㎡(34평형)</strong>, 두 가지 평형이 지배합니다. 59㎡는 신혼부부와 2-3인 가족의 ‘첫 집’으로, 84㎡는 4인 가족의 ‘표준’으로 자리 잡았습니다. 이 두 평형의 공간감 차이와 장단점을 이해하는 것이 합리적인 의사결정의 첫걸음입니다.
+        대한민국 아파트 시장은 사실상 <strong>전용 59㎡(25평형)</strong>와 <strong>84㎡(34평형)</strong>, 두 가지 평형이 지배합니다. 59㎡는 신혼부부와 2-3인 가족의 '첫 집'으로, 84㎡는 4인 가족의 '표준'으로 자리 잡았습니다. 이 두 평형의 공간감 차이와 장단점을 이해하는 것이 합리적인 의사결정의 첫걸음입니다.
       </p>
-      <ul>
-        <li><strong>59㎡ (약 25평형):</strong> 2-3인 가구의 합리적 선택. 관리비가 저렴하고 초기 비용 부담이 적습니다.</li>
-        <li><strong>84㎡ (약 34평형):</strong> 4인 가족의 국민 평형. 공간이 쾌적하고, 시장에서 가장 인기가 많아 환금성이 높습니다.</li>
-      </ul>
       <p>
-        저희 시뮬레이터는 이 두 ‘국민 평수’를 중심으로, 당신의 라이프스타일에 어떤 집이 더 적합할지 판단할 수 있도록 돕습니다.
+        특히 최근에는 재택근무 확산으로 <strong>홈오피스 공간</strong>에 대한 수요가 늘면서, 25평에서 34평으로 이사하려는 가구가 증가하고 있습니다. 반대로 자녀 독립 후 <strong>다운사이징</strong>을 고려하는 시니어 가구는 34평에서 25평으로 이동하는 추세입니다. 어떤 선택이든 핵심은 '지금 내 가족의 라이프스타일에 맞는가'입니다.
       </p>
+
+      <!-- 25평 vs 34평 비교 인포그래픽 -->
+      <figure class="my-m3-6">
+        <img
+          src="/images/infographics/25-vs-34-comparison.svg"
+          alt="25평 아파트와 34평 아파트의 구조, 방 개수, 추천 가구를 비교한 인포그래픽"
+          width="800"
+          height="450"
+          loading="lazy"
+          decoding="async"
+          class="w-full rounded-m3-lg border border-m3-outline-variant"
+        />
+        <figcaption class="text-center text-body-small text-m3-on-surface-variant mt-m3-2">
+          25평(59㎡)과 34평(84㎡) 평면 구조 및 추천 가구 비교
+        </figcaption>
+      </figure>
+
+      <ul>
+        <li><strong>59㎡ (약 25평형):</strong> 2-3인 가구의 합리적 선택. 관리비가 저렴하고 초기 비용 부담이 적습니다. 방 2개, 욕실 1개가 일반적이며, 신혼부부나 어린 자녀 1명이 있는 가정에 적합합니다.</li>
+        <li><strong>84㎡ (약 34평형):</strong> 4인 가족의 국민 평형. 공간이 쾌적하고, 시장에서 가장 인기가 많아 환금성이 높습니다. 방 3개, 욕실 2개 구조로 재택근무 공간이나 자녀 각자의 방이 필요할 때 적합합니다.</li>
+      </ul>
+
+      <!-- 평면도 비교 -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-m3-4 my-m3-6">
+        <figure>
+          <img
+            src="/images/infographics/floor-plans/2br-layout.svg"
+            alt="25평(59㎡) 2베드룸 아파트 평면도 예시"
+            width="400"
+            height="300"
+            loading="lazy"
+            decoding="async"
+            class="w-full rounded-m3-lg border border-m3-outline-variant bg-m3-surface"
+          />
+          <figcaption class="text-center text-body-small text-m3-on-surface-variant mt-m3-2">
+            25평형 2베드룸 평면도
+          </figcaption>
+        </figure>
+        <figure>
+          <img
+            src="/images/infographics/floor-plans/3br-layout.svg"
+            alt="34평(84㎡) 3베드룸 아파트 평면도 예시"
+            width="400"
+            height="300"
+            loading="lazy"
+            decoding="async"
+            class="w-full rounded-m3-lg border border-m3-outline-variant bg-m3-surface"
+          />
+          <figcaption class="text-center text-body-small text-m3-on-surface-variant mt-m3-2">
+            34평형 3베드룸 평면도
+          </figcaption>
+        </figure>
+      </div>
+      <p>
+        저희 시뮬레이터는 이 두 '국민 평수'를 중심으로, 당신의 라이프스타일에 어떤 집이 더 적합할지 판단할 수 있도록 돕습니다. 더 자세한 정보는 <a href="/guide/apartment-size-guide" class="text-m3-primary hover:underline">평형별 아파트 선택 가이드</a>에서 확인하세요.
+      </p>
+
+      <h2 class="text-title-large font-semibold text-m3-on-surface">평수 선택 시 고려해야 할 핵심 포인트</h2>
+      <p>
+        단순히 '넓을수록 좋다'는 생각은 예산 낭비로 이어질 수 있습니다. 평수를 선택할 때는 <strong>현재 가족 구성원 수</strong>, <strong>향후 5년간 가족 계획</strong>, <strong>재택근무 여부</strong>, 그리고 <strong>월 관리비 부담 능력</strong>을 종합적으로 고려해야 합니다.
+      </p>
+      <p>
+        예를 들어, 2인 가구가 34평에 살면 난방비와 관리비가 과도하게 나올 수 있고, 반대로 4인 가족이 25평에 거주하면 수납 공간 부족과 사생활 문제가 발생합니다. 저희 공간 시뮬레이터로 가구를 배치해보면, 숫자로는 알 수 없던 <strong>실제 생활 동선과 여유 공간</strong>을 시각적으로 확인할 수 있습니다.
+      </p>
+
+      <!-- 관련 가이드 하이라이트 -->
+      <div class="mt-m3-8 p-m3-4 bg-m3-surface-container rounded-m3-lg">
+        <h3 class="text-title-medium font-semibold text-m3-on-surface mb-m3-3">관련 가이드</h3>
+        <ul class="grid grid-cols-1 sm:grid-cols-3 gap-m3-3 not-prose">
+          <li>
+            <a href="/guide/pyeong-sqm-guide" class="block p-m3-3 bg-m3-surface hover:bg-m3-surface-variant rounded-m3-md transition-colors border border-m3-outline-variant">
+              <span class="text-label-large text-m3-primary">평수 변환 공식</span>
+              <span class="block text-body-small text-m3-on-surface-variant mt-1">1평 = 3.3058㎡의 유래와 계산법</span>
+            </a>
+          </li>
+          <li>
+            <a href="/guide/exclusive-vs-supply-area" class="block p-m3-3 bg-m3-surface hover:bg-m3-surface-variant rounded-m3-md transition-colors border border-m3-outline-variant">
+              <span class="text-label-large text-m3-primary">전용 vs 공급면적</span>
+              <span class="block text-body-small text-m3-on-surface-variant mt-1">같은 34평이 다르게 느껴지는 이유</span>
+            </a>
+          </li>
+          <li>
+            <a href="/guide/furniture-layout-by-size" class="block p-m3-3 bg-m3-surface hover:bg-m3-surface-variant rounded-m3-md transition-colors border border-m3-outline-variant">
+              <span class="text-label-large text-m3-primary">가구 배치 팁</span>
+              <span class="block text-body-small text-m3-on-surface-variant mt-1">평수별 최적의 가구 배치법</span>
+            </a>
+          </li>
+        </ul>
+      </div>
       
       <h2 class="text-title-large font-semibold text-m3-on-surface">자주 묻는 질문 (FAQ)</h2>
       <div class="space-y-m3-4 not-prose">

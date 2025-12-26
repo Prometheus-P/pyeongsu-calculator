@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="3베드룸 아파트 평면도">
+  <style>
+    .bg { fill: #FAFAFA; }
+    .wall { fill: #E0E0E0; stroke: #9E9E9E; stroke-width: 2; }
+    .room { fill: #E3F2FD; stroke: #1976D2; stroke-width: 1.5; }
+    .bedroom { fill: #EDE7F6; stroke: #7C4DFF; stroke-width: 1.5; }
+    .bedroom2 { fill: #FCE4EC; stroke: #E91E63; stroke-width: 1.5; }
+    .bedroom3 { fill: #E0F7FA; stroke: #00BCD4; stroke-width: 1.5; }
+    .bath { fill: #E8F5E9; stroke: #4CAF50; stroke-width: 1.5; }
+    .kitchen { fill: #FFF3E0; stroke: #FF9800; stroke-width: 1.5; }
+    .text { fill: #424242; font-family: -apple-system, sans-serif; font-size: 8px; }
+    .label { fill: #7C4DFF; font-family: -apple-system, sans-serif; font-size: 14px; font-weight: 600; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #2D2D2D; }
+      .wall { fill: #424242; stroke: #616161; }
+      .room { fill: #1E3A5F; stroke: #42A5F5; }
+      .bedroom { fill: #2E1A47; stroke: #B388FF; }
+      .bedroom2 { fill: #4A1942; stroke: #F48FB1; }
+      .bedroom3 { fill: #004D40; stroke: #4DD0E1; }
+      .bath { fill: #1B5E20; stroke: #66BB6A; }
+      .kitchen { fill: #4E3524; stroke: #FFB74D; }
+      .text { fill: #E0E0E0; }
+      .label { fill: #B388FF; }
+    }
+  </style>
+
+  <rect class="bg" width="200" height="200" rx="12"/>
+
+  <!-- Outer Wall -->
+  <rect class="wall" x="10" y="20" width="180" height="155" rx="4"/>
+
+  <!-- Living Room -->
+  <rect class="room" x="20" y="30" width="70" height="50" rx="2"/>
+  <text class="text" x="55" y="58" text-anchor="middle">거실</text>
+
+  <!-- Kitchen/Dining -->
+  <rect class="kitchen" x="95" y="30" width="85" height="32" rx="2"/>
+  <text class="text" x="137" y="50" text-anchor="middle">주방/식당</text>
+
+  <!-- Master Bedroom -->
+  <rect class="bedroom" x="20" y="85" width="50" height="45" rx="2"/>
+  <text class="text" x="45" y="112" text-anchor="middle">안방</text>
+
+  <!-- Room 2 -->
+  <rect class="bedroom2" x="75" y="85" width="40" height="45" rx="2"/>
+  <text class="text" x="95" y="112" text-anchor="middle">방2</text>
+
+  <!-- Room 3 -->
+  <rect class="bedroom3" x="120" y="67" width="38" height="38" rx="2"/>
+  <text class="text" x="139" y="90" text-anchor="middle">방3</text>
+
+  <!-- Bathroom 1 -->
+  <rect class="bath" x="163" y="67" width="22" height="38" rx="2"/>
+  <text class="text" x="174" y="90" text-anchor="middle" font-size="7">욕실1</text>
+
+  <!-- Bathroom 2 -->
+  <rect class="bath" x="120" y="110" width="35" height="28" rx="2"/>
+  <text class="text" x="137" y="128" text-anchor="middle" font-size="7">욕실2</text>
+
+  <!-- Entrance -->
+  <rect fill="#BDBDBD" x="20" y="135" width="25" height="18" rx="2"/>
+  <text class="text" x="32" y="147" text-anchor="middle" font-size="7">현관</text>
+
+  <!-- Balcony -->
+  <rect fill="none" stroke="#90A4AE" stroke-dasharray="3,2" x="160" y="110" width="25" height="28" rx="2"/>
+  <text class="text" x="172" y="128" text-anchor="middle" font-size="6">발코니</text>
+
+  <!-- Label -->
+  <text class="label" x="100" y="190" text-anchor="middle">3LDK (34평형)</text>
+</svg>
