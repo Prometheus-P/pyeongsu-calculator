@@ -17,7 +17,7 @@ describe('Space Simulator (Calculator)', () => {
     it('"평수 계산기" 제목과 서브타이틀을 렌더링한다', () => {
       renderCalculator();
       expect(screen.getByRole('heading', { name: '평수 계산기' })).toBeInTheDocument();
-      expect(screen.getByText('"평수 뒤에 숨은, 당신의 삶의 질을 계산합니다"')).toBeInTheDocument();
+      expect(screen.getByText('제곱미터와 평, 쉽게 변환하세요')).toBeInTheDocument();
     });
 
     it('주요 평형(10, 15, 20, 25, 30, 35, 40평) 버튼을 렌더링한다', () => {
@@ -69,24 +69,24 @@ describe('Space Simulator (Calculator)', () => {
       const sqmInput = screen.getByPlaceholderText('84');
       await user.type(sqmInput, '84');
 
-      expect(screen.getByText(/시장을 지배하는 국민 평형/)).toBeInTheDocument();
-      expect(screen.getByText(/높은 환금성/)).toBeInTheDocument();
+      expect(screen.getByText(/국민 평형/)).toBeInTheDocument();
+      expect(screen.getByText(/매물이 많아 비교가 쉽고/)).toBeInTheDocument();
     });
 
-    it('59㎡ 입력 시 "신혼부부 국민 평형" 인사이트 카드를 표시한다', async () => {
+    it('59㎡ 입력 시 "25평형" 인사이트 카드를 표시한다', async () => {
       const user = userEvent.setup();
       renderCalculator();
 
       const sqmInput = screen.getByPlaceholderText('84');
       await user.type(sqmInput, '59');
 
-      expect(screen.getByText(/신혼부부 국민 평형/)).toBeInTheDocument();
-      expect(screen.getByText(/공간 확장이 필요/)).toBeInTheDocument();
+      expect(screen.getByText(/신혼부부와 1~2인 가구/)).toBeInTheDocument();
+      expect(screen.getByText(/수납공간이 부족할 수 있고/)).toBeInTheDocument();
     });
 
     it('입력값이 없으면 인사이트 카드가 표시되지 않는다', () => {
       renderCalculator();
-      expect(screen.queryByText(/시장을 지배하는 국민 평형/)).not.toBeInTheDocument();
+      expect(screen.queryByText(/국민 평형/)).not.toBeInTheDocument();
     });
 
     it('유효한 값을 입력하면 공간 시뮬레이터가 표시된다', async () => {
