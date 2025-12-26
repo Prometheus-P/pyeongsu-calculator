@@ -6,28 +6,54 @@ import App from '../App';
 
 const faqItems = [
   {
-    question: '신혼부부인데, 25평(59㎡) 괜찮을까요?',
-    answer:
-      "25평(전용 59㎡)은 신혼부부가 시작하기에 가장 현실적인 선택지입니다. 아이 한 명까지는 충분히 생활하지만, 짐이 많아지면 수납 공간 부족으로 거실이 좁아 보일 수 있습니다. 저희 '공간 시뮬레이터'로 가구 배치를 미리 해보며 공간감을 직접 확인해보세요.",
-  },
-  {
-    question: '25평(59㎡)과 34평(84㎡) 중 고민이에요. 어떤 차이가 있나요?',
-    answer:
-      '34평(전용 84㎡)은 방 1개, 화장실 1개가 더 넓은 만큼 4인 가족에게 쾌적한 공간을 제공하며, 시장에서 가장 인기가 많아 되팔기에도 유리합니다. 다만, 관리비와 세금이 25평 대비 1.5배 이상 높을 수 있으니 예산을 함께 고려해야 합니다.',
-  },
-  {
     question: '1평은 몇 제곱미터(㎡)인가요?',
-    answer: '정확히 1평은 약 3.3058㎡입니다. 반대로 1㎡는 0.3025평입니다. 저희 계산기는 이 기준을 따릅니다.',
+    answer:
+      "**1평 = 3.3058㎡**입니다 (정확한 값). 간단히 **1평 ≈ 3.3㎡**로 계산할 수 있습니다. [역산] 1㎡ = 0.3025평입니다. [유래] 일본 다다미 2장 크기(1.818m × 1.818m)에서 비롯되었습니다. [실생활 예시] 전용 59㎡ = 17.8평, 전용 84㎡ = 25.4평입니다. 한국에서는 2007년부터 법적으로 ㎡만 사용하지만, 부동산 거래에서는 평수가 더 익숙합니다.",
   },
   {
-    question: '실평수는 어떻게 다른가요?',
+    question: '전용면적과 공급면적의 차이는 무엇인가요?',
     answer:
-      "실평수는 등기부상 전용면적에 발코니 확장 등 '서비스 면적'을 더한 값입니다. 같은 25평이라도 서비스 면적이 넓으면 실평수는 2-3평 더 크게 느껴질 수 있습니다.",
+      "**전용면적**은 내가 독점 사용하는 실내 공간입니다. **공급면적**은 전용면적 + 공용면적입니다. [전용면적 포함] 방, 거실, 주방, 욕실 (실제 거주 공간). [공용면적 포함] 복도, 계단, 엘리베이터 홀 (공동 사용 공간). [구체적 예시] '34평 아파트' = 공급면적 112㎡(34평), 실제 전용면적은 84㎡(25.4평). [핵심 팁] 아파트 비교 시 반드시 전용면적으로 비교하세요.",
   },
   {
-    question: '재택근무를 한다면 몇 평이 적당할까요?',
+    question: '신혼부부에게 25평(59㎡)은 충분한가요?',
     answer:
-      '재택근무를 위한 별도 공간이 필요하다면 34평(84㎡) 이상을 권장합니다. 25평에서는 거실 한쪽에 책상을 두거나 침실을 겸용해야 하는데, 업무와 휴식 공간이 분리되지 않아 집중력이 떨어질 수 있습니다. 34평은 방 3개 구조로 독립된 서재 공간 확보가 가능합니다.',
+      "**네, 충분합니다.** 25평(전용 59㎡)은 신혼부부에게 가장 인기 있는 평형입니다. [구조] 방 2개 + 욕실 1개 (침실 + 서재 또는 옷방 가능). [추천 가족 구성] 신혼부부, 아이 1명까지 쾌적하게 생활 가능. [월 관리비] 15~20만원으로 부담이 적음. [이사 시점] 아이가 초등학생이 되면 34평으로 이사 고려. [결론] 첫 집으로 25평을 선택하고, 가족이 늘면 업그레이드하는 전략을 권장합니다.",
+  },
+  {
+    question: '25평과 34평의 핵심 차이점은 무엇인가요?',
+    answer:
+      "**핵심 차이는 방 개수와 화장실 개수**입니다. [25평(59㎡)] 방 2개 + 화장실 1개 + 월관리비 15~20만원. [34평(84㎡)] 방 3개 + 화장실 2개 + 월관리비 25~35만원. [면적 차이] 약 25㎡(7.5평) 차이. [추천] 2~3인 가족 → 25평, 4인 가족 → 34평. [투자 관점] 34평이 환금성이 높고 시장에서 가장 인기 있는 '국민 평형'입니다.",
+  },
+  {
+    question: '실평수란 무엇인가요?',
+    answer:
+      "**실평수 = 전용면적 + 발코니 확장 면적**입니다. 발코니를 확장하면 실제 사용 가능한 공간이 늘어납니다. [추가 면적] 발코니 확장 시 3~5㎡(약 1~1.5평) 추가. [예시] 전용 59㎡(17.8평) 아파트 → 발코니 확장 후 실평수 62~64㎡(약 19평). [참고] 신축 아파트는 대부분 발코니 확장이 기본 옵션입니다. 확장 비용은 보통 500~1,000만원입니다.",
+  },
+  {
+    question: '재택근무자에게 적합한 평수는?',
+    answer:
+      "**최소 34평(84㎡) 이상**을 권장합니다. 홈오피스 공간을 별도로 확보해야 업무 효율이 높아집니다. [34평 장점] 방 3개 구조 → 침실, 자녀방, 서재(홈오피스) 분리 가능. [25평 한계] 거실이나 침실에 책상 배치 → 업무 집중도 저하, 화상회의 배경 문제. [부부 모두 재택근무라면] 43평(102㎡) 이상 고려. [핵심] 업무 공간과 생활 공간의 물리적 분리가 재택근무 성공의 핵심입니다.",
+  },
+  {
+    question: '4인 가족에게 필요한 최소 평수는?',
+    answer:
+      "**최소 34평(84㎡)**이 필요합니다. 4인 가족(부부 + 자녀 2명)이 쾌적하게 생활하려면 방 3개가 필수입니다. [34평 구조] 방 3개 → 부부 침실 + 자녀 각각의 방. [25평으로 버틸 수 있는 경우] 자녀가 미취학 아동일 때, 자녀가 같은 성별일 때. [이사 시점] 자녀가 초등학생이 되면 각자의 방이 필요합니다. [결론] 장기적으로 34평 이상을 계획하되, 예산에 따라 25평에서 시작할 수 있습니다.",
+  },
+  {
+    question: '오피스텔 20평과 아파트 20평은 같은 크기인가요?',
+    answer:
+      "**아니요, 다릅니다.** 같은 '20평'이라도 실제 생활 공간은 크게 다릅니다. [전용률 비교] 오피스텔 50~60% vs 아파트 75~85%. [실제 생활 공간] 오피스텔 20평 → 약 33㎡(10평), 아파트 20평 → 약 50㎡(15평). [차이 이유] 오피스텔은 계약면적 기준, 아파트는 공급면적 기준으로 표기. [핵심 팁] 오피스텔은 표기 평수의 50~60%를 실제 공간으로 예상하세요.",
+  },
+  {
+    question: '평수를 제곱미터로 빠르게 계산하는 방법은?',
+    answer:
+      "**평수 × 3.3 = 제곱미터**입니다. 반대로 **㎡ ÷ 3.3 = 평수**입니다. [계산 예시 1] 25평 × 3.3 = 82.5㎡ (정확한 값 82.6㎡). [계산 예시 2] 84㎡ ÷ 3.3 = 25.4평. [정밀 계산] 1평 = 3.3058㎡ 공식 사용. [암기 팁] '3.3'만 기억하면 대부분의 상황에서 충분합니다. 저희 계산기로 정확한 값을 확인하세요.",
+  },
+  {
+    question: '아파트 평형 표기에서 숫자는 무엇을 의미하나요?',
+    answer:
+      "**전용면적을 ㎡로 표시한 숫자**입니다. 예: 59타입, 84타입의 숫자가 바로 전용면적입니다. [59타입] 전용 59㎡ = 약 17.8평 (흔히 '25평'이라 부름). [84타입] 전용 84㎡ = 약 25.4평 (흔히 '34평'이라 부름). [혼동 주의] '25평', '34평'은 공급면적 기준의 관행적 표현. [핵심] 실제 생활 공간을 알려면 전용면적(숫자 타입)을 확인하세요.",
   },
 ];
 
@@ -193,6 +219,7 @@ const ogImage = 'https://www.pyeongcalc.kr/images/og-image.png';
       </div>
       
       <h2 class="text-title-large font-semibold text-m3-on-surface">자주 묻는 질문 (FAQ)</h2>
+      <p class="text-m3-on-surface-variant mb-m3-4">평수 계산과 아파트 면적에 관한 가장 많이 묻는 질문들에 대한 전문가 답변입니다.</p>
       <div class="space-y-m3-4 not-prose">
         {faqItems.map((item) => (
           <details
@@ -200,17 +227,22 @@ const ogImage = 'https://www.pyeongcalc.kr/images/og-image.png';
           >
             <summary class="flex items-center justify-between cursor-pointer p-m3-4 font-medium text-m3-on-surface list-none">
               <span class="flex items-center gap-m3-3">
-                <span class="flex-shrink-0 w-m3-6 h-m3-6 flex items-center justify-center rounded-m3-full bg-m3-primary-container text-m3-on-primary-container text-label-medium font-bold">
+                <span class="flex-shrink-0 w-m3-6 h-m3-6 flex items-center justify-center rounded-m3-full bg-m3-primary-container text-m3-on-primary-container text-label-medium font-bold" aria-label="질문">
                   Q
                 </span>
-                {item.question}
+                <span class="text-left">{item.question}</span>
               </span>
-              <span class="transition group-open:rotate-180 text-m3-on-surface-variant">
+              <span class="transition group-open:rotate-180 text-m3-on-surface-variant flex-shrink-0 ml-m3-2">
                 <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
               </span>
             </summary>
-            <div class="text-m3-on-surface-variant px-m3-4 pb-m3-4 pl-[3.25rem] border-t border-m3-outline-variant/50 pt-m3-3">
-              {item.answer}
+            <div class="px-m3-4 pb-m3-4 border-t border-m3-outline-variant/50 pt-m3-3">
+              <div class="flex gap-m3-3">
+                <span class="flex-shrink-0 w-m3-6 h-m3-6 flex items-center justify-center rounded-m3-full bg-m3-secondary-container text-m3-on-secondary-container text-label-medium font-bold" aria-label="답변">
+                  A
+                </span>
+                <p class="text-m3-on-surface leading-relaxed" set:html={item.answer.replace(/\*\*(.*?)\*\*/g, '<strong class="text-m3-primary font-semibold">$1</strong>').replace(/\[(.*?)\]/g, '<br/><span class="inline-block mt-1 text-m3-on-surface-variant">• $1:</span>')} />
+              </div>
             </div>
           </details>
         ))}
