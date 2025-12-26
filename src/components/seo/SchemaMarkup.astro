@@ -20,6 +20,26 @@ const { type, faqItems = [], blogPosting, schemaGraph } = Astro.props;
 
 const siteUrl = 'https://www.pyeongcalc.kr';
 
+// Organization Schema with credentials
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "PyeongCalc",
+  "url": siteUrl,
+  "logo": `${siteUrl}/images/og-image.png`,
+  "description": "부동산 면적 계산 및 아파트 공간 시뮬레이션 전문 서비스. 정확한 평수-제곱미터 변환과 실제 가구 배치 시뮬레이션을 제공합니다.",
+  "foundingDate": "2024",
+  "areaServed": "KR",
+  "knowsAbout": [
+    "부동산 면적 계산",
+    "평수-제곱미터 변환",
+    "아파트 평형 분석",
+    "공간 시뮬레이션",
+    "전용면적과 공급면적"
+  ],
+  "slogan": "평수 계산을 넘어, 공간을 시뮬레이션하세요"
+};
+
 // WebApplication Schema
 const webAppSchema = {
   "@context": "https://schema.org",
@@ -80,7 +100,7 @@ const howToSchema = {
   ]
 };
 
-// BlogPosting Schema
+// BlogPosting Schema with enhanced author credentials
 const blogPostingSchema = blogPosting ? {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -90,12 +110,19 @@ const blogPostingSchema = blogPosting ? {
   "dateModified": blogPosting.dateModified || blogPosting.datePublished,
   "author": {
     "@type": "Organization",
-    "name": "PyeongCalc"
+    "name": "PyeongCalc",
+    "url": siteUrl,
+    "description": "부동산 면적 계산 및 아파트 공간 시뮬레이션 전문 서비스",
+    "knowsAbout": ["부동산 면적 계산", "평수-제곱미터 변환", "아파트 평형 분석"]
   },
   "publisher": {
     "@type": "Organization",
     "name": "PyeongCalc",
-    "url": siteUrl
+    "url": siteUrl,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${siteUrl}/images/og-image.png`
+    }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
@@ -105,7 +132,10 @@ const blogPostingSchema = blogPosting ? {
 ---
 
 {(type === 'calculator' || type === 'all') && (
-  <JsonLdScript schema={webAppSchema} />
+  <>
+    <JsonLdScript schema={organizationSchema} />
+    <JsonLdScript schema={webAppSchema} />
+  </>
 )}
 
 {(type === 'faq' || type === 'all') && faqSchema && (
