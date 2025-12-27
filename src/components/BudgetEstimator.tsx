@@ -71,7 +71,7 @@ export default function BudgetEstimator({ pyeong, insightLabel }: BudgetEstimato
             basicInterior,
             premiumInterior,
           })}
-          className="w-full mt-m3-4 py-m3-3 bg-m3-secondary-container text-m3-on-secondary-container text-label-large font-medium rounded-m3-full m3-state-layer hover:shadow-m3-1 transition-shadow"
+          className="w-full mt-m3-4 py-m3-3 border-2 border-m3-outline text-m3-on-surface text-label-large font-medium rounded-m3-full m3-state-layer hover:bg-m3-surface-variant hover:border-m3-primary transition-all"
         >
           인테리어 견적 문의하기
         </button>
@@ -123,7 +123,7 @@ export default function BudgetEstimator({ pyeong, insightLabel }: BudgetEstimato
             maxLoan,
             needCash: needCash + basicInterior,
           })}
-          className="w-full py-m3-3 bg-m3-tertiary text-m3-on-tertiary font-medium text-label-large rounded-m3-full shadow-m3-1 hover:shadow-m3-2 active:scale-[0.98] transition-all m3-state-layer"
+          className="w-full py-m3-3 bg-m3-secondary-container text-m3-on-secondary-container font-medium text-label-large rounded-m3-full hover:shadow-m3-1 active:scale-[0.98] transition-all m3-state-layer"
         >
           대출 상담 신청하기
         </button>
