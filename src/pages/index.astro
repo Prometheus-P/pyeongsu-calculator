@@ -18,12 +18,12 @@ const faqItems = [
   {
     question: '신혼부부에게 25평(59㎡)은 충분한가요?',
     answer:
-      "**네, 충분합니다.** 25평(전용 59㎡)은 신혼부부에게 가장 인기 있는 평형입니다. [구조] 방 2개 + 욕실 1개 (침실 + 서재 또는 옷방 가능). [추천 가족 구성] 신혼부부, 아이 1명까지 쾌적하게 생활 가능. [월 관리비] 15~20만원으로 부담이 적음. [이사 시점] 아이가 초등학생이 되면 34평으로 이사 고려. [결론] 첫 집으로 25평을 선택하고, 가족이 늘면 업그레이드하는 전략을 권장합니다.",
+      "**네, 충분합니다.** 25평(전용 59㎡)은 신혼부부에게 가장 인기 있는 평형입니다. [구조] 방 2개 + 욕실 1개 (침실 + 서재 또는 옷방 가능). [추천 가족 구성] 신혼부부, 아이 1명까지 쾌적하게 생활 가능. [월 관리비] 20~28만원 수준 (2025년 기준, 단지별 상이). [이사 시점] 아이가 초등학생이 되면 34평으로 이사 고려. [결론] 첫 집으로 25평을 선택하고, 가족이 늘면 업그레이드하는 전략을 권장합니다.",
   },
   {
     question: '25평과 34평의 핵심 차이점은 무엇인가요?',
     answer:
-      "**핵심 차이는 방 개수와 화장실 개수**입니다. [25평(59㎡)] 방 2개 + 화장실 1개 + 월관리비 15~20만원. [34평(84㎡)] 방 3개 + 화장실 2개 + 월관리비 25~35만원. [면적 차이] 약 25㎡(7.5평) 차이. [추천] 2~3인 가족 → 25평, 4인 가족 → 34평. [투자 관점] 34평이 환금성이 높고 시장에서 가장 인기 있는 '국민 평형'입니다.",
+      "**핵심 차이는 방 개수와 화장실 개수**입니다. [25평(59㎡)] 방 2개 + 화장실 1개 + 월관리비 20~28만원. [34평(84㎡)] 방 3개 + 화장실 2개 + 월관리비 35~50만원. [면적 차이] 약 25㎡(7.5평) 차이 (2025년 기준, 난방비 포함). [추천] 2~3인 가족 → 25평, 4인 가족 → 34평. [투자 관점] 입지에 따라 다르지만, 일반적으로 34평이 선호도가 높음. 단, 역세권 소형은 회전율이 더 높을 수 있음.",
   },
   {
     question: '실평수란 무엇인가요?',
@@ -68,6 +68,22 @@ const ogImage = 'https://www.pyeongcalc.kr/images/og-image.png';
   <SchemaMarkup type="all" faqItems={faqItems} slot="head" />
 
   <main class="max-w-3xl mx-auto px-4 py-10">
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="브레드크럼" class="mb-m3-4 text-body-small">
+      <ol class="flex items-center gap-2 text-m3-on-surface-variant" itemscope itemtype="https://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item" class="hover:text-m3-primary transition-colors">
+            <span itemprop="name">홈</span>
+          </a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <li class="text-m3-outline" aria-hidden="true">/</li>
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span itemprop="name" class="text-m3-on-surface font-medium">평수 계산기</span>
+          <meta itemprop="position" content="2" />
+        </li>
+      </ol>
+    </nav>
     <AdContainer position="top" className="hidden sm:flex" />
     <App client:load />
     <section class="mt-m3-6 bg-m3-surface-variant/30 border border-m3-outline-variant rounded-m3-lg p-m3-4 text-body-medium leading-relaxed">
@@ -177,12 +193,12 @@ const ogImage = 'https://www.pyeongcalc.kr/images/og-image.png';
         저희 시뮬레이터는 이 두 '국민 평수'를 중심으로, 당신의 라이프스타일에 어떤 집이 더 적합할지 판단할 수 있도록 돕습니다. 더 자세한 정보는 <a href="/guide/apartment-size-guide" class="text-m3-primary hover:underline">평형별 아파트 선택 가이드</a>에서 확인하세요.
       </p>
 
-      <h2 class="text-title-large font-semibold text-m3-on-surface">평수 선택 시 고려해야 할 핵심 포인트</h2>
+      <h2 class="text-title-large font-semibold text-m3-on-surface" id="selection-tips">평수 선택 시 고려해야 할 핵심 포인트</h2>
       <p>
-        단순히 '넓을수록 좋다'는 생각은 예산 낭비로 이어질 수 있습니다. 평수를 선택할 때는 <strong>현재 가족 구성원 수</strong>, <strong>향후 5년간 가족 계획</strong>, <strong>재택근무 여부</strong>, 그리고 <strong>월 관리비 부담 능력</strong>을 종합적으로 고려해야 합니다.
+        단순히 '넓을수록 좋다'는 생각은 예산 낭비로 이어질 수 있습니다. <a href="/guide/apartment-size-guide" class="text-m3-primary hover:underline">평수를 선택</a>할 때는 <strong>현재 가족 구성원 수</strong>, <strong>향후 5년간 가족 계획</strong>, <strong>재택근무 여부</strong>, 그리고 <strong>월 관리비 부담 능력</strong>을 종합적으로 고려해야 합니다.
       </p>
       <p>
-        예를 들어, 2인 가구가 34평에 살면 난방비와 관리비가 과도하게 나올 수 있고, 반대로 4인 가족이 25평에 거주하면 수납 공간 부족과 사생활 문제가 발생합니다. 저희 공간 시뮬레이터로 가구를 배치해보면, 숫자로는 알 수 없던 <strong>실제 생활 동선과 여유 공간</strong>을 시각적으로 확인할 수 있습니다.
+        예를 들어, 2인 가구가 34평에 살면 난방비와 관리비가 과도하게 나올 수 있고, 반대로 4인 가족이 25평에 거주하면 수납 공간 부족과 사생활 문제가 발생합니다. 저희 공간 시뮬레이터로 <a href="/guide/furniture-layout-by-size" class="text-m3-primary hover:underline">가구를 배치</a>해보면, 숫자로는 알 수 없던 <strong>실제 생활 동선과 여유 공간</strong>을 시각적으로 확인할 수 있습니다.
       </p>
 
       <h2 class="text-title-large font-semibold text-m3-on-surface">평수(坪)의 유래와 정확한 환산법</h2>
