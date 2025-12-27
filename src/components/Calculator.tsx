@@ -14,6 +14,10 @@ import { getProvocativeMessage, getShareableText, type FamilyType } from '../uti
 import SpaceVisualizer from './SpaceVisualizer'; // Visual Moat Import
 import BudgetEstimator from './BudgetEstimator'; // Cashflow Protocol Import
 import RealPriceInfo from './RealPriceInfo'; // Plan 2: 실거래가 연동
+import SizeRecommendationCard from './SizeRecommendationCard'; // Confidence System
+import PropertyAlertForm from './PropertyAlertForm'; // Soft CTA
+import SizeComparisonTable from './SizeComparisonTable'; // Comparison Feature
+import MarketTrendBadge from './MarketTrendBadge'; // Urgency Signal
 import { TextField, Chip, Card } from './m3'; // M3 컴포넌트
 
 const FAMILY_OPTIONS: { type: FamilyType; label: string }[] = [
@@ -152,6 +156,13 @@ export default function Calculator() {
         </div>
       </section>
 
+      {/* 3.5. 시장 트렌드 배지 */}
+      {isValidInput(pyeong) && (
+        <div className="mb-m3-4 flex justify-center">
+          <MarketTrendBadge pyeong={parseFloat(pyeong)} />
+        </div>
+      )}
+
       {/* 4. 트리거 메시지 - 도발적 진단 */}
       {triggerResult && (
         <div
@@ -184,6 +195,14 @@ export default function Calculator() {
             친구에게 공유하기 →
           </button>
         </div>
+      )}
+
+      {/* 4.5. 확신 시스템 - SizeRecommendationCard */}
+      {isValidInput(pyeong) && (
+        <SizeRecommendationCard
+          pyeong={parseFloat(pyeong)}
+          familyType={familyType}
+        />
       )}
 
       {/* 5. 빠른 선택 */}
@@ -257,6 +276,17 @@ export default function Calculator() {
 
       {/* 4. Visual Moat: 공간 시뮬레이터 */}
       {isValidInput(sqm) && <SpaceVisualizer sqm={parseFloat(sqm)} />}
+
+      {/* 📬 Soft CTA: 매물 알림 신청 */}
+      {isValidInput(pyeong) && <PropertyAlertForm pyeong={parseFloat(pyeong)} />}
+
+      {/* 📊 비교 기능: 인접 평수 비교 */}
+      {isValidInput(pyeong) && (
+        <SizeComparisonTable
+          pyeong={parseFloat(pyeong)}
+          onSizeSelect={updateFieldsFromPyeong}
+        />
+      )}
 
       {/* 💰 Cashflow Protocol: The Venom */}
       {insight && isValidInput(pyeong) && (

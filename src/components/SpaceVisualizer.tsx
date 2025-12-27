@@ -193,7 +193,7 @@ export default function SpaceVisualizer({ sqm }: SpaceVisualizerProps) {
       {!showEmailForm && !submitted && (
         <button
           onClick={handleSaveLayout}
-          className="w-full mt-m3-4 py-m3-3 bg-m3-tertiary-container text-m3-on-tertiary-container rounded-m3-md text-label-large font-medium m3-state-layer hover:shadow-m3-1 transition-all"
+          className="w-full mt-m3-4 py-m3-3 text-m3-primary text-label-large font-medium rounded-m3-md hover:bg-m3-primary/10 active:bg-m3-primary/20 transition-all"
         >
           💾 내 배치 저장하고 비교하기
         </button>
