@@ -7,6 +7,7 @@ interface Props {
   noindex?: boolean;
   publishDate?: Date;
   modifiedDate?: Date;
+  keywords?: string;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   noindex = false,
   publishDate,
   modifiedDate,
+  keywords = '평수 계산기, 평수 변환, 제곱미터 평수, 평 계산, 25평 34평, 아파트 면적, 전용면적, 공급면적, 평수 계산법, 부동산 면적 계산',
 } = Astro.props;
 
 // Naver 최적화: title 40자, description 80자
@@ -25,6 +27,7 @@ const truncatedDesc = description.length > 80 ? description.slice(0, 77) + '...'
 
 const siteName = 'PyeongCalc 평수 계산기';
 const siteUrl = 'https://www.pyeongcalc.kr';
+const authorName = 'PyeongCalc';
 
 // Environment-based verification codes
 const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -35,10 +38,25 @@ const naverVerification = import.meta.env.PUBLIC_NAVER_SITE_VERIFICATION;
 <title>{truncatedTitle}</title>
 <meta name="title" content={truncatedTitle} />
 <meta name="description" content={truncatedDesc} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content={authorName} />
 <link rel="canonical" href={canonical} />
 
+<!-- Language & Region -->
+<meta name="language" content="Korean" />
+<meta name="geo.region" content="KR" />
+<meta name="geo.placename" content="South Korea" />
+<link rel="alternate" hreflang="ko" href={canonical} />
+<link rel="alternate" hreflang="x-default" href={canonical} />
+
+<!-- Performance Hints -->
+<link rel="preconnect" href="https://www.googletagmanager.com" />
+<link rel="preconnect" href="https://www.google-analytics.com" />
+<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+<link rel="dns-prefetch" href="https://www.google-analytics.com" />
+
 {noindex && <meta name="robots" content="noindex, nofollow" />}
-{!noindex && <meta name="robots" content="index, follow, max-image-preview:large" />}
+{!noindex && <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
@@ -46,14 +64,20 @@ const naverVerification = import.meta.env.PUBLIC_NAVER_SITE_VERIFICATION;
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(ogImage, siteUrl).href} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="평수 계산기 - 평수와 제곱미터 변환 도구" />
 <meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content="ko_KR" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@pyeongcalc" />
+<meta name="twitter:creator" content="@pyeongcalc" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(ogImage, siteUrl).href} />
+<meta name="twitter:image:alt" content="평수 계산기 - 평수와 제곱미터 변환 도구" />
 
 <!-- Article Dates (for blog/content pages) -->
 {publishDate && <meta property="article:published_time" content={publishDate.toISOString()} />}
